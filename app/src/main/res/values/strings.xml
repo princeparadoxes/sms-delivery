@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">СМС Рассылка</string>
+    <string name="title_section1">Новое SMS для рассылки</string>
+    <string name="title_section2">База номеров для рассылки</string>
+    <string name="title_section3">Отправленные ранее SMS</string>
+    <string name="action_settings">Настройки</string>
+
+</resources>
