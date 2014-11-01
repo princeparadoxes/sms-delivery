@@ -5,9 +5,11 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:weightSum="1"
-              android:padding="8dp">
+              android:padding="8dp"
+              android:background="@color/application_background_color">
 
-    <EditText
+
+<EditText
             android:layout_width="match_parent"
             android:layout_height="120dp"
             android:inputType="textMultiLine"

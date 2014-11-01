@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import ru.stefa.tizarhunter.stefasms.R;
@@ -42,9 +41,10 @@ public class NumbersFragment extends Fragment
         ListView listView = (ListView) rootView.findViewById(R.id.listView);
         DatabaseActions databaseActions = new DatabaseActions();
         databaseActions.connectionDatabase(mContext);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
-            android.R.layout.simple_list_item_1, databaseActions.listTables());
-        listView.setAdapter(adapter);
+        NumbersAdapter numbersAdapter = new NumbersAdapter(mContext, databaseActions.listTables());
+//        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
+//            android.R.layout.simple_list_item_1, databaseActions.listTables());
+        listView.setAdapter(numbersAdapter);
 //        TextView tv = (TextView) rootView.findViewById(R.id.section_label);
 //        tv.setText("Номера");
         return rootView;

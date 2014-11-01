@@ -3,13 +3,19 @@ package ru.stefa.tizarhunter.stefasms.database;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.provider.BaseColumns;
 
 public class Database extends SQLiteOpenHelper
 {
-    private SQLiteDatabase mSQLiteDatabase;
-
     private static final String DATABASE_NAME = "database.db";
     private static final int DATABASE_VERSION = 1;
+    public static final String DATABASE_TABLE = "nameTables";
+    public static final String NAME_COLUMN = "name";
+
+    private static final String DATABASE_CREATE_SCRIPT = "create table "
+            + DATABASE_TABLE + " (" + BaseColumns._ID
+            + " integer primary key autoincrement, " + NAME_COLUMN
+            + " text not null);";
 
     public Database(Context context)
     {
@@ -19,10 +25,7 @@ public class Database extends SQLiteOpenHelper
     @Override
     public void onCreate(SQLiteDatabase db)
     {
-//        mSQLiteDatabase = db;
-//        String query = "SELECT * FROM sqlite_master WHERE type = 'table'";
-//        Cursor cursor = mSQLiteDatabase.rawQuery(query, null);
-
+        db.execSQL(DATABASE_CREATE_SCRIPT);
     }
 
 

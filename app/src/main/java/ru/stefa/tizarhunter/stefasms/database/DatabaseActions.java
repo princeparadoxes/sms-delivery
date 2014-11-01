@@ -1,5 +1,6 @@
 package ru.stefa.tizarhunter.stefasms.database;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -21,12 +22,21 @@ public class DatabaseActions
 
     public void createTable(String tableName)
     {
+        ContentValues newValues = new ContentValues();
+        newValues.put(mDatabase.NAME_COLUMN, tableName);
+        db.insert(mDatabase.NAME_COLUMN, null, newValues);
         final String SQL_CREATE_ENTRIES = "CREATE TABLE " + tableName + " (" + UID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
             + NUMBER + " INTEGER);";
         db.execSQL(SQL_CREATE_ENTRIES);
     }
 
     public void dropTable(String tableName)
+    {
+        final String SQL_DELETE_ENTRIES = "DROP TABLE IF EXISTS " + tableName;
+        db.execSQL(SQL_DELETE_ENTRIES);
+    }
+
+    public void tableDataList(String tableName)
     {
         final String SQL_DELETE_ENTRIES = "DROP TABLE IF EXISTS " + tableName;
         db.execSQL(SQL_DELETE_ENTRIES);
