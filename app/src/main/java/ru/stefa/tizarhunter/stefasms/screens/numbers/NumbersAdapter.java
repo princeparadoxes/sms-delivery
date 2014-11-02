@@ -53,6 +53,7 @@ public class NumbersAdapter extends BindableAdapter<String>
         {
             ((TextView) view.findViewById(R.id.number_listview_element_text)).setText("Добавить новую базу номеров");
             ((ImageView) view.findViewById(R.id.number_listView_element_image)).setVisibility(View.VISIBLE);
+
         }
         else
         {

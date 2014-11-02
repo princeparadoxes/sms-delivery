@@ -7,10 +7,13 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import ru.stefa.tizarhunter.stefasms.R;
 import ru.stefa.tizarhunter.stefasms.database.DatabaseActions;
+import ru.stefa.tizarhunter.stefasms.misc.OpenFileDialog;
 
 public class NumbersFragment extends Fragment
 {
@@ -43,6 +46,24 @@ public class NumbersFragment extends Fragment
         databaseActions.connectionDatabase(mContext);
         NumbersAdapter numbersAdapter = new NumbersAdapter(mContext, databaseActions.listTables());
         listView.setAdapter(numbersAdapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener()
+        {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l)
+            {
+                if(position == 0)
+                {
+                    OpenFileDialog fileDialog = new OpenFileDialog(mContext)
+                            .setOpenDialogListener(new OpenFileDialog.OpenDialogListener() {
+                                @Override
+                                public void OnSelectedFile(String fileName) {
+                                    Toast.makeText(getActivity(), fileName, Toast.LENGTH_LONG).show();
+                                }
+                            });
+                    fileDialog.show();
+                }
+            }
+        });
         return rootView;
     }
 }
