@@ -24,7 +24,7 @@ public class DatabaseActions
     {
         ContentValues newValues = new ContentValues();
         newValues.put(mDatabase.NAME_COLUMN, tableName);
-        db.insert(mDatabase.NAME_COLUMN, null, newValues);
+        db.insert(mDatabase.DATABASE_TABLE, null, newValues);
         final String SQL_CREATE_ENTRIES = "CREATE TABLE " + tableName + " (" + UID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
             + NUMBER + " INTEGER);";
         db.execSQL(SQL_CREATE_ENTRIES);

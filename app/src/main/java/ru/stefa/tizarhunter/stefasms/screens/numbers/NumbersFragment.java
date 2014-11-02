@@ -53,14 +53,29 @@ public class NumbersFragment extends Fragment
             {
                 if(position == 0)
                 {
-                    OpenFileDialog fileDialog = new OpenFileDialog(mContext)
-                            .setOpenDialogListener(new OpenFileDialog.OpenDialogListener() {
-                                @Override
-                                public void OnSelectedFile(String fileName) {
-                                    Toast.makeText(getActivity(), fileName, Toast.LENGTH_LONG).show();
-                                }
-                            });
-                    fileDialog.show();
+                    NewBaseDialog newBaseDialog = new NewBaseDialog(mContext, new NewBaseDialog.Callback()
+                    {
+                        @Override
+                        public void ok(String nameBase)
+                        {
+
+                        }
+
+                        @Override
+                        public void okImport(String nameBase)
+                        {
+                            OpenFileDialog fileDialog = new OpenFileDialog(mContext)
+                                    .setOpenDialogListener(new OpenFileDialog.OpenDialogListener() {
+                                        @Override
+                                        public void OnSelectedFile(String fileName) {
+                                            Toast.makeText(getActivity(), fileName, Toast.LENGTH_LONG).show();
+                                        }
+                                    });
+                            fileDialog.show();
+                        }
+                    });
+                    newBaseDialog.show();
+
                 }
             }
         });

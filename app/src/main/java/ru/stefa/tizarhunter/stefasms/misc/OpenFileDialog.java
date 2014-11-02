@@ -61,17 +61,15 @@ public class OpenFileDialog extends AlertDialog.Builder {
             TextView view = (TextView) super.getView(position, convertView, parent);
             view.setTextColor(R.color.number_listview_element_text);
             File file = getItem(position);
-            if (view != null) {
-                view.setText(file.getName());
-                if (file.isDirectory()) {
-                    setDrawable(view, mFolderIcon);
-                } else {
-                    setDrawable(view, mFileIcon);
-                    if (mSelectedIndex == position)
-                        view.setBackgroundColor(getContext().getResources().getColor(android.R.color.holo_blue_dark));
-                    else
-                        view.setBackgroundColor(getContext().getResources().getColor(android.R.color.transparent));
-                }
+            view.setText(file.getName());
+            if (file.isDirectory()) {
+                setDrawable(view, mFolderIcon);
+            } else {
+                setDrawable(view, mFileIcon);
+                if (mSelectedIndex == position)
+                    view.setBackgroundColor(getContext().getResources().getColor(android.R.color.holo_blue_dark));
+                else
+                    view.setBackgroundColor(getContext().getResources().getColor(android.R.color.transparent));
             }
             return view;
         }
