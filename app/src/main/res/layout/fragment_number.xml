@@ -10,6 +10,6 @@
     <ListView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/listView"
+        android:id="@+id/number_listView"
         android:divider="@drawable/listview_devider"/>
 </LinearLayout>

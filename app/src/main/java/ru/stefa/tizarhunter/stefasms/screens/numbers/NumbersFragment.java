@@ -38,15 +38,11 @@ public class NumbersFragment extends Fragment
         Bundle savedInstanceState)
     {
         View rootView = inflater.inflate(R.layout.fragment_number, container, false);
-        ListView listView = (ListView) rootView.findViewById(R.id.listView);
+        ListView listView = (ListView) rootView.findViewById(R.id.number_listView);
         DatabaseActions databaseActions = new DatabaseActions();
         databaseActions.connectionDatabase(mContext);
         NumbersAdapter numbersAdapter = new NumbersAdapter(mContext, databaseActions.listTables());
-//        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
-//            android.R.layout.simple_list_item_1, databaseActions.listTables());
         listView.setAdapter(numbersAdapter);
-//        TextView tv = (TextView) rootView.findViewById(R.id.section_label);
-//        tv.setText("Номера");
         return rootView;
     }
 }

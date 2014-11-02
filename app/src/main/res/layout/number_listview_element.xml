@@ -11,8 +11,8 @@
         android:layout_height="wrap_content"
         android:textSize="18sp"
         android:textStyle="bold"
-        android:textColor="@color/listview_element_text"
-        android:id="@+id/listview_element_text"/>
+        android:textColor="@color/number_listview_element_text"
+        android:id="@+id/number_listview_element_text"/>
 
     <ImageView
         android:layout_width="wrap_content"
@@ -21,6 +21,6 @@
         android:src="@drawable/ic_add_black"
         android:layout_marginRight="12dp"
         android:visibility="invisible"
-        android:id="@+id/listView_element_image"/>
+        android:id="@+id/number_listView_element_image"/>
 
 </FrameLayout>

@@ -27,7 +27,7 @@ private Context mContext;
             case 1:
                 return NumbersFragment.newInstance(position + 1, mContext);
             case 2:
-                return ArchiveFragment.newInstance(position + 1);
+                return ArchiveFragment.newInstance(position + 1, mContext);
         }
         return null;
     }

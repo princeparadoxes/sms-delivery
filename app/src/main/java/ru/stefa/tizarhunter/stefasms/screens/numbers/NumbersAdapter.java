@@ -43,7 +43,7 @@ public class NumbersAdapter extends BindableAdapter<String>
     @Override
     public View newView(LayoutInflater inflater, int position, ViewGroup container)
     {
-        return inflater.inflate(R.layout.listview_ticket, container, false);
+        return inflater.inflate(R.layout.number_listview_element, container, false);
     }
 
     @Override
@@ -51,12 +51,12 @@ public class NumbersAdapter extends BindableAdapter<String>
     {
         if (position==0)
         {
-            ((TextView) view.findViewById(R.id.listview_element_text)).setText("Добавить новую базу номеров");
-            ((ImageView) view.findViewById(R.id.listView_element_image)).setVisibility(View.VISIBLE);
+            ((TextView) view.findViewById(R.id.number_listview_element_text)).setText("Добавить новую базу номеров");
+            ((ImageView) view.findViewById(R.id.number_listView_element_image)).setVisibility(View.VISIBLE);
         }
         else
         {
-            ((TextView) view.findViewById(R.id.listview_element_text)).setText(item);
+            ((TextView) view.findViewById(R.id.number_listview_element_text)).setText(item);
         }
 
     }
