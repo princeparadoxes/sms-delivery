@@ -10,6 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,22 +38,29 @@ public class NewBaseDialog extends AlertDialog.Builder
         stringList.add("Ввести номера вручную");
         stringList.add("Импортировать из файла");
         linearLayout.addView(createRadioButtons(context, stringList));
-        setCustomTitle(mTitle).setView(linearLayout).setPositiveButton(android.R.string.ok,
-                new DialogInterface.OnClickListener()
+        setCustomTitle(mTitle).setView(linearLayout).setPositiveButton(android.R.string.ok, new DialogInterface
+                .OnClickListener()
                 {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i)
                     {
-                        DatabaseActions databaseActions = new DatabaseActions();
-                        databaseActions.connectionDatabase(context);
-                        databaseActions.createTable("dialog");
-                        if (mChoise == 0)
+                        if (!mEditText.getText().toString().isEmpty())
                         {
-                            callback.ok(mEditText.getText().toString());
+                            DatabaseActions databaseActions = new DatabaseActions();
+                            databaseActions.connectionDatabase(context);
+                            databaseActions.createTable(mEditText.getText().toString());
+                            if (mChoise == 0)
+                            {
+                                callback.ok(mEditText.getText().toString());
+                            }
+                            else
+                            {
+                                callback.okImport(mEditText.getText().toString());
+                            }
                         }
                         else
                         {
-                            callback.okImport(mEditText.getText().toString());
+                            Toast.makeText(context,"Введите имя базы данных", Toast.LENGTH_LONG).show();
                         }
                     }
                 }).setNegativeButton(android.R.string.cancel, null);
@@ -90,6 +98,7 @@ public class NewBaseDialog extends AlertDialog.Builder
                 mChoise = i;
             }
         });
+        radioGroup.check(0);
         return radioGroup;
     }
 
@@ -107,6 +116,7 @@ public class NewBaseDialog extends AlertDialog.Builder
     public static interface Callback
     {
         void ok(String nameBase);
+
         void okImport(String nameBase);
     }
 }

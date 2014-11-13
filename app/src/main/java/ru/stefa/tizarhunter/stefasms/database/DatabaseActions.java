@@ -44,14 +44,26 @@ public class DatabaseActions
 
     public ArrayList<String> listTables()
     {
+        ArrayList<String> arrayList = readTableColumn(mDatabase.DATABASE_TABLE, mDatabase.NAME_COLUMN);
+//        String query = "SELECT * FROM " + mDatabase.DATABASE_TABLE;
+//        Cursor cursor = db.rawQuery(query, null);
+//        for (int i = 0; i < cursor.getColumnCount(); i++)
+//        {
+//            arrayList.add(cursor.getColumnName(i));
+//        }
+//        cursor.close();
+        return arrayList;
+    }
+
+    public ArrayList<String> readTableColumn (String tableName, String column){
         ArrayList<String> arrayList = new ArrayList<String>();
-        String query = "SELECT * FROM sqlite_master WHERE type = 'table'";
-        Cursor cursor = db.rawQuery(query, null);
-        for (int i = 0; i < cursor.getColumnCount(); i++)
-        {
-            arrayList.add(cursor.getColumnName(i));
+        Cursor c = db.query(tableName, null, null, null, null, null, null);
+        if (c.moveToFirst()) {
+            do {
+                arrayList.add(c.getString(c.getColumnIndex(column)));
+            } while (c.moveToNext());
         }
-        cursor.close();
+        c.close();
         return arrayList;
     }
 }
