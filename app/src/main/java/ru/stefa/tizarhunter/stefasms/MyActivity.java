@@ -27,6 +27,7 @@ public class MyActivity extends Activity implements ActionBar.TabListener
         mSectionsPagerAdapter = new SectionsPagerAdapter(getFragmentManager(), this);
 
         mViewPager = (ViewPager) findViewById(R.id.pager);
+
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
         mViewPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener()

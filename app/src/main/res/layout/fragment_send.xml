@@ -27,7 +27,7 @@
             android:layout_height="20dp"
             android:layout_marginTop="8dp"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:background="@drawable/background_element"
+            android:background="@drawable/archive_listview_element_background"
             android:id="@+id/send_number_symbols"/>
 
     <FrameLayout
@@ -46,21 +46,19 @@
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:textColor="@android:color/black"
-                    android:background="@drawable/background_button"
+                    android:background="@drawable/archive_listview_element_background"
                     android:text="Выбрать базу номеров"
                     android:id="@+id/send_button_base"
-                    android:textStyle="bold"
                     />
 
             <Button
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:textColor="@android:color/black"
-                    android:background="@drawable/background_button"
+                    android:background="@drawable/archive_listview_element_background"
                     android:text="Послать!"
                     android:layout_marginTop="8dp"
                     android:id="@+id/send_button_send"
-                    android:textStyle="bold"
                     />
         </LinearLayout>
     </FrameLayout>

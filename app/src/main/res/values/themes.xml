@@ -4,7 +4,10 @@
     <style name="CustomActionBarTheme"
            parent="@android:style/Theme.Holo.Light.DarkActionBar">
         <item name="android:actionBarStyle">@style/MyActionBar</item>
-        <!--<item name="android:actionBarTabStyle">@style/MyActionBarTab</item>-->
+        <item name="android:actionBarTabStyle">@android:style/Widget.Holo.Light.ActionBar.TabView.Inverse</item>
+        <item name="android:actionBarTabTextStyle">@style/MyActionBarTabText</item>
+        <!--<item name="android:actionBarTabBarStyle">@android:style/Widget.Holo.Light.ActionBar.TabBar.Inverse</item>-->
+        <item name="android:actionBarTabBarStyle">@style/MyActionBarTabBar</item>
     </style>
 
     <style name="MyActionBar"
@@ -12,8 +15,16 @@
         <item name="android:background">@color/background_element</item>
     </style>
 
-    <!--<style name="MyActionBarTab"-->
-           <!--parent="@android:style/Widget.Holo.Light.ActionBar.TabBar">-->
-        <!--<item name="android:background">@color/background_button</item>-->
-    <!--</style>-->
+    <style name="MyActionBarTabBar"
+           parent="@android:style/Widget.Holo.Light.ActionBar.TabBar">
+        <item name="android:background">@color/background_element</item>
+        <item name="android:divider">?android:attr/actionBarDivider</item>
+    </style>
+
+
+    <style name="MyActionBarTabText" parent="android:style/Widget.Holo.ActionBar.TabText">
+        <!-- This is a PURPLE text color when selected and a WHITE color otherwise -->
+        <item name="android:textColor">@color/selector_tab_text</item>
+    </style>
+
 </resources>

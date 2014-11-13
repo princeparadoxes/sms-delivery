@@ -45,14 +45,7 @@ public class DatabaseActions
     public ArrayList<String> listTables()
     {
         ArrayList<String> arrayList = readTableColumn(mDatabase.DATABASE_TABLE, mDatabase.NAME_COLUMN);
-//        String query = "SELECT * FROM " + mDatabase.DATABASE_TABLE;
-//        Cursor cursor = db.rawQuery(query, null);
-//        for (int i = 0; i < cursor.getColumnCount(); i++)
-//        {
-//            arrayList.add(cursor.getColumnName(i));
-//        }
-//        cursor.close();
-        return arrayList;
+         return arrayList;
     }
 
     public ArrayList<String> readTableColumn (String tableName, String column){
