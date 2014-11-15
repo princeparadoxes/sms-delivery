@@ -4,7 +4,6 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -49,16 +48,15 @@ public class NumbersAdapter extends BindableAdapter<String>
     @Override
     public void bindView(String item, int position, View view)
     {
-        if (position==0)
-        {
-            ((TextView) view.findViewById(R.id.number_listview_element_text)).setText("Добавить новую базу номеров");
-            ((ImageView) view.findViewById(R.id.number_listView_element_image)).setVisibility(View.VISIBLE);
-
-        }
-        else
-        {
+//        if (position==0)
+//        {
+//            ((TextView) view.findViewById(R.id.number_listview_element_text)).setText("Добавить новую базу номеров");
+////            ((ImageView) view.findViewById(R.id.number_listView_element_image)).setVisibility(View.VISIBLE);
+//
+//        }
+//        else
+//        {
             ((TextView) view.findViewById(R.id.number_listview_element_text)).setText(item);
-        }
-
+//        }
     }
 }
