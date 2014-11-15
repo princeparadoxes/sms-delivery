@@ -15,8 +15,6 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
-import ru.stefa.tizarhunter.stefasms.database.DatabaseActions;
-
 public class NewBaseDialog extends AlertDialog.Builder
 {
     private int mChoise = -1;
@@ -46,9 +44,7 @@ public class NewBaseDialog extends AlertDialog.Builder
                     {
                         if (!mEditText.getText().toString().isEmpty())
                         {
-                            DatabaseActions databaseActions = new DatabaseActions();
-                            databaseActions.connectionDatabase(context);
-                            databaseActions.createTableNumbers(mEditText.getText().toString());
+
                             if (mChoise == 0)
                             {
                                 callback.ok(mEditText.getText().toString());

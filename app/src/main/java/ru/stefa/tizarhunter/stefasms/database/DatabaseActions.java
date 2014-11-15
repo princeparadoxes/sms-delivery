@@ -43,6 +43,7 @@ public class DatabaseActions
 
     public void dropTable(String tableName)
     {
+        db.delete(mDatabase.DATABASE_TABLE,mDatabase.NAME_COLUMN + "=\"" + tableName + "\"", null);
         final String SQL_DELETE_ENTRIES = "DROP TABLE IF EXISTS " + tableName;
         db.execSQL(SQL_DELETE_ENTRIES);
     }

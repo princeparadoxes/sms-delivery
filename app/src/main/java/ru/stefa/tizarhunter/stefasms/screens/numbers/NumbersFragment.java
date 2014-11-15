@@ -11,9 +11,14 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import ru.stefa.tizarhunter.stefasms.R;
 import ru.stefa.tizarhunter.stefasms.database.DatabaseActions;
+import ru.stefa.tizarhunter.stefasms.files.FilesActions;
 import ru.stefa.tizarhunter.stefasms.files.OpenFileDialog;
+import ru.stefa.tizarhunter.stefasms.misc.MultiChoiceImpl;
 
 public class NumbersFragment extends Fragment
 {
@@ -42,10 +47,26 @@ public class NumbersFragment extends Fragment
     {
         View rootView = inflater.inflate(R.layout.fragment_number, container, false);
         ListView listView = (ListView) rootView.findViewById(R.id.number_listView);
-        DatabaseActions databaseActions = new DatabaseActions();
+        final DatabaseActions databaseActions = new DatabaseActions();
         databaseActions.connectionDatabase(mContext);
-        NumbersAdapter numbersAdapter = new NumbersAdapter(mContext, databaseActions.listTables());
+        final NumbersAdapter numbersAdapter = new NumbersAdapter(mContext, databaseActions.listTables());
         listView.setAdapter(numbersAdapter);
+        //Указываем ListView, что мы хотим режим с мультивыделением
+        listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
+        //Указываем обработчик такого режима
+        listView.setMultiChoiceModeListener(new MultiChoiceImpl(listView, new MultiChoiceImpl.OnClickMenuListener()
+        {
+            @Override
+            public void OnDeleteClick(List<String> selectedElements)
+            {
+                for (int i=0; i<selectedElements.size();i++)
+                {
+                    databaseActions.dropTable(selectedElements.get(i));
+                }
+                numbersAdapter.notifyDataSetChanged();
+
+            }
+        }));
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener()
         {
             @Override
@@ -56,18 +77,22 @@ public class NumbersFragment extends Fragment
                     NewBaseDialog newBaseDialog = new NewBaseDialog(mContext, new NewBaseDialog.Callback()
                     {
                         @Override
-                        public void ok(String nameBase)
+                        public void ok(final String nameBase)
                         {
-
+                            databaseActions.createTableNumbers(nameBase);
                         }
 
                         @Override
-                        public void okImport(String nameBase)
+                        public void okImport(final String nameBase)
                         {
+                            databaseActions.createTableNumbers(nameBase);
                             OpenFileDialog fileDialog = new OpenFileDialog(mContext)
                                     .setOpenDialogListener(new OpenFileDialog.OpenDialogListener() {
                                         @Override
                                         public void OnSelectedFile(String fileName) {
+                                            FilesActions filesActions =  new FilesActions(mContext);
+                                            ArrayList<String> numbersFromFile = filesActions.readFileSD(fileName);
+                                            databaseActions.insertNumbersInTable(nameBase, numbersFromFile);
                                             Toast.makeText(getActivity(), fileName, Toast.LENGTH_LONG).show();
                                         }
                                     });
