@@ -25,6 +25,8 @@ public class NumbersFragment extends Fragment
     private Context mContext;
     private SQLiteDatabase mSQLiteDatabase;
     private static final String ARG_SECTION_NUMBER = "section_number";
+    private NumbersAdapter mNumbersAdapter;
+    private ArrayList<String> mAdapterData;
 
 
     public static NumbersFragment newInstance(int sectionNumber, Context context)
@@ -49,8 +51,9 @@ public class NumbersFragment extends Fragment
         ListView listView = (ListView) rootView.findViewById(R.id.number_listView);
         final DatabaseActions databaseActions = new DatabaseActions();
         databaseActions.connectionDatabase(mContext);
-        final NumbersAdapter numbersAdapter = new NumbersAdapter(mContext, databaseActions.listTables());
-        listView.setAdapter(numbersAdapter);
+        mAdapterData =  databaseActions.listTables();
+        mNumbersAdapter = new NumbersAdapter(mContext, mAdapterData);
+        listView.setAdapter(mNumbersAdapter);
         //Указываем ListView, что мы хотим режим с мультивыделением
         listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
         //Указываем обработчик такого режима
@@ -63,8 +66,7 @@ public class NumbersFragment extends Fragment
                 {
                     databaseActions.dropTable(selectedElements.get(i));
                 }
-                numbersAdapter.notifyDataSetChanged();
-
+                updateListView(databaseActions.listTables());
             }
         }));
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener()
@@ -105,5 +107,12 @@ public class NumbersFragment extends Fragment
             }
         });
         return rootView;
+    }
+
+    private void updateListView (ArrayList<String> newList)
+    {
+        mAdapterData.clear();
+        mAdapterData.addAll(newList);
+        mNumbersAdapter.notifyDataSetChanged();
     }
 }

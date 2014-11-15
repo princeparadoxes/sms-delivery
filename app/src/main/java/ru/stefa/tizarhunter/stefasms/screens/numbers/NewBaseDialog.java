@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.view.Gravity;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
@@ -84,17 +85,26 @@ public class NewBaseDialog extends AlertDialog.Builder
         {
             RadioButton radioButton = new RadioButton(context);
             radioButton.setText(stringList.get(i));
+            final int finalI = i;
+            radioButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
+            {
+                @Override
+                public void onCheckedChanged(CompoundButton compoundButton, boolean b)
+                {
+                    mChoise = finalI;
+                }
+            });
             radioGroup.addView(radioButton);
         }
-        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
-        {
-            @Override
-            public void onCheckedChanged(RadioGroup radioGroup, int i)
-            {
-                mChoise = i;
-            }
-        });
-        radioGroup.check(0);
+//        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
+//        {
+//            @Override
+//            public void onCheckedChanged(RadioGroup radioGroup, int checkedId)
+//            {
+//
+//            }
+//        });
+//        radioGroup.check(0);
         return radioGroup;
     }
 
