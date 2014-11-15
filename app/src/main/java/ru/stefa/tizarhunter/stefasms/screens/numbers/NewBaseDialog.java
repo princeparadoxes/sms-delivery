@@ -48,7 +48,7 @@ public class NewBaseDialog extends AlertDialog.Builder
                         {
                             DatabaseActions databaseActions = new DatabaseActions();
                             databaseActions.connectionDatabase(context);
-                            databaseActions.createTable(mEditText.getText().toString());
+                            databaseActions.createTableNumbers(mEditText.getText().toString());
                             if (mChoise == 0)
                             {
                                 callback.ok(mEditText.getText().toString());

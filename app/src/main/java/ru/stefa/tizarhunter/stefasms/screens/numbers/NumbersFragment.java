@@ -13,7 +13,7 @@ import android.widget.Toast;
 
 import ru.stefa.tizarhunter.stefasms.R;
 import ru.stefa.tizarhunter.stefasms.database.DatabaseActions;
-import ru.stefa.tizarhunter.stefasms.misc.OpenFileDialog;
+import ru.stefa.tizarhunter.stefasms.files.OpenFileDialog;
 
 public class NumbersFragment extends Fragment
 {

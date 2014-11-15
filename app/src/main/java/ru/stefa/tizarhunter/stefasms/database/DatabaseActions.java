@@ -20,14 +20,25 @@ public class DatabaseActions
         db = mDatabase.getWritableDatabase();
     }
 
-    public void createTable(String tableName)
+    public void createTableNumbers(String tableName)
     {
         ContentValues newValues = new ContentValues();
         newValues.put(mDatabase.NAME_COLUMN, tableName);
         db.insert(mDatabase.DATABASE_TABLE, null, newValues);
         final String SQL_CREATE_ENTRIES = "CREATE TABLE " + tableName + " (" + UID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
-            + NUMBER + " INTEGER);";
+            + NUMBER + " TEXT);";
         db.execSQL(SQL_CREATE_ENTRIES);
+    }
+
+    public void insertNumbersInTable(String tableName, ArrayList<String> numbers)
+    {
+        ContentValues newValues = new ContentValues();
+        for (int i = 0; i < numbers.size(); i++)
+        {
+            newValues.put(NUMBER, numbers.get(i));
+        }
+
+        db.insert(tableName, null, newValues);
     }
 
     public void dropTable(String tableName)
