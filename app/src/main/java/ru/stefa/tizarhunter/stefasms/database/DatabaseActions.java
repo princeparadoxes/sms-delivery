@@ -36,9 +36,8 @@ public class DatabaseActions
         for (int i = 0; i < numbers.size(); i++)
         {
             newValues.put(NUMBER, numbers.get(i));
+            db.insert(tableName, null, newValues);
         }
-
-        db.insert(tableName, null, newValues);
     }
 
     public void dropTable(String tableName)
