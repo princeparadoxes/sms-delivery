@@ -13,9 +13,18 @@
         android:layout_height="47dp"
         android:textSize="18sp"
         android:textStyle="bold"
+        android:textColor="@android:color/black"
         android:gravity="center_vertical"
-        android:textColor="@color/number_listview_element_text"
         android:id="@+id/number_listview_element_text"/>
+
+    <TextView
+        android:id="@+id/number_listview_element_size"
+        android:layout_width="wrap_content"
+        android:layout_height="47dp"
+        android:textSize="12sp"
+        android:textColor="@color/number_listview_element_text"
+        android:layout_gravity="right"
+        android:gravity="center_vertical"/>
 
     <!--<ImageView-->
         <!--android:layout_width="wrap_content"-->

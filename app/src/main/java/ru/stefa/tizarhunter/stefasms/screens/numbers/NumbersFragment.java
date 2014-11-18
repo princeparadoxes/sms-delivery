@@ -31,7 +31,7 @@ public class NumbersFragment extends Fragment
     private static final String ARG_SECTION_NUMBER = "section_number";
     private @NonNull HeaderHolder mHeaderHolder;
     private NumbersAdapter mNumbersAdapter;
-    private ArrayList<String> mAdapterData;
+    private ArrayList<NumbersModel> mAdapterData;
     private DatabaseActions mDatabaseActions;
 
 
@@ -84,7 +84,10 @@ public class NumbersFragment extends Fragment
             public void onItemClick(AdapterView<?> parent, View view, int position, long id)
             {
                 changeHeaderToNumbers(mAdapterData.get((int) id));
-                updateListView(mDatabaseActions.readTableColumn(mAdapterData.get((int) id), DatabaseActions.NUMBER));
+                ArrayList<String> strings = mDatabaseActions.readTableColumn(mAdapterData.get((int) id).getName(),
+                        DatabaseActions.NUMBER);
+                updateListView(stringsToNumberModel(strings));
+
             }
         });
         changeHeaderToTables();
@@ -105,7 +108,8 @@ public class NumbersFragment extends Fragment
                        public void ok(final String nameBase)
                        {
                            mDatabaseActions.createTableNumbers(nameBase);
-                           updateListView(mDatabaseActions.readTableColumn(nameBase, DatabaseActions.NUMBER));
+                           ArrayList<String> strings = mDatabaseActions.readTableColumn(nameBase, DatabaseActions.NUMBER);
+                           updateListView(stringsToNumberModel(strings));
                        }
 
                        @Override
@@ -124,7 +128,8 @@ public class NumbersFragment extends Fragment
                                        }
                                    });
                            fileDialog.show();
-                           updateListView(mDatabaseActions.readTableColumn(nameBase, DatabaseActions.NUMBER));
+                           ArrayList<String> strings = mDatabaseActions.readTableColumn(nameBase, DatabaseActions.NUMBER);
+                           updateListView(stringsToNumberModel(strings));
                        }
                    });
                    newBaseDialog.show();
@@ -135,11 +140,12 @@ public class NumbersFragment extends Fragment
 
     }
 
-    private void changeHeaderToNumbers(String baseName)
+    private void changeHeaderToNumbers(NumbersModel numbersModel)
     {
         mHeaderHolder.mAddTextView.setText("Добавить новый номер");
         mHeaderHolder.mAddTextView.setOnClickListener(null);
-        mHeaderHolder.mNameBaseText.setText(baseName);
+        mHeaderHolder.mNameBaseText.setText(numbersModel.getName());
+        mHeaderHolder.mSizeBase.setText(numbersModel.getSize() + "");
         mHeaderHolder.mNumbersContainer.setVisibility(View.VISIBLE);
         mHeaderHolder.mBackImage.setOnClickListener(new View.OnClickListener()
         {
@@ -153,18 +159,31 @@ public class NumbersFragment extends Fragment
     }
 
 
-    private void updateListView(ArrayList<String> newList)
+    private void updateListView(ArrayList<NumbersModel> newList)
     {
         mAdapterData.clear();
         mAdapterData.addAll(newList);
         mNumbersAdapter.notifyDataSetChanged();
     }
 
+    private ArrayList<NumbersModel> stringsToNumberModel(ArrayList<String> strings)
+    {
+        ArrayList<NumbersModel> numbersModels = new ArrayList<NumbersModel>();
+        for (int i=0; i<strings.size();i++)
+        {
+            NumbersModel numbersModel = new NumbersModel();
+            numbersModel.setName(strings.get(i));
+            numbersModel.setSize(0);
+            numbersModels.add(numbersModel);
+        }
+        return numbersModels;
+    }
     public static class HeaderHolder
     {
         public final @NonNull TextView mAddTextView;
         public final @NonNull LinearLayout mNumbersContainer;
         public final @NonNull TextView mNameBaseText;
+        public final @NonNull TextView mSizeBase;
         public final @NonNull ImageView mBackImage;
 
 
@@ -173,6 +192,7 @@ public class NumbersFragment extends Fragment
             mAddTextView = (TextView) view.findViewById(R.id.header_listview_text);
             mNumbersContainer = (LinearLayout) view.findViewById(R.id.header_numbers_container);
             mNameBaseText = (TextView) view.findViewById(R.id.name_base);
+            mSizeBase = (TextView) view.findViewById(R.id.base_size);
             mBackImage = (ImageView) view.findViewById(R.id.back_image);
         }
     }

@@ -7,6 +7,8 @@ import android.database.sqlite.SQLiteDatabase;
 
 import java.util.ArrayList;
 
+import ru.stefa.tizarhunter.stefasms.screens.numbers.NumbersModel;
+
 public class DatabaseActions
 {
     private Database mDatabase;
@@ -25,8 +27,8 @@ public class DatabaseActions
         ContentValues newValues = new ContentValues();
         newValues.put(mDatabase.NAME_COLUMN, tableName);
         db.insert(mDatabase.DATABASE_TABLE, null, newValues);
-        final String SQL_CREATE_ENTRIES = "CREATE TABLE " + tableName + " (" + UID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
-            + NUMBER + " TEXT);";
+        final String SQL_CREATE_ENTRIES = "CREATE TABLE " + tableName + " (" + UID + " INTEGER PRIMARY KEY " +
+                "AUTOINCREMENT," + NUMBER + " TEXT);";
         db.execSQL(SQL_CREATE_ENTRIES);
     }
 
@@ -42,7 +44,7 @@ public class DatabaseActions
 
     public void dropTable(String tableName)
     {
-        db.delete(mDatabase.DATABASE_TABLE,mDatabase.NAME_COLUMN + "=\"" + tableName + "\"", null);
+        db.delete(mDatabase.DATABASE_TABLE, mDatabase.NAME_COLUMN + "=\"" + tableName + "\"", null);
         final String SQL_DELETE_ENTRIES = "DROP TABLE IF EXISTS " + tableName;
         db.execSQL(SQL_DELETE_ENTRIES);
     }
@@ -53,21 +55,42 @@ public class DatabaseActions
         db.execSQL(SQL_DELETE_ENTRIES);
     }
 
-    public ArrayList<String> listTables()
+    public ArrayList<NumbersModel> listTables()
     {
-        ArrayList<String> arrayList = readTableColumn(mDatabase.DATABASE_TABLE, mDatabase.NAME_COLUMN);
-         return arrayList;
+        ArrayList<String> tableNames = readTableColumn(mDatabase.DATABASE_TABLE, mDatabase.NAME_COLUMN);
+        ArrayList<NumbersModel> numbersModels = new ArrayList<NumbersModel>();
+        for (int i=0; i < tableNames.size(); i++)
+        {
+            NumbersModel numbersModel = new NumbersModel();
+            numbersModel.setName(tableNames.get(i));
+            numbersModel.setSize(getCountTableRow(tableNames.get(i)));
+            numbersModels.add(numbersModel);
+        }
+        return numbersModels;
     }
 
-    public ArrayList<String> readTableColumn (String tableName, String column){
+    public ArrayList<String> readTableColumn(String tableName, String column)
+    {
         ArrayList<String> arrayList = new ArrayList<String>();
         Cursor c = db.query(tableName, null, null, null, null, null, null);
-        if (c.moveToFirst()) {
-            do {
+        if (c.moveToFirst())
+        {
+            do
+            {
                 arrayList.add(c.getString(c.getColumnIndex(column)));
-            } while (c.moveToNext());
+            }
+            while (c.moveToNext());
         }
         c.close();
         return arrayList;
+    }
+
+    public int getCountTableRow(String tableName)
+    {
+        Cursor mCount= db.rawQuery("select count(*) from '" + tableName + "'", null);
+        mCount.moveToFirst();
+        int count= mCount.getInt(0);
+        mCount.close();
+        return count;
     }
 }

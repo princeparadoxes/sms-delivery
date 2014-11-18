@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ru.stefa.tizarhunter.stefasms.R;
+import ru.stefa.tizarhunter.stefasms.screens.numbers.NumbersModel;
 
 public class MultiChoiceImpl implements AbsListView.MultiChoiceModeListener {
     private AbsListView listView;
@@ -84,7 +85,8 @@ public class MultiChoiceImpl implements AbsListView.MultiChoiceModeListener {
         SparseBooleanArray sparseBooleanArray = listView.getCheckedItemPositions();
         for (int i = 0; i < sparseBooleanArray.size(); i++) {
             if (sparseBooleanArray.valueAt(i)) {
-                String selectedItem = (String) listView.getItemAtPosition(sparseBooleanArray.keyAt(i));
+                NumbersModel numbersModel = (NumbersModel) listView.getItemAtPosition(sparseBooleanArray.keyAt(i));
+                String selectedItem = numbersModel.getName();
                 selectedElements.add(selectedItem);
             }
         }

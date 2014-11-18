@@ -11,14 +11,28 @@
     android:id="@+id/header_numbers_container"
     android:orientation="vertical"
     android:visibility="gone">
-    <TextView
-        android:id="@+id/name_base"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="47dp"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:gravity="center"
-        />
+        android:layout_height="wrap_content"
+        android:padding="8dp">
+        <TextView
+            android:id="@+id/name_base"
+            android:layout_width="wrap_content"
+            android:layout_height="47dp"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_gravity="center"
+            />
+        <TextView
+            android:id="@+id/base_size"
+            android:layout_width="wrap_content"
+            android:layout_height="47dp"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:layout_gravity="right|center_vertical"
+            />
+        </FrameLayout>
+
     <ImageView
         android:id="@+id/back_image"
         android:layout_width="wrap_content"

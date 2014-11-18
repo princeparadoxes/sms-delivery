@@ -96,15 +96,6 @@ public class NewBaseDialog extends AlertDialog.Builder
             });
             radioGroup.addView(radioButton);
         }
-//        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
-//        {
-//            @Override
-//            public void onCheckedChanged(RadioGroup radioGroup, int checkedId)
-//            {
-//
-//            }
-//        });
-//        radioGroup.check(0);
         return radioGroup;
     }
 

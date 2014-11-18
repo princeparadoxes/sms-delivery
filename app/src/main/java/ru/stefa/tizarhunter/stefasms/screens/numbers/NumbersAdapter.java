@@ -11,11 +11,11 @@ import java.util.ArrayList;
 import ru.stefa.tizarhunter.stefasms.R;
 import ru.stefa.tizarhunter.stefasms.misc.BindableAdapter;
 
-public class NumbersAdapter extends BindableAdapter<String>
+public class NumbersAdapter extends BindableAdapter<NumbersModel>
 {
-    private ArrayList<String> mList;
+    private ArrayList<NumbersModel> mList;
 
-    public NumbersAdapter(Context context,  ArrayList<String> list)
+    public NumbersAdapter(Context context, ArrayList<NumbersModel> list)
     {
         super(context);
         mList = list;
@@ -28,7 +28,7 @@ public class NumbersAdapter extends BindableAdapter<String>
     }
 
     @Override
-    public String getItem(int position)
+    public NumbersModel getItem(int position)
     {
         return mList.get(position);
     }
@@ -46,17 +46,14 @@ public class NumbersAdapter extends BindableAdapter<String>
     }
 
     @Override
-    public void bindView(String item, int position, View view)
+    public void bindView(NumbersModel item, int position, View view)
     {
-//        if (position==0)
-//        {
-//            ((TextView) view.findViewById(R.id.number_listview_element_text)).setText("Добавить новую базу номеров");
-////            ((ImageView) view.findViewById(R.id.number_listView_element_image)).setVisibility(View.VISIBLE);
-//
-//        }
-//        else
-//        {
-            ((TextView) view.findViewById(R.id.number_listview_element_text)).setText(item);
-//        }
+        ((TextView) view.findViewById(R.id.number_listview_element_text)).setText(item.getName());
+        if (item.getSize() != 0)
+        {
+            ((TextView) view.findViewById(R.id.number_listview_element_size)).setText(item.getSize() + "");
+        }
+
+
     }
 }
