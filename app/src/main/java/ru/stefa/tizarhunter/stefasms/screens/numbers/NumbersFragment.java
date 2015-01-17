@@ -107,29 +107,47 @@ public class NumbersFragment extends Fragment
                        @Override
                        public void ok(final String nameBase)
                        {
-                           mDatabaseActions.createTableNumbers(nameBase);
-                           ArrayList<String> strings = mDatabaseActions.readTableColumn(nameBase, DatabaseActions.NUMBER);
-                           updateListView(stringsToNumberModel(strings));
+                           if (dataBaseNameValidation(nameBase) != null)
+                           {
+                               mDatabaseActions.createTableNumbers(dataBaseNameValidation(nameBase));
+                               ArrayList<String> strings = mDatabaseActions.readTableColumn(
+                                       dataBaseNameValidation(nameBase), DatabaseActions.NUMBER);
+                               updateListView(stringsToNumberModel(strings));
+                           }
+                           else
+                           {
+                               Toast.makeText(getActivity(), "Неправильное имя базы данных", Toast.LENGTH_LONG).show();
+                           }
                        }
 
                        @Override
                        public void okImport(final String nameBase)
                        {
-                           mDatabaseActions.createTableNumbers(nameBase);
-                           OpenFileDialog fileDialog = new OpenFileDialog(mContext).setOpenDialogListener(new OpenFileDialog.OpenDialogListener()
-                                   {
-                                       @Override
-                                       public void OnSelectedFile(String fileName)
+                           if (dataBaseNameValidation(nameBase) != null)
+                           {
+                               mDatabaseActions.createTableNumbers(dataBaseNameValidation(nameBase));
+                               OpenFileDialog fileDialog = new OpenFileDialog(mContext).setOpenDialogListener(
+                                       new OpenFileDialog.OpenDialogListener()
                                        {
-                                           FilesActions filesActions = new FilesActions(mContext);
-                                           ArrayList<String> numbersFromFile = filesActions.readFileSD(fileName);
-                                           mDatabaseActions.insertNumbersInTable(nameBase, numbersFromFile);
-                                           Toast.makeText(getActivity(), fileName, Toast.LENGTH_LONG).show();
-                                       }
-                                   });
-                           fileDialog.show();
-                           ArrayList<String> strings = mDatabaseActions.readTableColumn(nameBase, DatabaseActions.NUMBER);
-                           updateListView(stringsToNumberModel(strings));
+                                           @Override
+                                           public void OnSelectedFile(String fileName)
+                                           {
+                                               FilesActions filesActions = new FilesActions(mContext);
+                                               ArrayList<String> numbersFromFile = filesActions.readFileSD(fileName);
+                                               mDatabaseActions.insertNumbersInTable(dataBaseNameValidation(nameBase),
+                                                       numbersFromFile);
+                                               Toast.makeText(getActivity(), fileName, Toast.LENGTH_LONG).show();
+                                           }
+                                       });
+                               fileDialog.show();
+                               ArrayList<String> strings = mDatabaseActions.readTableColumn(
+                                       dataBaseNameValidation(nameBase), DatabaseActions.NUMBER);
+                               updateListView(stringsToNumberModel(strings));
+                           }
+                           else
+                           {
+                               Toast.makeText(getActivity(), "Неправильное имя базы данных", Toast.LENGTH_LONG).show();
+                           }
                        }
                    });
                    newBaseDialog.show();
@@ -138,6 +156,20 @@ public class NumbersFragment extends Fragment
            mHeaderHolder.mNumbersContainer.setVisibility(View.GONE);
 
 
+    }
+
+
+    private String dataBaseNameValidation(String name)
+    {
+
+        for (int i = 0; i < mAdapterData.size(); i++)
+        {
+            if (mAdapterData.get(i).getName().equals(name))
+            {
+                return null;
+            }
+        }
+        return name.replaceAll("\\s+", "_");
     }
 
     private void changeHeaderToNumbers(NumbersModel numbersModel)

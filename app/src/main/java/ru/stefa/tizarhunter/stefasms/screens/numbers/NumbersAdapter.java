@@ -48,7 +48,7 @@ public class NumbersAdapter extends BindableAdapter<NumbersModel>
     @Override
     public void bindView(NumbersModel item, int position, View view)
     {
-        ((TextView) view.findViewById(R.id.number_listview_element_text)).setText(item.getName());
+        ((TextView) view.findViewById(R.id.number_listview_element_text)).setText(item.getName().replaceAll("_", " "));
         if (item.getSize() != 0)
         {
             ((TextView) view.findViewById(R.id.number_listview_element_size)).setText(item.getSize() + "");
