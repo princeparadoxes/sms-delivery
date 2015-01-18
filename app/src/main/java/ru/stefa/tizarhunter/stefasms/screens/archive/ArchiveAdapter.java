@@ -6,7 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import ru.stefa.tizarhunter.stefasms.R;
 import ru.stefa.tizarhunter.stefasms.misc.BindableAdapter;
@@ -14,9 +14,9 @@ import ru.stefa.tizarhunter.stefasms.misc.BindableAdapter;
 public class ArchiveAdapter extends BindableAdapter<ArchiveModel>
 {
 
-    private ArrayList<ArchiveModel> mList;
+    private List<ArchiveModel> mList;
 
-    public ArchiveAdapter(Context context, ArrayList<ArchiveModel> list)
+    public ArchiveAdapter(Context context, List<ArchiveModel> list)
     {
         super(context);
         mList = list;

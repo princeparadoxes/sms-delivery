@@ -6,7 +6,9 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import ru.stefa.tizarhunter.stefasms.screens.archive.ArchiveModel;
 import ru.stefa.tizarhunter.stefasms.screens.numbers.NumbersModel;
 
 public class DatabaseActions
@@ -26,7 +28,7 @@ public class DatabaseActions
     {
         ContentValues newValues = new ContentValues();
         newValues.put(mDatabase.NAME_COLUMN, tableName);
-        db.insert(mDatabase.DATABASE_TABLE, null, newValues);
+        db.insert(mDatabase.NUMBERS_TABLE, null, newValues);
         final String SQL_CREATE_ENTRIES = "CREATE TABLE " + tableName + " (" + UID + " INTEGER PRIMARY KEY " +
                 "AUTOINCREMENT," + NUMBER + " TEXT);";
         db.execSQL(SQL_CREATE_ENTRIES);
@@ -44,7 +46,7 @@ public class DatabaseActions
 
     public void dropTable(String tableName)
     {
-        db.delete(mDatabase.DATABASE_TABLE, mDatabase.NAME_COLUMN + "=\"" + tableName + "\"", null);
+        db.delete(mDatabase.NUMBERS_TABLE, mDatabase.NAME_COLUMN + "=\"" + tableName + "\"", null);
         final String SQL_DELETE_ENTRIES = "DROP TABLE IF EXISTS " + tableName;
         db.execSQL(SQL_DELETE_ENTRIES);
     }
@@ -57,7 +59,7 @@ public class DatabaseActions
 
     public ArrayList<NumbersModel> listTables()
     {
-        ArrayList<String> tableNames = readTableColumn(mDatabase.DATABASE_TABLE, mDatabase.NAME_COLUMN);
+        ArrayList<String> tableNames = readTableColumn(mDatabase.NUMBERS_TABLE, mDatabase.NAME_COLUMN);
         ArrayList<NumbersModel> numbersModels = new ArrayList<NumbersModel>();
         for (int i=0; i < tableNames.size(); i++)
         {
@@ -67,6 +69,35 @@ public class DatabaseActions
             numbersModels.add(numbersModel);
         }
         return numbersModels;
+    }
+
+    public void addToArchive(String text, int count, long time)
+    {
+        ContentValues newValues = new ContentValues();
+        newValues.put(Database.TEXT_COLUMN, text);
+        newValues.put(Database.COUNT_COLUMN, count);
+        newValues.put(Database.BASES_COLUMN, time);
+        db.insert(Database.ARCHIVE_TABLE, null, newValues);
+    }
+
+    public List<ArchiveModel> getAllArchive()
+    {
+        List<ArchiveModel> archiveModels = new ArrayList<ArchiveModel>();
+        Cursor c = db.query(Database.ARCHIVE_TABLE, null, null, null, null, null, null);
+        if (c.moveToFirst())
+        {
+            do
+            {
+                ArchiveModel archiveModel = new ArchiveModel();
+                archiveModel.setText(c.getString(c.getColumnIndex(Database.TEXT_COLUMN)));
+                archiveModel.setNumberSends(c.getInt(c.getColumnIndex(Database.COUNT_COLUMN)));
+                archiveModel.setDateTime(c.getLong(c.getColumnIndex(Database.BASES_COLUMN)));
+                archiveModels.add(archiveModel);
+            }
+            while (c.moveToNext());
+        }
+        c.close();
+        return archiveModels;
     }
 
     public ArrayList<String> readTableColumn(String tableName, String column)

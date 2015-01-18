@@ -9,13 +9,23 @@ public class Database extends SQLiteOpenHelper
 {
     private static final String DATABASE_NAME = "database.db";
     private static final int DATABASE_VERSION = 1;
-    public static final String DATABASE_TABLE = "nameTables";
+    public static final String NUMBERS_TABLE = "nameTables";
     public static final String NAME_COLUMN = "name";
+    public static final String ARCHIVE_TABLE = "archive";
+    public static final String TEXT_COLUMN = "text";
+    public static final String COUNT_COLUMN = "count";
+    public static final String BASES_COLUMN = "bases";
 
-    private static final String DATABASE_CREATE_SCRIPT = "create table "
-            + DATABASE_TABLE + " (" + BaseColumns._ID
+
+    private static final String DATABASE_CREATE_NUMBERS = "create table "
+            + NUMBERS_TABLE + " (" + BaseColumns._ID
             + " integer primary key autoincrement, " + NAME_COLUMN
             + " text not null);";
+    private static final String DATABASE_CREATE_ARCHIVE = "create table "
+            + ARCHIVE_TABLE + " (" + BaseColumns._ID + " integer primary key autoincrement, "
+            + TEXT_COLUMN + " text not null, "
+            + COUNT_COLUMN  + " integer, "
+            + BASES_COLUMN + " long);";
 
     public Database(Context context)
     {
@@ -25,7 +35,8 @@ public class Database extends SQLiteOpenHelper
     @Override
     public void onCreate(SQLiteDatabase db)
     {
-        db.execSQL(DATABASE_CREATE_SCRIPT);
+        db.execSQL(DATABASE_CREATE_NUMBERS);
+        db.execSQL(DATABASE_CREATE_ARCHIVE);
     }
 
 

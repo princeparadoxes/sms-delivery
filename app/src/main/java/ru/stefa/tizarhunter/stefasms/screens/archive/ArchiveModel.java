@@ -1,12 +1,10 @@
 package ru.stefa.tizarhunter.stefasms.screens.archive;
 
-import java.text.DateFormat;
-
 public class ArchiveModel
 {
     private String mText;
     private int mNumberSends;
-    private DateFormat mDateFormat;
+    private long mDateTime;
 
     public String getText()
     {
@@ -28,13 +26,13 @@ public class ArchiveModel
         mNumberSends = numberSends;
     }
 
-    public DateFormat getDateFormat()
+    public long getDateTime()
     {
-        return mDateFormat;
+        return mDateTime;
     }
 
-    public void setDateFormat(DateFormat dateFormat)
+    public void setDateTime(long dateTime)
     {
-        mDateFormat = dateFormat;
+        mDateTime = dateTime;
     }
 }

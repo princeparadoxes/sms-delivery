@@ -5,46 +5,47 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     >
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:id="@+id/header_numbers_container"
-    android:orientation="vertical"
-    android:visibility="gone">
-    <FrameLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="8dp">
-        <TextView
-            android:id="@+id/name_base"
-            android:layout_width="wrap_content"
-            android:layout_height="47dp"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:layout_gravity="center"
-            />
-        <TextView
-            android:id="@+id/base_size"
-            android:layout_width="wrap_content"
-            android:layout_height="47dp"
-            android:textSize="14sp"
-            android:textStyle="bold"
-            android:layout_gravity="right|center_vertical"
-            />
+        android:id="@+id/header_numbers_container"
+        android:orientation="vertical"
+        android:visibility="gone">
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp">
+            <TextView
+                android:id="@+id/name_base"
+                android:layout_width="wrap_content"
+                android:layout_height="47dp"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_gravity="center"
+                />
+            <TextView
+                android:id="@+id/base_size"
+                android:layout_width="wrap_content"
+                android:layout_height="47dp"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:layout_gravity="right|center_vertical"
+                />
         </FrameLayout>
 
-    <ImageView
-        android:id="@+id/back_image"
-        android:layout_width="wrap_content"
-        android:layout_height="47dp"
-        android:layout_marginLeft="12dp"
-        android:src="@drawable/ic_more_horiz_grey600_36dp"/>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@drawable/listview_devider"/>
-</LinearLayout>
+        <ImageView
+            android:id="@+id/back_image"
+            android:layout_width="wrap_content"
+            android:layout_height="47dp"
+            android:layout_marginLeft="4dp"
+            android:src="@drawable/ic_more_horiz_grey600_36dp"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@drawable/listview_devider"/>
+    </LinearLayout>
     <FrameLayout
+        android:id="@+id/header_tables_add"
         android:layout_width="match_parent"
         android:layout_height="47dp"
         android:paddingLeft="12dp"
@@ -63,7 +64,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="right|center_vertical"
             android:src="@drawable/ic_add_circle_grey600_36dp"
-            android:layout_marginRight="12dp"/>
+            android:layout_marginRight="4dp"/>
     </FrameLayout>
 
 

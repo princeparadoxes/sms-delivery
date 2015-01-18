@@ -7,10 +7,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.TextView;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import ru.stefa.tizarhunter.stefasms.R;
+import ru.stefa.tizarhunter.stefasms.database.DatabaseActions;
 
 /**
  * Created by tizarhunter on 17.08.14.
@@ -18,8 +20,9 @@ import ru.stefa.tizarhunter.stefasms.R;
 public class ArchiveFragment extends Fragment
 {
     private Context mContext;
-    private ArrayList<ArchiveModel> mArchiveModelList;
+    private List<ArchiveModel> mArchiveModelList;
     private static final String ARG_SECTION_NUMBER = "section_archive";
+    private DatabaseActions mDatabaseActions;
 
     public static ArchiveFragment newInstance(int sectionNumber, Context context)
     {
@@ -39,18 +42,16 @@ public class ArchiveFragment extends Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         View rootView = inflater.inflate(R.layout.fragment_archive, container, false);
+        mDatabaseActions = new DatabaseActions();
+        mDatabaseActions.connectionDatabase(mContext);
         ListView listView = (ListView) rootView.findViewById(R.id.archive_listView);
-        mArchiveModelList = new ArrayList<ArchiveModel>();
-        for (int i = 0; i < 5; i++)
-        {
-            ArchiveModel archiveModel = new ArchiveModel();
-            archiveModel.setText("Архивное смс" + i);
-            archiveModel.setNumberSends(500 + i);
-            //archiveModel.getDateFormat()
-            mArchiveModelList.add(archiveModel);
-        }
+        mArchiveModelList =mDatabaseActions.getAllArchive();
         ArchiveAdapter archiveAdapter = new ArchiveAdapter(mContext, mArchiveModelList);
         listView.setAdapter(archiveAdapter);
+        if (mArchiveModelList.size() == 0)
+        {
+            ((TextView) rootView.findViewById(R.id.archive_empty_text)).setVisibility(View.VISIBLE);
+        }
         return rootView;
     }
 }

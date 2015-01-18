@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -97,7 +98,7 @@ public class NumbersFragment extends Fragment
     private void changeHeaderToTables()
     {
            mHeaderHolder.mAddTextView.setText("Добавить новую базу номеров");
-           mHeaderHolder.mAddTextView.setOnClickListener(new View.OnClickListener()
+           mHeaderHolder.mAddContainer.setOnClickListener(new View.OnClickListener()
            {
                @Override
                public void onClick(View view)
@@ -175,7 +176,7 @@ public class NumbersFragment extends Fragment
     private void changeHeaderToNumbers(NumbersModel numbersModel)
     {
         mHeaderHolder.mAddTextView.setText("Добавить новый номер");
-        mHeaderHolder.mAddTextView.setOnClickListener(null);
+        mHeaderHolder.mAddContainer.setOnClickListener(null);
         mHeaderHolder.mNameBaseText.setText(numbersModel.getName());
         mHeaderHolder.mSizeBase.setText(numbersModel.getSize() + "");
         mHeaderHolder.mNumbersContainer.setVisibility(View.VISIBLE);
@@ -212,6 +213,7 @@ public class NumbersFragment extends Fragment
     }
     public static class HeaderHolder
     {
+        public final @NonNull FrameLayout mAddContainer;
         public final @NonNull TextView mAddTextView;
         public final @NonNull LinearLayout mNumbersContainer;
         public final @NonNull TextView mNameBaseText;
@@ -221,6 +223,7 @@ public class NumbersFragment extends Fragment
 
         public HeaderHolder(View view)
         {
+            mAddContainer = (FrameLayout) view.findViewById(R.id.header_tables_add);
             mAddTextView = (TextView) view.findViewById(R.id.header_listview_text);
             mNumbersContainer = (LinearLayout) view.findViewById(R.id.header_numbers_container);
             mNameBaseText = (TextView) view.findViewById(R.id.name_base);
