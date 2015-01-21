@@ -23,7 +23,7 @@ private Context mContext;
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                return SendFragment.newInstance(position + 1);
+                return SendFragment.newInstance(position + 1, mContext);
             case 1:
                 return NumbersFragment.newInstance(position + 1, mContext);
             case 2:

@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.sql.Date;
 import java.util.List;
 
 import ru.stefa.tizarhunter.stefasms.R;
@@ -51,6 +52,7 @@ public class ArchiveAdapter extends BindableAdapter<ArchiveModel>
     {
         ((TextView) view.findViewById(R.id.archive_listview_element_text)).setText(item.getText());
         ((TextView) view.findViewById(R.id.archive_listview_element_number)).setText(item.getNumberSends() + "");
-        ((TextView) view.findViewById(R.id.archive_listview_element_date)).setText(item.getText().toString());
+        Date date = new Date(item.getDateTime());
+        ((TextView) view.findViewById(R.id.archive_listview_element_date)).setText(date.toString());
     }
 }

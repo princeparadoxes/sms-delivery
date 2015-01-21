@@ -34,6 +34,7 @@ public class NumbersFragment extends Fragment
     private NumbersAdapter mNumbersAdapter;
     private ArrayList<NumbersModel> mAdapterData;
     private DatabaseActions mDatabaseActions;
+    ListView mListView;
 
 
     public static NumbersFragment newInstance(int sectionNumber, Context context)
@@ -59,15 +60,15 @@ public class NumbersFragment extends Fragment
         mDatabaseActions.connectionDatabase(mContext);
         mAdapterData = mDatabaseActions.listTables();
         mNumbersAdapter = new NumbersAdapter(mContext, mAdapterData);
-        ListView listView = (ListView) rootView.findViewById(R.id.number_listView);
+        mListView = (ListView) rootView.findViewById(R.id.number_listView);
         LinearLayout linearLayout = new LinearLayout(mContext);
         ViewGroup header = (ViewGroup) inflater.inflate(R.layout.number_listview_header, linearLayout, false);
         linearLayout.addView(header);
-        listView.addHeaderView(linearLayout);
-        listView.setAdapter(mNumbersAdapter);
+        mListView.addHeaderView(linearLayout);
+        mListView.setAdapter(mNumbersAdapter);
         mHeaderHolder = new HeaderHolder(header);
-        listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
-        listView.setMultiChoiceModeListener(new MultiChoiceImpl(listView, new MultiChoiceImpl.OnClickMenuListener()
+        mListView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
+        mListView.setMultiChoiceModeListener(new MultiChoiceImpl(mListView, new MultiChoiceImpl.OnClickMenuListener()
         {
             @Override
             public void OnDeleteClick(List<String> selectedElements)
@@ -79,7 +80,79 @@ public class NumbersFragment extends Fragment
                 updateListView(mDatabaseActions.listTables());
             }
         }));
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener()
+
+        changeHeaderToTables();
+        return rootView;
+    }
+
+    private void changeHeaderToTables()
+    {
+        mHeaderHolder.mAddTextView.setText("Добавить новую базу номеров");
+        mHeaderHolder.mAddContainer.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                NewBaseDialog newBaseDialog = new NewBaseDialog(mContext, new NewBaseDialog.Callback()
+                {
+                    @Override
+                    public void ok(final String nameBase)
+                    {
+                        if (dataBaseNameValidation(nameBase) != null)
+                        {
+                            mDatabaseActions.createTableNumbers(dataBaseNameValidation(nameBase));
+                            ArrayList<String> numbers = mDatabaseActions.readTableColumn(dataBaseNameValidation
+                                    (nameBase), DatabaseActions.NUMBER);
+                            NumbersModel numbersModel = new NumbersModel();
+                            numbersModel.setName(nameBase);
+                            numbersModel.setSize(numbers.size());
+                            changeHeaderToNumbers(numbersModel);
+                            updateListView(stringsToNumberModel(numbers));
+                        }
+                        else
+                        {
+                            Toast.makeText(getActivity(), "Неправильное имя базы данных", Toast.LENGTH_LONG).show();
+                        }
+                    }
+
+                    @Override
+                    public void okImport(final String nameBase)
+                    {
+                        if (dataBaseNameValidation(nameBase) != null)
+                        {
+                            mDatabaseActions.createTableNumbers(dataBaseNameValidation(nameBase));
+                            OpenFileDialog fileDialog = new OpenFileDialog(mContext).setOpenDialogListener(new OpenFileDialog.OpenDialogListener()
+                                    {
+                                        @Override
+                                        public void OnSelectedFile(String fileName)
+                                        {
+                                            FilesActions filesActions = new FilesActions(mContext);
+                                            ArrayList<String> numbersFromFile = filesActions.readFileSD(fileName);
+                                            mDatabaseActions.insertNumbersInTable(dataBaseNameValidation(nameBase),
+                                                    numbersFromFile);
+                                            ArrayList<String> strings = mDatabaseActions.readTableColumn(dataBaseNameValidation
+                                                    (nameBase), DatabaseActions.NUMBER);
+                                            NumbersModel numbersModel = new NumbersModel();
+                                            numbersModel.setName(nameBase);
+                                            numbersModel.setSize(strings.size());
+                                            changeHeaderToNumbers(numbersModel);
+                                            updateListView(stringsToNumberModel(strings));
+                                            Toast.makeText(getActivity(), fileName, Toast.LENGTH_LONG).show();
+                                        }
+                                    });
+                            fileDialog.show();
+                        }
+                        else
+                        {
+                            Toast.makeText(getActivity(), "Неправильное имя базы данных", Toast.LENGTH_LONG).show();
+                        }
+                    }
+                });
+                newBaseDialog.show();
+            }
+        });
+        mHeaderHolder.mNumbersContainer.setVisibility(View.GONE);
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener()
         {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id)
@@ -88,74 +161,8 @@ public class NumbersFragment extends Fragment
                 ArrayList<String> strings = mDatabaseActions.readTableColumn(mAdapterData.get((int) id).getName(),
                         DatabaseActions.NUMBER);
                 updateListView(stringsToNumberModel(strings));
-
             }
         });
-        changeHeaderToTables();
-        return rootView;
-    }
-
-    private void changeHeaderToTables()
-    {
-           mHeaderHolder.mAddTextView.setText("Добавить новую базу номеров");
-           mHeaderHolder.mAddContainer.setOnClickListener(new View.OnClickListener()
-           {
-               @Override
-               public void onClick(View view)
-               {
-                   NewBaseDialog newBaseDialog = new NewBaseDialog(mContext, new NewBaseDialog.Callback()
-                   {
-                       @Override
-                       public void ok(final String nameBase)
-                       {
-                           if (dataBaseNameValidation(nameBase) != null)
-                           {
-                               mDatabaseActions.createTableNumbers(dataBaseNameValidation(nameBase));
-                               ArrayList<String> strings = mDatabaseActions.readTableColumn(
-                                       dataBaseNameValidation(nameBase), DatabaseActions.NUMBER);
-                               updateListView(stringsToNumberModel(strings));
-                           }
-                           else
-                           {
-                               Toast.makeText(getActivity(), "Неправильное имя базы данных", Toast.LENGTH_LONG).show();
-                           }
-                       }
-
-                       @Override
-                       public void okImport(final String nameBase)
-                       {
-                           if (dataBaseNameValidation(nameBase) != null)
-                           {
-                               mDatabaseActions.createTableNumbers(dataBaseNameValidation(nameBase));
-                               OpenFileDialog fileDialog = new OpenFileDialog(mContext).setOpenDialogListener(
-                                       new OpenFileDialog.OpenDialogListener()
-                                       {
-                                           @Override
-                                           public void OnSelectedFile(String fileName)
-                                           {
-                                               FilesActions filesActions = new FilesActions(mContext);
-                                               ArrayList<String> numbersFromFile = filesActions.readFileSD(fileName);
-                                               mDatabaseActions.insertNumbersInTable(dataBaseNameValidation(nameBase),
-                                                       numbersFromFile);
-                                               Toast.makeText(getActivity(), fileName, Toast.LENGTH_LONG).show();
-                                           }
-                                       });
-                               fileDialog.show();
-                               ArrayList<String> strings = mDatabaseActions.readTableColumn(
-                                       dataBaseNameValidation(nameBase), DatabaseActions.NUMBER);
-                               updateListView(stringsToNumberModel(strings));
-                           }
-                           else
-                           {
-                               Toast.makeText(getActivity(), "Неправильное имя базы данных", Toast.LENGTH_LONG).show();
-                           }
-                       }
-                   });
-                   newBaseDialog.show();
-               }
-           });
-           mHeaderHolder.mNumbersContainer.setVisibility(View.GONE);
-
 
     }
 
@@ -177,9 +184,10 @@ public class NumbersFragment extends Fragment
     {
         mHeaderHolder.mAddTextView.setText("Добавить новый номер");
         mHeaderHolder.mAddContainer.setOnClickListener(null);
-        mHeaderHolder.mNameBaseText.setText(numbersModel.getName());
+        mHeaderHolder.mNameBaseText.setText(numbersModel.getName().replaceAll("_", " "));
         mHeaderHolder.mSizeBase.setText(numbersModel.getSize() + "");
         mHeaderHolder.mNumbersContainer.setVisibility(View.VISIBLE);
+        mHeaderHolder.mNumbersContainer.setOnClickListener(null);
         mHeaderHolder.mBackImage.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -189,6 +197,7 @@ public class NumbersFragment extends Fragment
                 changeHeaderToTables();
             }
         });
+        mListView.setOnItemClickListener(null);
     }
 
 
@@ -202,7 +211,7 @@ public class NumbersFragment extends Fragment
     private ArrayList<NumbersModel> stringsToNumberModel(ArrayList<String> strings)
     {
         ArrayList<NumbersModel> numbersModels = new ArrayList<NumbersModel>();
-        for (int i=0; i<strings.size();i++)
+        for (int i = 0; i < strings.size(); i++)
         {
             NumbersModel numbersModel = new NumbersModel();
             numbersModel.setName(strings.get(i));
@@ -211,6 +220,7 @@ public class NumbersFragment extends Fragment
         }
         return numbersModels;
     }
+
     public static class HeaderHolder
     {
         public final @NonNull FrameLayout mAddContainer;

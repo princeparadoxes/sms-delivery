@@ -38,6 +38,8 @@ public class ArchiveFragment extends Fragment
         mContext = context;
     }
 
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {

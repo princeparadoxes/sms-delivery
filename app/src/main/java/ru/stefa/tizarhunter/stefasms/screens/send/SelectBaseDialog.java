@@ -29,6 +29,7 @@ public class SelectBaseDialog extends AlertDialog.Builder
         mTitle.setText("Выберите базу номеров");
         LinearLayout linearLayout = createMainLayout(context);
         DatabaseActions databaseActions = new DatabaseActions();
+        databaseActions.connectionDatabase(context);
         final List<NumbersModel> stringList = databaseActions.listTables();
         linearLayout.addView(createRadioButtons(context, stringList));
         setCustomTitle(mTitle).setView(linearLayout).setPositiveButton(android.R.string.ok, new DialogInterface
@@ -39,7 +40,7 @@ public class SelectBaseDialog extends AlertDialog.Builder
             {
                 if (mSelect != -1)
                 {
-                    callback.ok(stringList.get(mSelect).getName());
+                    callback.ok(stringList.get(mSelect).getName().replaceAll("\\s+", "_"));
                 }
                 else
                 {
@@ -70,7 +71,7 @@ public class SelectBaseDialog extends AlertDialog.Builder
         for (int i = 0; i < stringList.size(); i++)
         {
             RadioButton radioButton = new RadioButton(context);
-            radioButton.setText(stringList.get(i).getName());
+            radioButton.setText(stringList.get(i).getName().replaceAll("_", " "));
             final int finalI = i;
             radioButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
             {

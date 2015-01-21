@@ -15,7 +15,7 @@
             android:inputType="textMultiLine"
             android:ems="10"
             android:padding="10dp"
-            android:text="Введите сообщение"
+            android:hint="Введите сообщение"
             android:textColor="@android:color/black"
             android:textSize="25sp"
             android:id="@+id/send_edit_message"
@@ -52,7 +52,6 @@
                     />
 
             <Button
-                    android:enabled="false"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:textColor="@android:color/black"

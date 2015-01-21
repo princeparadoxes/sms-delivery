@@ -7,8 +7,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+
+import java.util.ArrayList;
 
 import ru.stefa.tizarhunter.stefasms.R;
+import ru.stefa.tizarhunter.stefasms.database.DatabaseActions;
 
 /**
  * Created by tizarhunter on 17.08.14.
@@ -19,6 +23,11 @@ public class SendFragment extends Fragment
 
     private Context mContext;
     private String mBaseName;
+    ArrayList<String> mNumbers;
+    DatabaseActions mDatabaseActions;
+
+    private Button mSendButton;
+    private EditText mMessageEditText;
 
     /**
      * Returns a new instance of this fragment for the given section
@@ -39,11 +48,14 @@ public class SendFragment extends Fragment
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-        Bundle savedInstanceState)
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         final View rootView = inflater.inflate(R.layout.fragment_send, container, false);
-        ((Button) rootView.findViewById(R.id.send_button_base)).setOnClickListener(new View.OnClickListener()
+        mSendButton = (Button) rootView.findViewById(R.id.send_button_send);
+        mMessageEditText = (EditText) rootView.findViewById(R.id.send_edit_message);
+        mDatabaseActions = new DatabaseActions();
+        mDatabaseActions.connectionDatabase(mContext);
+        rootView.findViewById(R.id.send_button_base).setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View view)
@@ -55,22 +67,37 @@ public class SendFragment extends Fragment
                     {
                         if (nameBase != null)
                         {
-                            ((Button) rootView.findViewById(R.id.send_button_base)).setEnabled(true);
                             mBaseName = nameBase;
+                            mNumbers = mDatabaseActions.readTableColumn(nameBase, DatabaseActions.NUMBER);
+                            mSendButton.setOnClickListener(mSendClickListener);
                         }
                         else
                         {
-                            ((Button) rootView.findViewById(R.id.send_button_base)).setEnabled(false);
                             mBaseName = null;
+                            mSendButton.setOnClickListener(null);
                         }
                     }
                 });
+                selectBaseDialog.show();
             }
         });
 
-//        TextView tv = (TextView) rootView.findViewById(R.id.section_label);
-//        tv.setText("Отправка");
         return rootView;
+    }
+
+    View.OnClickListener mSendClickListener = new View.OnClickListener()
+    {
+        @Override
+        public void onClick(View view)
+        {
+            mDatabaseActions.addToArchive(mMessageEditText.getText().toString(), mNumbers.size(),
+                    System.currentTimeMillis());
+        }
+    };
+
+    private void sendSms()
+    {
+
     }
 }
 

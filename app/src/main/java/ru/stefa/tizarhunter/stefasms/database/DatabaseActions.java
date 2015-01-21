@@ -46,7 +46,7 @@ public class DatabaseActions
 
     public void dropTable(String tableName)
     {
-        db.delete(mDatabase.NUMBERS_TABLE, mDatabase.NAME_COLUMN + "=\"" + tableName + "\"", null);
+        db.delete(Database.NUMBERS_TABLE, Database.NAME_COLUMN + "=\"" + tableName + "\"", null);
         final String SQL_DELETE_ENTRIES = "DROP TABLE IF EXISTS " + tableName;
         db.execSQL(SQL_DELETE_ENTRIES);
     }
@@ -59,7 +59,7 @@ public class DatabaseActions
 
     public ArrayList<NumbersModel> listTables()
     {
-        ArrayList<String> tableNames = readTableColumn(mDatabase.NUMBERS_TABLE, mDatabase.NAME_COLUMN);
+        ArrayList<String> tableNames = readTableColumn(Database.NUMBERS_TABLE, Database.NAME_COLUMN);
         ArrayList<NumbersModel> numbersModels = new ArrayList<NumbersModel>();
         for (int i=0; i < tableNames.size(); i++)
         {

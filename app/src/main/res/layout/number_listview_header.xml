@@ -63,8 +63,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="right|center_vertical"
-            android:src="@drawable/ic_add_circle_grey600_36dp"
-            android:layout_marginRight="4dp"/>
+            android:src="@drawable/ic_add_circle_grey600_36dp"/>
     </FrameLayout>
 
 
