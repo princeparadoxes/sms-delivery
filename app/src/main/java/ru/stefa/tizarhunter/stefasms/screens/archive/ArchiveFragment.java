@@ -39,7 +39,6 @@ public class ArchiveFragment extends Fragment
     }
 
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
@@ -47,7 +46,7 @@ public class ArchiveFragment extends Fragment
         mDatabaseActions = new DatabaseActions();
         mDatabaseActions.connectionDatabase(mContext);
         ListView listView = (ListView) rootView.findViewById(R.id.archive_listView);
-        mArchiveModelList =mDatabaseActions.getAllArchive();
+        mArchiveModelList = mDatabaseActions.getAllArchive();
         ArchiveAdapter archiveAdapter = new ArchiveAdapter(mContext, mArchiveModelList);
         listView.setAdapter(archiveAdapter);
         if (mArchiveModelList.size() == 0)

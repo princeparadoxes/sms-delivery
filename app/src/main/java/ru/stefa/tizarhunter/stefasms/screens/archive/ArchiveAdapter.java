@@ -51,7 +51,8 @@ public class ArchiveAdapter extends BindableAdapter<ArchiveModel>
     public void bindView(ArchiveModel item, int position, View view)
     {
         ((TextView) view.findViewById(R.id.archive_listview_element_text)).setText(item.getText());
-        ((TextView) view.findViewById(R.id.archive_listview_element_number)).setText(item.getNumberSends() + "");
+        ((TextView) view.findViewById(R.id.archive_listview_element_number)).setText("Кол-во сообщений " +
+                item.getNumberSends() + "");
         Date date = new Date(item.getDateTime());
         ((TextView) view.findViewById(R.id.archive_listview_element_date)).setText(date.toString());
     }

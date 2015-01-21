@@ -180,10 +180,28 @@ public class NumbersFragment extends Fragment
         return name.replaceAll("\\s+", "_");
     }
 
-    private void changeHeaderToNumbers(NumbersModel numbersModel)
+    private void changeHeaderToNumbers(final NumbersModel numbersModel)
     {
         mHeaderHolder.mAddTextView.setText("Добавить новый номер");
-        mHeaderHolder.mAddContainer.setOnClickListener(null);
+        mHeaderHolder.mAddContainer.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                NewNumberDialog newNumberDialog = new NewNumberDialog(mContext, new NewNumberDialog.Callback()
+                {
+                    @Override
+                    public void ok(String newNumber)
+                    {
+                        ArrayList<String> number = new ArrayList<String>();
+                        number.add(newNumber);
+                        mDatabaseActions.insertNumbersInTable(numbersModel.getName(), number);
+                        updateListView(stringsToNumberModel(number));
+                    }
+                });
+                newNumberDialog.show();
+            }
+        });
         mHeaderHolder.mNameBaseText.setText(numbersModel.getName().replaceAll("_", " "));
         mHeaderHolder.mSizeBase.setText(numbersModel.getSize() + "");
         mHeaderHolder.mNumbersContainer.setVisibility(View.VISIBLE);
