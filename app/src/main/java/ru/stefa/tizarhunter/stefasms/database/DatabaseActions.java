@@ -27,15 +27,16 @@ public class DatabaseActions
     public void createTableNumbers(String tableName)
     {
         ContentValues newValues = new ContentValues();
-        newValues.put(mDatabase.NAME_COLUMN, tableName);
-        db.insert(mDatabase.NUMBERS_TABLE, null, newValues);
-        final String SQL_CREATE_ENTRIES = "CREATE TABLE " + tableName + " (" + UID + " INTEGER PRIMARY KEY " +
+        newValues.put(Database.NAME_COLUMN, tableName);
+        db.insert(Database.NUMBERS_TABLE, null, newValues);
+        final String SQL_CREATE_ENTRIES = "CREATE TABLE `" + tableName + "` (" + UID + " INTEGER PRIMARY KEY " +
                 "AUTOINCREMENT," + NUMBER + " TEXT);";
         db.execSQL(SQL_CREATE_ENTRIES);
     }
 
     public void insertNumbersInTable(String tableName, ArrayList<String> numbers)
     {
+        tableName = "`" + tableName + "`";
         ContentValues newValues = new ContentValues();
         for (int i = 0; i < numbers.size(); i++)
         {
@@ -44,15 +45,25 @@ public class DatabaseActions
         }
     }
 
+    public void deleteNumbersFromTable(String tableName, ArrayList<String> numbers)
+    {
+        tableName = "`" + tableName + "`";
+        for (int i = 0; i < numbers.size(); i++)
+        {
+            db.delete(tableName, NUMBER + "=" + numbers.get(i), null);
+        }
+    }
+
     public void dropTable(String tableName)
     {
         db.delete(Database.NUMBERS_TABLE, Database.NAME_COLUMN + "=\"" + tableName + "\"", null);
-        final String SQL_DELETE_ENTRIES = "DROP TABLE IF EXISTS " + tableName;
+        final String SQL_DELETE_ENTRIES = "DROP TABLE IF EXISTS `" + tableName + "`";
         db.execSQL(SQL_DELETE_ENTRIES);
     }
 
     public void tableDataList(String tableName)
     {
+        tableName = "`" + tableName + "`";
         final String SQL_DELETE_ENTRIES = "DROP TABLE IF EXISTS " + tableName;
         db.execSQL(SQL_DELETE_ENTRIES);
     }
@@ -103,6 +114,7 @@ public class DatabaseActions
     public ArrayList<String> readTableColumn(String tableName, String column)
     {
         ArrayList<String> arrayList = new ArrayList<String>();
+        tableName = "`" + tableName + "`";
         Cursor c = db.query(tableName, null, null, null, null, null, null);
         if (c.moveToFirst())
         {
@@ -118,7 +130,7 @@ public class DatabaseActions
 
     public int getCountTableRow(String tableName)
     {
-        Cursor mCount= db.rawQuery("select count(*) from '" + tableName + "'", null);
+        Cursor mCount= db.rawQuery("select count(*) from `" + tableName + "`", null);
         mCount.moveToFirst();
         int count= mCount.getInt(0);
         mCount.close();

@@ -6,7 +6,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.AbsListView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,12 +51,13 @@ public class MultiChoiceImpl implements AbsListView.MultiChoiceModeListener {
     public boolean onActionItemClicked(ActionMode actionMode, MenuItem menuItem) {
         if (menuItem.getTitle().equals("delete"))
         {
-            String text = "Action - " + menuItem.getTitle() + " ; Selected items: " + getSelectedElements();
-            Toast.makeText(listView.getContext(), text , Toast.LENGTH_LONG).show();
+//            String text = "Action - " + menuItem.getTitle() + " ; Selected items: " + getSelectedElements();
+//            Toast.makeText(listView.getContext(), text , Toast.LENGTH_LONG).show();
             if (mOnClickMenuListener != null)
             {
                 mOnClickMenuListener.OnDeleteClick(getSelectedElements());
             }
+            actionMode.finish();
         }
         return false;
     }

@@ -68,18 +68,7 @@ public class NumbersFragment extends Fragment
         mListView.setAdapter(mNumbersAdapter);
         mHeaderHolder = new HeaderHolder(header);
         mListView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
-        mListView.setMultiChoiceModeListener(new MultiChoiceImpl(mListView, new MultiChoiceImpl.OnClickMenuListener()
-        {
-            @Override
-            public void OnDeleteClick(List<String> selectedElements)
-            {
-                for (int i = 0; i < selectedElements.size(); i++)
-                {
-                    mDatabaseActions.dropTable(selectedElements.get(i));
-                }
-                updateListView(mDatabaseActions.listTables());
-            }
-        }));
+
 
         changeHeaderToTables();
         return rootView;
@@ -163,7 +152,18 @@ public class NumbersFragment extends Fragment
                 updateListView(stringsToNumberModel(strings));
             }
         });
-
+        mListView.setMultiChoiceModeListener(new MultiChoiceImpl(mListView, new MultiChoiceImpl.OnClickMenuListener()
+        {
+            @Override
+            public void OnDeleteClick(List<String> selectedElements)
+            {
+                for (int i = 0; i < selectedElements.size(); i++)
+                {
+                    mDatabaseActions.dropTable(selectedElements.get(i));
+                }
+                updateListView(mDatabaseActions.listTables());
+            }
+        }));
     }
 
 
@@ -196,7 +196,9 @@ public class NumbersFragment extends Fragment
                         ArrayList<String> number = new ArrayList<String>();
                         number.add(newNumber);
                         mDatabaseActions.insertNumbersInTable(numbersModel.getName(), number);
-                        updateListView(stringsToNumberModel(number));
+                        ArrayList<String> strings = mDatabaseActions.readTableColumn(numbersModel.getName(),
+                                DatabaseActions.NUMBER);
+                        updateListView(stringsToNumberModel(strings));
                     }
                 });
                 newNumberDialog.show();
@@ -216,6 +218,17 @@ public class NumbersFragment extends Fragment
             }
         });
         mListView.setOnItemClickListener(null);
+        mListView.setMultiChoiceModeListener(new MultiChoiceImpl(mListView, new MultiChoiceImpl.OnClickMenuListener()
+        {
+            @Override
+            public void OnDeleteClick(List<String> selectedElements)
+            {
+                mDatabaseActions.deleteNumbersFromTable(numbersModel.getName(),(ArrayList<String>) selectedElements);
+                ArrayList<String> strings = mDatabaseActions.readTableColumn(numbersModel.getName(),
+                        DatabaseActions.NUMBER);
+                updateListView(stringsToNumberModel(strings));
+            }
+        }));
     }
 
 
