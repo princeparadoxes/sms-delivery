@@ -1,10 +1,28 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="application_name">Sms Delivery</string>
 
-    <string name="app_name">СМС Рассылка</string>
-    <string name="title_section1">Новое SMS для рассылки</string>
-    <string name="title_section2">База номеров для рассылки</string>
-    <string name="title_section3">Отправленные ранее SMS</string>
-    <string name="action_settings">Настройки</string>
+    <!--FONTS-->
+    <string name="roboto_regular" translatable="false">fonts/roboto_regular.ttf</string>
+    <string name="roboto_bold" translatable="false">fonts/roboto_bold.ttf</string>
+    <string name="roboto_light" translatable="false">fonts/roboto_light.ttf</string>
+    <string name="roboto_medium" translatable="false">fonts/roboto_medium.ttf</string>
 
+    <!--Main screen-->
+    <string name="main_screen_title">Main</string>
+
+    <!--Drawable Layout-->
+    <string name="drawer_open">open</string>
+    <string name="drawer_close">close</string>
+
+    <!-- Tabs-->
+    <string name="numbers_feed_name">Numbers</string>
+    <string name="send_feed_name">Send</string>
+    <string name="archive_feed_name">Archive</string>
+
+    <!--Settings-->
+    <string name="settings_first_title">Setting</string>
+
+    <!--Feedback-->
+    <string name="feedback_open_though">Open with</string>
+    <string name="feedback_email">ozmcorp@gmail.com</string>
 </resources>

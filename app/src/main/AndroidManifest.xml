@@ -1,23 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="ru.stefa.tizarhunter.stefasms" >
-    <uses-permission android:name="android.permission.SEND_SMS"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+          package="ru.princeparadoxes.smsdelivery">
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+
     <application
+        android:name=".SmsApplication"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
-        android:label="@string/app_name"
-        android:theme="@style/CustomActionBarTheme"  >
-       <activity
-            android:name=".MyActivity"
-            android:label="@string/app_name"
-            android:windowSoftInputMode="stateHidden">
+        android:label="@string/application_name"
+        android:theme="@style/Theme.Splash">
+        <activity
+            android:name=".ui.main.MainActivity"
+            android:label="@string/main_screen_title">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
     </application>
 
 </manifest>

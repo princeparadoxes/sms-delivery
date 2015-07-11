@@ -1,0 +1,22 @@
+/**
+ * PMD task
+ * Usage:
+ * - place this file under root dir of your project at /gradle  directory
+ * - apply script from your gradle file:
+ * apply from : "{rootDir}/gradle/pmd.gradle"
+ *
+ * To configure pmd ruleset use configs at:
+ * "{rootDir}/config/pmd/pmd-ruleset.xml"
+ *
+ * Xml and HTML reports are stored:
+ * "{project.buildDir}/reports/pmd/"
+ */
+
+apply plugin: 'pmd'
+
+task pmd(type: Pmd) {
+    description 'Runs PMD inspection against Android sourcesets.'
+    group = 'Code Quality'
+    ruleSetFiles = files("${rootProject.rootDir}/config/pmd/pmd-ruleset.xml")
+    source = fileTree('src/')
+}

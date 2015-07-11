@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="main_general_screen_button" type="id">1</item>
+    <item name="main_emotions_screen_button" type="id">2</item>
+    <item name="main_my_collection_screen_button" type="id">3</item>
+</resources>
