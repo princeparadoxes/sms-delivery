@@ -5,9 +5,9 @@ android {
     buildToolsVersion "20.0.0"
 
     defaultConfig {
-        applicationId "ru.stefa.tizarhunter.stefasms"
+        applicationId "ru.stefa.tizarhunter.smsdelivery"
         minSdkVersion 14
-        targetSdkVersion 19
+        targetSdkVersion 22
         versionCode 1
         versionName "1.0"
     }
@@ -23,5 +23,5 @@ repositories {
 }
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:support-v13:21.0.0'
+    compile 'com.android.support:support-v13:22.2.0'
 }
