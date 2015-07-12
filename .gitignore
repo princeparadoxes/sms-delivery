@@ -6,3 +6,4 @@
 *.hprof
 *.sh
 build
+.idea/modules.xml
