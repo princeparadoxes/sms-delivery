@@ -48,7 +48,7 @@
                     android:layout_height="50dp
                     android:textColor="@android:color/black"
                     android:background="@drawable/archive_listview_element_background"
-                    android:text="Выбрать базу номеров"
+                    android:name="Выбрать базу номеров"
                     android:id="@+id/send_button_base"
                     />
 
@@ -57,7 +57,7 @@
                     android:layout_height="50dp"
                     android:textColor="@android:color/black"
                     android:background="@drawable/archive_listview_element_background"
-                    android:text="Послать!"
+                    android:name="Послать!"
                     android:layout_marginTop="8dp"
                     android:id="@+id/send_button_send"
                     />

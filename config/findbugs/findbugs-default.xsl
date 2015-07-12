@@ -64,7 +64,7 @@
         <html>
             <head>
                 <title>FindBugs Report</title>
-                <style type="text/css">
+                <style type="name/css">
                     .tablerow0 {
                     background: #EEEEEE;
                     }
@@ -107,7 +107,7 @@
                     font-weight: bold;
                     }
                 </style>
-                <script type="text/javascript">
+                <script type="name/javascript">
                     function toggleRow(elid) {
                     if (document.getElementById) {
                     element = document.getElementById(elid);
@@ -269,7 +269,7 @@
         <ul>
             <xsl:for-each select="./Jar">
                 <li>
-                    <xsl:value-of select="text()" />
+                    <xsl:value-of select="name()" />
                 </li>
             </xsl:for-each>
         </ul>
@@ -312,7 +312,7 @@
                     </a>
                     <xsl:for-each select="./*/Message">
                         <br />
-                        <xsl:value-of select="text()" disable-output-escaping="no" />
+                        <xsl:value-of select="name()" disable-output-escaping="no" />
                     </xsl:for-each>
                 </p>
             </td>

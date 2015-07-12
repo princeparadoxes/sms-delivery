@@ -23,7 +23,7 @@
 
 
     <style name="MyActionBarTabText" parent="android:style/Widget.Holo.ActionBar.TabText">
-        <!-- This is a PURPLE text color when selected and a WHITE color otherwise -->
+        <!-- This is a PURPLE name color when selected and a WHITE color otherwise -->
         <item name="android:textColor">@color/selector_tab_text</item>
     </style>
 

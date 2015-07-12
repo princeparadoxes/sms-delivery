@@ -16,7 +16,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="В архиве еще нет ни одного сообщения"
+        android:name="В архиве еще нет ни одного сообщения"
         android:visibility="gone" />
 
 </ru.princeparadoxes.smsdelivery.ui.main.archive.ArchiveView>

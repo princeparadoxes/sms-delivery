@@ -18,7 +18,7 @@
     <xsl:template match="checkstyle">
         <html>
             <head>
-                <style type="text/css">
+                <style type="name/css">
                     .bannercell {
                     border: 0px;
                     padding: 0px;
@@ -37,7 +37,7 @@
                     background: #fff;
                     }
                     th, td {
-                    text-align: left;
+                    name-align: left;
                     vertical-align: top;
                     }
                     th {
@@ -62,7 +62,7 @@
                     font-weight:bold;
                     background: #525D76;
                     color: white;
-                    text-decoration: none;
+                    name-decoration: none;
                     padding: 5px;
                     margin-right: 2px;
                     margin-left: 2px;
@@ -80,12 +80,12 @@
                             <img src="http://jakarta.apache.org/images/jakarta-logo.gif" alt="http://jakarta.apache.org" align="left" border="0"/>
                             </a-->
                         </td>
-                        <td class="text-align:right">
+                        <td class="name-align:right">
                             <h2>CheckStyle Audit</h2>
                         </td>
                     </tr>
                     <tr>
-                        <td class="text-align:right">Designed for use with
+                        <td class="name-align:right">Designed for use with
                             <a href='http://checkstyle.sourceforge.net/'>CheckStyle</a>
                             and<a href='http://jakarta.apache.org'>Ant</a>.
                         </td>
