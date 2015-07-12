@@ -1,8 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ru.princeparadoxes.smsdelivery.ui.main.archive.ArchiveView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<ru.princeparadoxes.smsdelivery.ui.main.archive.ArchiveView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main_content_view"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ListView
+        android:id="@+id/archive_listView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:divider="@android:color/transparent" />
+
+    <TextView
+        android:id="@+id/archive_empty_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="В архиве еще нет ни одного сообщения"
+        android:visibility="gone" />
 
 </ru.princeparadoxes.smsdelivery.ui.main.archive.ArchiveView>

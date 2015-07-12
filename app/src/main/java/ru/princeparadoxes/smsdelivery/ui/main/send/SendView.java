@@ -5,6 +5,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.AttributeSet;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 
 import javax.inject.Inject;
 
@@ -15,7 +16,7 @@ import ru.princeparadoxes.smsdelivery.base.mvp.BaseView;
 import ru.princeparadoxes.smsdelivery.ui.main.MainActivity;
 import ru.princeparadoxes.smsdelivery.ui.main.MainComponent;
 
-public class SendView extends FrameLayout implements BaseView {
+public class SendView extends LinearLayout implements BaseView {
 
     @Inject
     MainActivity.Presenter mainPresenter;

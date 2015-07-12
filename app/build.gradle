@@ -36,6 +36,10 @@ android {
     compileSdkVersion rootProject.compileSdkVersion
     buildToolsVersion rootProject.buildToolsVersion
 
+    packagingOptions {
+        exclude 'META-INF/services/javax.annotation.processing.Processor'
+    }
+
     defaultConfig {
         applicationId "${packagename}"
 
@@ -85,12 +89,10 @@ android {
     }
 }
 
-configurations {
-    internalDebugCompile
-}
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:support-v4:22.2.0'
+    compile 'com.android.support:support-annotations:22.2.0'
     compile 'com.android.support:appcompat-v7:22.2.0'
     compile 'com.android.support:recyclerview-v7:22.2.0'
     compile 'com.android.support:cardview-v7:22.2.0'
