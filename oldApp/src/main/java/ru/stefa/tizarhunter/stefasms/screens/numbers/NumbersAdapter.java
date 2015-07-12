@@ -57,7 +57,5 @@ public class NumbersAdapter extends BindableAdapter<NumbersModel>
         {
             ((TextView) view.findViewById(R.id.number_listview_element_size)).setText("");
         }
-
-
     }
 }

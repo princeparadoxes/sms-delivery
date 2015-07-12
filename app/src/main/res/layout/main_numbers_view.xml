@@ -1,17 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ru.princeparadoxes.smsdelivery.ui.main.numbers.NumbersView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ru.princeparadoxes.smsdelivery.ui.main.numbers.NumbersView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main_content_view"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="8dp">
+    android:padding="16dp">
 
-    <ListView
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/main_numbers_recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/number_listView"/>
-        <!--android:background="@drawable/archive_listview_element_background"-->
-        <!--android:divider="@drawable/listview_devider"/>-->
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:scrollbarStyle="outsideOverlay"
+        android:scrollbars="vertical"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+    <TextView
+        android:id="@+id/main_numbers_center_text"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"/>
 
 </ru.princeparadoxes.smsdelivery.ui.main.numbers.NumbersView>
