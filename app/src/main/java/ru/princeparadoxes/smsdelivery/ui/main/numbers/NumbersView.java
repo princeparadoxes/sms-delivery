@@ -4,9 +4,11 @@ import android.content.Context;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.Layout;
 import android.util.AttributeSet;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.List;
@@ -18,7 +20,7 @@ import butterknife.InjectView;
 import ru.princeparadoxes.smsdelivery.R;
 import ru.princeparadoxes.smsdelivery.base.ComponentFinder;
 import ru.princeparadoxes.smsdelivery.base.mvp.BaseView;
-import ru.princeparadoxes.smsdelivery.data.model.NumbersBase;
+import ru.princeparadoxes.smsdelivery.data.model.DatabaseOfPhoneNumbers;
 import ru.princeparadoxes.smsdelivery.ui.main.MainComponent;
 
 public class NumbersView extends FrameLayout implements BaseView {
@@ -47,16 +49,27 @@ public class NumbersView extends FrameLayout implements BaseView {
     @Override
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
-        ButterKnife.inject(this);
         numbersPresenter.takeView(this);
+        ButterKnife.inject(this);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
+        final LayoutInflater inflater = LayoutInflater.from(getContext());
+        LinearLayout header = (LinearLayout) inflater.inflate(
+                R.layout.number_listview_header, null, false);
+        header.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                numbersPresenter.addDatabaseNumbers();
+            }
+        });
+        numbersAdapter.addHeader(header);
+        numbersAdapter.notifyDataSetChanged();
         recyclerView.setAdapter(numbersAdapter);
     }
 
-    public void setData(List<NumbersBase> numbersBases) {
-        if (numbersBases.size() > 0) {
-            numbersAdapter.addAll(numbersBases);
+    public void setData(List<DatabaseOfPhoneNumbers> databaseOfPhoneNumberses) {
+        if (databaseOfPhoneNumberses.size() > 0) {
+        numbersAdapter.addAll(databaseOfPhoneNumberses);
         } else {
             centerText.setText("Bases not found");
         }
@@ -64,8 +77,8 @@ public class NumbersView extends FrameLayout implements BaseView {
 
     @Override
     protected void onDetachedFromWindow() {
-        numbersPresenter.dropView(this);
         ButterKnife.reset(this);
+        numbersPresenter.dropView(this);
         super.onDetachedFromWindow();
     }
 

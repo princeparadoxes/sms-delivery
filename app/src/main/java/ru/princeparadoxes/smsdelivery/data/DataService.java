@@ -5,7 +5,7 @@ import android.content.Context;
 
 import java.util.List;
 
-import ru.princeparadoxes.smsdelivery.data.model.NumbersBase;
+import ru.princeparadoxes.smsdelivery.data.model.DatabaseOfPhoneNumbers;
 import ru.princeparadoxes.smsdelivery.data.model.NumbersBaseDB;
 import ru.princeparadoxes.smsdelivery.data.rx.RequestFunction;
 import ru.princeparadoxes.smsdelivery.ui.ApplicationScope;
@@ -17,7 +17,6 @@ import javax.inject.Inject;
 
 @ApplicationScope
 public class DataService {
-    public static final String NO_INTERNET_CONNECTION = "No internet connection";
 
     private final Context context;
     private final FileService fileService;
@@ -33,12 +32,23 @@ public class DataService {
         this.databaseService = databaseService;
     }
 
-    public Observable<List<NumbersBase>> getNumbersBases()
+    public Observable<List<DatabaseOfPhoneNumbers>> getDatabaseOfPhoneNumbers()
     {
-        return Observable.create(new RequestFunction<List<NumbersBase>>() {
+        return Observable.create(new RequestFunction<List<DatabaseOfPhoneNumbers>>() {
             @Override
-            protected List<NumbersBase> request() {
+            protected List<DatabaseOfPhoneNumbers> request() {
                 return NumbersBaseDB.getAll(databaseService.request());
+            }
+        }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
+    }
+
+    public Observable addDatabaseOfPhoneNumbers(final String name)
+    {
+        return Observable.create(new RequestFunction() {
+            @Override
+            protected Void request() {
+                NumbersBaseDB.addNewDatabase(name, databaseService.request());
+                return null;
             }
         }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
     }

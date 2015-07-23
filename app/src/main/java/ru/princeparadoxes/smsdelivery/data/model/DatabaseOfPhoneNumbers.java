@@ -7,12 +7,12 @@ import android.support.annotation.NonNull;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NumbersBase implements Parcelable {
+public class DatabaseOfPhoneNumbers implements Parcelable {
     private int id;
     private String name;
     private List<String> numbers;
 
-    public NumbersBase(int id, String name, List<String> numbers) {
+    public DatabaseOfPhoneNumbers(int id, String name, List<String> numbers) {
         this.id = id;
         this.name = name;
         this.numbers = numbers;
@@ -42,12 +42,12 @@ public class NumbersBase implements Parcelable {
         this.numbers = numbers;
     }
 
-    public static NumbersBase fromRealmObject(@NonNull NumbersBaseDB type) {
+    public static DatabaseOfPhoneNumbers fromRealmObject(@NonNull NumbersBaseDB type) {
         ArrayList<String> list = new ArrayList<>();
         for (NumberDB numberDB : type.getNumbers()) {
             list.add(numberDB.getNumber());
         }
-        return new NumbersBase(type.getId(), type.getName(), list);
+        return new DatabaseOfPhoneNumbers(type.getId(), type.getName(), list);
     }
 
 
@@ -63,19 +63,19 @@ public class NumbersBase implements Parcelable {
         dest.writeStringList(this.numbers);
     }
 
-    protected NumbersBase(Parcel in) {
+    protected DatabaseOfPhoneNumbers(Parcel in) {
         this.id = in.readInt();
         this.name = in.readString();
         this.numbers = in.createStringArrayList();
     }
 
-    public static final Creator<NumbersBase> CREATOR = new Creator<NumbersBase>() {
-        public NumbersBase createFromParcel(Parcel source) {
-            return new NumbersBase(source);
+    public static final Creator<DatabaseOfPhoneNumbers> CREATOR = new Creator<DatabaseOfPhoneNumbers>() {
+        public DatabaseOfPhoneNumbers createFromParcel(Parcel source) {
+            return new DatabaseOfPhoneNumbers(source);
         }
 
-        public NumbersBase[] newArray(int size) {
-            return new NumbersBase[size];
+        public DatabaseOfPhoneNumbers[] newArray(int size) {
+            return new DatabaseOfPhoneNumbers[size];
         }
     };
 }

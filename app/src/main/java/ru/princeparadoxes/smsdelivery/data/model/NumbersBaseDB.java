@@ -39,44 +39,50 @@ public class NumbersBaseDB extends RealmObject {
         this.numbers = numbers;
     }
 
-    public static List<NumbersBase> getAll(Realm realm) {
+    public static List<DatabaseOfPhoneNumbers> getAll(Realm realm) {
         RealmResults<NumbersBaseDB> query = realm.where(NumbersBaseDB.class).findAll();
-        List<NumbersBase> list = new ArrayList<>();
+        List<DatabaseOfPhoneNumbers> list = new ArrayList<>();
         if (query != null) {
             for (NumbersBaseDB numbersBaseDB : query) {
-                list.add(NumbersBase.fromRealmObject(numbersBaseDB));
+                list.add(DatabaseOfPhoneNumbers.fromRealmObject(numbersBaseDB));
             }
         }
         realm.close();
         return list;
     }
 
-    public static void put(@NonNull List<NumbersBase> numbersBases, Realm realm) {
-        for (NumbersBase type : numbersBases) {
+    public static void put(@NonNull List<DatabaseOfPhoneNumbers> databaseOfPhoneNumberses, Realm realm) {
+        for (DatabaseOfPhoneNumbers type : databaseOfPhoneNumberses) {
             putDB(type, realm);
         }
         realm.close();
     }
 
-    public static void put(@NonNull NumbersBase numbersBase, Realm realm) {
-        putDB(numbersBase, realm);
+    public static void addNewDatabase(String name, Realm realm){
+        int nextID = (int) (realm.where(NumbersBaseDB.class).maximumInt("id") + 1);
+        List<String> list = new ArrayList<>();
+        DatabaseOfPhoneNumbers database = new DatabaseOfPhoneNumbers(nextID, name, list);
+        putDB(database, realm);
+    }
+    public static void put(@NonNull DatabaseOfPhoneNumbers databaseOfPhoneNumbers, Realm realm) {
+        putDB(databaseOfPhoneNumbers, realm);
         realm.close();
     }
 
-    private static void putDB(@NonNull NumbersBase numbersBase, Realm realm) {
-        RealmObject query = realm.where(NumbersBaseDB.class).equalTo("id", numbersBase.getId()).findFirst();
+    private static void putDB(@NonNull DatabaseOfPhoneNumbers databaseOfPhoneNumbers, Realm realm) {
+        RealmObject query = realm.where(NumbersBaseDB.class).equalTo("id", databaseOfPhoneNumbers.getId()).findFirst();
         if (query == null) {
-            createItem(numbersBase, realm);
+            createItem(databaseOfPhoneNumbers, realm);
         }
     }
 
-    private static void createItem(NumbersBase numbersBase, Realm realm) {
+    private static void createItem(DatabaseOfPhoneNumbers databaseOfPhoneNumbers, Realm realm) {
         realm.beginTransaction();
         NumbersBaseDB object = realm.createObject(NumbersBaseDB.class);
-        object.setId(numbersBase.getId());
-        object.setName(numbersBase.getName());
+        object.setId(databaseOfPhoneNumbers.getId());
+        object.setName(databaseOfPhoneNumbers.getName());
         RealmList<NumberDB> list = new RealmList<>();
-        for (String s : numbersBase.getNumbers()) {
+        for (String s : databaseOfPhoneNumbers.getNumbers()) {
             list.add(NumberDB.fromObject(s, realm));
         }
         object.setNumbers(list);

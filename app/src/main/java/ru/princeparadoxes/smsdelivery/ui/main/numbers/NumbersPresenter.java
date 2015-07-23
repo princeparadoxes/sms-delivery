@@ -5,7 +5,8 @@ import java.util.List;
 import ru.princeparadoxes.smsdelivery.base.mvp.BasePresenter;
 import ru.princeparadoxes.smsdelivery.data.DataService;
 import ru.princeparadoxes.smsdelivery.data.TokenStorage;
-import ru.princeparadoxes.smsdelivery.data.model.NumbersBase;
+import ru.princeparadoxes.smsdelivery.data.model.DatabaseOfPhoneNumbers;
+import ru.princeparadoxes.smsdelivery.data.model.NumberDB;
 import ru.princeparadoxes.smsdelivery.ui.main.MainScope;
 
 import javax.inject.Inject;
@@ -14,7 +15,6 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
 import rx.schedulers.Schedulers;
 import rx.subscriptions.CompositeSubscription;
-import timber.log.Timber;
 
 @MainScope
 public final class NumbersPresenter extends BasePresenter<NumbersView> {
@@ -39,16 +39,24 @@ public final class NumbersPresenter extends BasePresenter<NumbersView> {
     }
 
     private void getData(){
-        subscriptions.add(dataService.getNumbersBases()
+        subscriptions.add(dataService.getDatabaseOfPhoneNumbers()
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(new Action1<List<NumbersBase>>() {
+                        .subscribe(new Action1<List<DatabaseOfPhoneNumbers>>() {
                             @Override
-                            public void call(List<NumbersBase> numbersBases) {
-                                getView().setData(numbersBases);
+                            public void call(List<DatabaseOfPhoneNumbers> databaseOfPhoneNumberses) {
+                                getView().setData(databaseOfPhoneNumberses);
                             }
                         })
         );
+    }
+
+    public void addDatabaseNumbers() {
+//        DatabaseOfPhoneNumbers databaseOfPhoneNumbers = new DatabaseOfPhoneNumbers();
+        dataService.addDatabaseOfPhoneNumbers("Новая база")
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe();
     }
 
     @Override
@@ -59,4 +67,5 @@ public final class NumbersPresenter extends BasePresenter<NumbersView> {
             subscriptions = null;
         }
     }
+
 }

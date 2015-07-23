@@ -6,10 +6,10 @@ import android.view.View;
 import android.widget.TextView;
 
 import ru.princeparadoxes.smsdelivery.R;
-import ru.princeparadoxes.smsdelivery.data.model.NumbersBase;
+import ru.princeparadoxes.smsdelivery.data.model.DatabaseOfPhoneNumbers;
 import ru.princeparadoxes.smsdelivery.ui.misc.RecyclerBindableAdapter;
 
-public class NumbersAdapter extends RecyclerBindableAdapter<NumbersBase, NumbersAdapter.ViewHolder> {
+public class NumbersAdapter extends RecyclerBindableAdapter<DatabaseOfPhoneNumbers, NumbersAdapter.ViewHolder> {
 
     private final Context context;
 
@@ -45,16 +45,16 @@ public class NumbersAdapter extends RecyclerBindableAdapter<NumbersBase, Numbers
             super(itemView);
         }
 
-        public void bindView(NumbersBase item) {
+        public void bindView(DatabaseOfPhoneNumbers item) {
             ((TextView) itemView.findViewById(R.id.number_listview_element_text)).setText(item.getName());
-            if (item.getNumbers().size() != 0)
-            {
-                ((TextView) itemView.findViewById(R.id.number_listview_element_size)).setText(item.getNumbers().size() + "");
-            }
-            else
-            {
-                ((TextView) itemView.findViewById(R.id.number_listview_element_size)).setText("");
-            }
+//            if (item.getNumbers().size() != 0)
+//            {
+//                ((TextView) itemView.findViewById(R.id.number_listview_element_size)).setText(item.getNumbers().size() + "");
+//            }
+//            else
+//            {
+//                ((TextView) itemView.findViewById(R.id.number_listview_element_size)).setText("");
+//            }
         }
     }
 }

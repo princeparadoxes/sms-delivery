@@ -23,7 +23,7 @@ public abstract class RecyclerViewHeaderFooterAdapter<T, VH extends RecyclerView
     public static final int TYPE_HEADER = 7898;
     public static final int TYPE_FOOTER = 7899;
 
-    private List<View> mHeaders = new ArrayList<>();
+    protected List<View> mHeaders = new ArrayList<>();
     private List<View> mFooters = new ArrayList<>();
 
     private int mManagerType;
@@ -69,7 +69,7 @@ public abstract class RecyclerViewHeaderFooterAdapter<T, VH extends RecyclerView
         return 1;
     }
 
-    private int getSpan() {
+    protected int getSpan() {
         if (mManager instanceof GridLayoutManager) {
             return ((GridLayoutManager) mManager).getSpanCount();
         } else if (mManager instanceof StaggeredGridLayoutManager) {
@@ -89,7 +89,7 @@ public abstract class RecyclerViewHeaderFooterAdapter<T, VH extends RecyclerView
     public VH onCreateViewHolder(ViewGroup viewGroup, int type) {
         //if our position is one of our items (this comes from getItemViewType(int position) below)
         if (type != TYPE_HEADER && type != TYPE_FOOTER) {
-            return onCreteItemViewHolder(viewGroup, type);
+            return (VH) onCreteItemViewHolder(viewGroup, type);
             //else we have a header/footer
         } else {
             //create a new framelayout, or inflate from a resource
@@ -123,7 +123,7 @@ public abstract class RecyclerViewHeaderFooterAdapter<T, VH extends RecyclerView
         //if it's a staggered grid, span the whole layout
         if (mManagerType == TYPE_MANAGER_STAGGERED_GRID) {
             StaggeredGridLayoutManager.LayoutParams layoutParams = new StaggeredGridLayoutManager.LayoutParams(
-                            ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+                    ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
             layoutParams.setFullSpan(true);
             vh.itemView.setLayoutParams(layoutParams);
         }
@@ -150,7 +150,7 @@ public abstract class RecyclerViewHeaderFooterAdapter<T, VH extends RecyclerView
 
     @Override
     public int getItemCount() {
-        return mHeaders.size() + getItemCount() + mFooters.size();
+        return mHeaders.size() + getRealItemCount() + mFooters.size();
     }
 
     @Override
@@ -218,6 +218,7 @@ public abstract class RecyclerViewHeaderFooterAdapter<T, VH extends RecyclerView
     abstract public T getItem(int position);
     abstract protected VH onCreteItemViewHolder(ViewGroup parent, int type);
     abstract protected void onBindItemViewHolder(VH viewHolder, int position, int type);
+    abstract protected int getRealItemCount();
 
     public static interface SpanItemInterface {
         int getGridSpan();
