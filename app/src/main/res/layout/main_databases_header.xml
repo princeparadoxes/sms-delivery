@@ -15,8 +15,9 @@
             android:id="@+id/header_listview_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Add base number phones"
             android:layout_gravity="center_vertical"
+            android:textColor="@color/secondary_accent"
+            android:text="Add base number phones"
             android:textSize="18sp"
             android:textStyle="bold" />
 

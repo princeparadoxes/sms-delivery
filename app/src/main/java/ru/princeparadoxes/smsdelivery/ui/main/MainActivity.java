@@ -16,9 +16,11 @@ import ru.princeparadoxes.smsdelivery.base.navigation.activity.ActivityScreen;
 import ru.princeparadoxes.smsdelivery.base.navigation.activity.ActivityScreenSwitcher;
 import ru.princeparadoxes.smsdelivery.data.DataService;
 import ru.princeparadoxes.smsdelivery.data.TokenStorage;
+import ru.princeparadoxes.smsdelivery.data.model.DatabaseOfPhoneNumbers;
 import ru.princeparadoxes.smsdelivery.ui.ApplicationSwitcher;
+import ru.princeparadoxes.smsdelivery.ui.main.databases.DatabasesActionsDialogBuilder;
+import ru.princeparadoxes.smsdelivery.ui.main.databases.DatabasesPresenter;
 import ru.princeparadoxes.smsdelivery.ui.main.send.SendPresenter;
-import ru.princeparadoxes.smsdelivery.ui.main.numbers.NumbersPresenter;
 import ru.princeparadoxes.smsdelivery.ui.main.archive.ArchivePresenter;
 
 import javax.inject.Inject;
@@ -34,15 +36,13 @@ public class MainActivity extends BaseActivity implements HasComponent<MainCompo
     ApplicationSwitcher applicationSwitcher;
 
     private MainComponent component;
-
-    private boolean isActive;
+    @Inject
+    DatabasesActionsDialogBuilder databasesActionsDialogBuilder;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.Theme_App);
         super.onCreate(savedInstanceState);
-        final Intent intent = getIntent();
-        final Bundle extras = intent.getExtras();
     }
 
     @Override
@@ -55,16 +55,16 @@ public class MainActivity extends BaseActivity implements HasComponent<MainCompo
 
     @Override
     protected void onStart() {
-        super.onStart();
-        isActive = true;
         applicationSwitcher.attach(this);
+        databasesActionsDialogBuilder.attach(this);
+        super.onStart();
     }
 
     @Override
     protected void onStop() {
-        isActive = false;
-        applicationSwitcher.detach();
         super.onStop();
+        applicationSwitcher.detach();
+        databasesActionsDialogBuilder.detach();
     }
 
 
@@ -104,7 +104,7 @@ public class MainActivity extends BaseActivity implements HasComponent<MainCompo
 
         private final DataService dataService;
         private final ActivityScreenSwitcher screenSwitcher;
-        private final NumbersPresenter numbersPresenter;
+        private final DatabasesPresenter databasesPresenter;
         private final ArchivePresenter archivePresenter;
         private final SendPresenter sendPresenter;
         private final TokenStorage tokenStorage;
@@ -112,16 +112,14 @@ public class MainActivity extends BaseActivity implements HasComponent<MainCompo
         @Nullable
         private CompositeSubscription subscriptions;
 
-        private boolean isNeedSwitch;
-
         @Inject
         public Presenter(DataService dataService, ActivityScreenSwitcher screenSwitcher,
-                         NumbersPresenter numbersPresenter,
+                         DatabasesPresenter databasesPresenter,
                          ArchivePresenter archivePresenter, SendPresenter sendPresenter,
                          TokenStorage tokenStorage) {
             this.dataService = dataService;
             this.screenSwitcher = screenSwitcher;
-            this.numbersPresenter = numbersPresenter;
+            this.databasesPresenter = databasesPresenter;
             this.archivePresenter = archivePresenter;
             this.sendPresenter = sendPresenter;
             this.tokenStorage = tokenStorage;

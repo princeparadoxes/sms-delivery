@@ -1,4 +1,4 @@
-package ru.princeparadoxes.smsdelivery.ui.main.numbers;
+package ru.princeparadoxes.smsdelivery.ui.main.databases;
 
 import android.content.Context;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -22,11 +22,12 @@ import ru.princeparadoxes.smsdelivery.base.ComponentFinder;
 import ru.princeparadoxes.smsdelivery.base.mvp.BaseView;
 import ru.princeparadoxes.smsdelivery.data.model.DatabaseOfPhoneNumbers;
 import ru.princeparadoxes.smsdelivery.ui.main.MainComponent;
+import ru.princeparadoxes.smsdelivery.ui.misc.OnRecyclerItemClickListener;
 
-public class NumbersView extends FrameLayout implements BaseView {
+public class DatabasesView extends FrameLayout implements BaseView {
 
     @Inject
-    NumbersPresenter numbersPresenter;
+    DatabasesPresenter presenter;
 
     @InjectView(R.id.main_numbers_recycler_view)
     protected RecyclerView recyclerView;
@@ -34,42 +35,54 @@ public class NumbersView extends FrameLayout implements BaseView {
     protected TextView centerText;
 
     private RecyclerView.LayoutManager layoutManager;
-    private NumbersAdapter numbersAdapter;
+    private DatabasesAdapter databasesAdapter;
 
-    public NumbersView(Context context, AttributeSet attrs) {
+    public DatabasesView(Context context, AttributeSet attrs) {
         super(context, attrs);
         if (!isInEditMode()) {
             MainComponent component = ComponentFinder.findActivityComponent(context);
             component.inject(this);
         }
         layoutManager = new LinearLayoutManager(context);
-        numbersAdapter = new NumbersAdapter(context, layoutManager);
+        databasesAdapter = new DatabasesAdapter(context, layoutManager);
     }
 
     @Override
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
-        numbersPresenter.takeView(this);
+        presenter.takeView(this);
         ButterKnife.inject(this);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         final LayoutInflater inflater = LayoutInflater.from(getContext());
         LinearLayout header = (LinearLayout) inflater.inflate(
-                R.layout.number_listview_header, null, false);
+                R.layout.main_databases_header, null, false);
         header.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                numbersPresenter.addDatabaseNumbers();
+                presenter.addDatabaseNumbers();
             }
         });
-        numbersAdapter.addHeader(header);
-        numbersAdapter.notifyDataSetChanged();
-        recyclerView.setAdapter(numbersAdapter);
+        databasesAdapter.addHeader(header);
+        databasesAdapter.notifyDataSetChanged();
+        recyclerView.setAdapter(databasesAdapter);
+        recyclerView.addOnItemTouchListener(new OnRecyclerItemClickListener(getContext(),
+                new OnRecyclerItemClickListener.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(View childView, int position) {
+                            presenter.openDialog(position);
+                    }
+
+                    @Override
+                    public void onItemLongPress(View childView, int position) {
+
+                    }
+                }));
     }
 
     public void setData(List<DatabaseOfPhoneNumbers> databaseOfPhoneNumberses) {
         if (databaseOfPhoneNumberses.size() > 0) {
-        numbersAdapter.addAll(databaseOfPhoneNumberses);
+            databasesAdapter.addAll(databaseOfPhoneNumberses);
         } else {
             centerText.setText("Bases not found");
         }
@@ -78,7 +91,7 @@ public class NumbersView extends FrameLayout implements BaseView {
     @Override
     protected void onDetachedFromWindow() {
         ButterKnife.reset(this);
-        numbersPresenter.dropView(this);
+        presenter.dropView(this);
         super.onDetachedFromWindow();
     }
 
@@ -96,4 +109,11 @@ public class NumbersView extends FrameLayout implements BaseView {
     }
 
 
+    public void deleteElement(int position) {
+        databasesAdapter.deleteChild(position);
+    }
+
+    public void moveToTop(int position) {
+        databasesAdapter.moveChildToTop(position);
+    }
 }

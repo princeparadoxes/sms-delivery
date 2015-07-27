@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="toolbar_text_size">20sp</dimen>
+    <!-- app-->
+    <dimen name="app_toolbar_text_size">20sp</dimen>
+    <dimen name="app_item_height">64dp</dimen>
 
     <!--Settings-->
     <dimen name="settings_item_height">52dp</dimen>

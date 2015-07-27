@@ -15,14 +15,19 @@
     <string name="drawer_close">close</string>
 
     <!-- Tabs-->
-    <string name="numbers_feed_name">Numbers</string>
+    <string name="databases_feed_name">Numbers</string>
     <string name="send_feed_name">Send</string>
     <string name="archive_feed_name">Archive</string>
 
     <!--Settings-->
     <string name="settings_first_title">Setting</string>
 
+    <!-- Databases Actions Dialog-->
+    <string name="databases_actions_dialog_delete">Delete</string>
+    <string name="databases_actions_dialog_rename">Rename</string>
+    <string name="databases_actions_dialog_move_to_top">Move to top</string>
+
     <!--Feedback-->
     <string name="feedback_open_though">Open with</string>
-    <string name="feedback_email">ozmcorp@gmail.com</string>
+    <string name="feedback_email">tzarsuperman@gmail.com</string>
 </resources>

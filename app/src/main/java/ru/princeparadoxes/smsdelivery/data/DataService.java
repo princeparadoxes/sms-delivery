@@ -42,13 +42,13 @@ public class DataService {
         }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
     }
 
-    public Observable addDatabaseOfPhoneNumbers(final String name)
+    public Observable<Boolean> addDatabaseOfPhoneNumbers(final String name)
     {
-        return Observable.create(new RequestFunction() {
+        return Observable.create(new RequestFunction<Boolean>() {
             @Override
-            protected Void request() {
+            protected Boolean request() {
                 NumbersBaseDB.addNewDatabase(name, databaseService.request());
-                return null;
+                return true;
             }
         }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
     }

@@ -47,8 +47,9 @@ public abstract class RecyclerBindableAdapter<T, VH extends RecyclerView.ViewHol
     }
 
     public void deleteChild(int position) {
-        dataset.remove(position);
+        dataset.remove(position - getHeadersCount());
         notifyItemRemoved(position);
+        if (position == dataset.size())
         notifyItemRangeChanged(position, dataset.size() - position - 1);
     }
 
@@ -58,12 +59,11 @@ public abstract class RecyclerBindableAdapter<T, VH extends RecyclerView.ViewHol
         notifyDataSetChanged();
     }
 
-    // TODO: a.m. make method for params: from/to;
     public void moveChildToTop(int position) {
-        final T item = dataset.remove(position);
+        final T item = dataset.remove(position - getHeadersCount());
         dataset.add(0, item);
-        notifyItemMoved(position, 0);
-        notifyItemRangeChanged(0, dataset.size());
+        notifyItemMoved(position, getHeadersCount());
+        notifyItemRangeChanged(getHeadersCount(), dataset.size());
     }
 
     @Override

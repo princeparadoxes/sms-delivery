@@ -11,6 +11,7 @@ import ru.princeparadoxes.smsdelivery.data.TokenStorage;
 import ru.princeparadoxes.smsdelivery.ui.ActivityHierarchyServer;
 import ru.princeparadoxes.smsdelivery.ui.AppContainer;
 import ru.princeparadoxes.smsdelivery.ui.ApplicationSwitcher;
+import ru.princeparadoxes.smsdelivery.ui.main.databases.DatabasesActionsDialogBuilder;
 
 
 /**
@@ -41,5 +42,7 @@ public interface SmsDependencies {
     FileService fileService();
 
     ApplicationSwitcher applicationSwitcher();
+
+    DatabasesActionsDialogBuilder databasesActionsDialogBuilder();
 
 }

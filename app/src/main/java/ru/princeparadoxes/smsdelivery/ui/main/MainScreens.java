@@ -14,8 +14,8 @@ public enum MainScreens implements CoordinatorPageAdapter.Item {
             R.layout.main_send_view,
             R.string.send_feed_name),
     NUMBERS_SCREEN(
-            R.layout.main_numbers_view,
-            R.string.numbers_feed_name),
+            R.layout.main_databases_view,
+            R.string.databases_feed_name),
     ARCHIVE_SCREEN(
             R.layout.main_archive_view,
             R.string.archive_feed_name);

@@ -9,6 +9,6 @@
 
     <include
         android:id="@+id/setting_item_first"
-        layout="@layout/setting_item_view"/>
+        layout="@layout/setting_item"/>
 
 </ru.princeparadoxes.smsdelivery.ui.settings.SettingsView>

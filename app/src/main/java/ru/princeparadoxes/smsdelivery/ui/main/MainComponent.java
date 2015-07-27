@@ -2,7 +2,7 @@ package ru.princeparadoxes.smsdelivery.ui.main;
 
 import ru.princeparadoxes.smsdelivery.SmsComponent;
 import ru.princeparadoxes.smsdelivery.ui.main.send.SendView;
-import ru.princeparadoxes.smsdelivery.ui.main.numbers.NumbersView;
+import ru.princeparadoxes.smsdelivery.ui.main.databases.DatabasesView;
 import ru.princeparadoxes.smsdelivery.ui.main.archive.ArchiveView;
 import ru.princeparadoxes.smsdelivery.ui.settings.SettingsView;
 
@@ -17,7 +17,7 @@ public interface MainComponent extends MainDepencencies{
 
     void inject(SendView view);
 
-    void inject(NumbersView view);
+    void inject(DatabasesView view);
 
     void inject(ArchiveView view);
 

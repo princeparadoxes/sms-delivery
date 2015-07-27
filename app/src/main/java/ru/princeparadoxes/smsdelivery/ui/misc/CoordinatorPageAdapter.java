@@ -27,7 +27,7 @@ public class CoordinatorPageAdapter extends ViewPagerAdapter<CoordinatorPageAdap
         // nothing;
     }
 
-    public static interface Item {
+    public interface Item {
         int getResId();
         int getNameResId();
     }

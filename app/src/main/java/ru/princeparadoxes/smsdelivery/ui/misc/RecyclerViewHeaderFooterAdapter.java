@@ -214,10 +214,18 @@ public abstract class RecyclerViewHeaderFooterAdapter<T, VH extends RecyclerView
         }
     }
 
+    public int getHeadersCount() {
+        return mHeaders.size();
+    }
+
     abstract protected int getItemType(int position);
+
     abstract public T getItem(int position);
+
     abstract protected VH onCreteItemViewHolder(ViewGroup parent, int type);
+
     abstract protected void onBindItemViewHolder(VH viewHolder, int position, int type);
+
     abstract protected int getRealItemCount();
 
     public static interface SpanItemInterface {
