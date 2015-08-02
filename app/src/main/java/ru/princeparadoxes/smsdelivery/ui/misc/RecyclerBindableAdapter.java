@@ -49,7 +49,6 @@ public abstract class RecyclerBindableAdapter<T, VH extends RecyclerView.ViewHol
     public void deleteChild(int position) {
         dataset.remove(position - getHeadersCount());
         notifyItemRemoved(position);
-        if (position == dataset.size())
         notifyItemRangeChanged(position, dataset.size() - position - 1);
     }
 
@@ -71,7 +70,10 @@ public abstract class RecyclerBindableAdapter<T, VH extends RecyclerView.ViewHol
         return viewHolder(inflater.inflate(layoutId(type), parent, false), type);
     }
 
-    protected abstract @LayoutRes int layoutId(int type);
+    protected abstract
+    @LayoutRes
+    int layoutId(int type);
+
     protected abstract VH viewHolder(View view, int type);
 
 }

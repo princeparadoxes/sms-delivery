@@ -6,7 +6,7 @@ import android.content.Context;
 import java.util.List;
 
 import ru.princeparadoxes.smsdelivery.data.model.DatabaseOfPhoneNumbers;
-import ru.princeparadoxes.smsdelivery.data.model.NumbersBaseDB;
+import ru.princeparadoxes.smsdelivery.data.model.DatabaseOfPhoneNumbersDB;
 import ru.princeparadoxes.smsdelivery.data.rx.RequestFunction;
 import ru.princeparadoxes.smsdelivery.ui.ApplicationScope;
 import rx.Observable;
@@ -37,7 +37,7 @@ public class DataService {
         return Observable.create(new RequestFunction<List<DatabaseOfPhoneNumbers>>() {
             @Override
             protected List<DatabaseOfPhoneNumbers> request() {
-                return NumbersBaseDB.getAll(databaseService.request());
+                return DatabaseOfPhoneNumbersDB.getAll(databaseService.request());
             }
         }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
     }
@@ -47,10 +47,31 @@ public class DataService {
         return Observable.create(new RequestFunction<Boolean>() {
             @Override
             protected Boolean request() {
-                NumbersBaseDB.addNewDatabase(name, databaseService.request());
+                DatabaseOfPhoneNumbersDB.addNewDatabase(name, databaseService.request());
                 return true;
             }
         }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
     }
 
+    public Observable<Boolean> moveToTopDatabaseOfPhoneNumbers(final DatabaseOfPhoneNumbers object)
+    {
+        return Observable.create(new RequestFunction<Boolean>() {
+            @Override
+            protected Boolean request() {
+                DatabaseOfPhoneNumbersDB.setMinPosition(object, databaseService.request());
+                return true;
+            }
+        }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
+    }
+
+    public Observable<Boolean> deleteDatabaseOfPhoneNumbers(final DatabaseOfPhoneNumbers object)
+    {
+        return Observable.create(new RequestFunction<Boolean>() {
+            @Override
+            protected Boolean request() {
+                DatabaseOfPhoneNumbersDB.remove(object, databaseService.request());
+                return true;
+            }
+        }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
+    }
 }

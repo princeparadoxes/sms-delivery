@@ -82,6 +82,7 @@ public class DatabasesView extends FrameLayout implements BaseView {
 
     public void setData(List<DatabaseOfPhoneNumbers> databaseOfPhoneNumberses) {
         if (databaseOfPhoneNumberses.size() > 0) {
+            databasesAdapter.clear();
             databasesAdapter.addAll(databaseOfPhoneNumberses);
         } else {
             centerText.setText("Bases not found");
@@ -110,10 +111,12 @@ public class DatabasesView extends FrameLayout implements BaseView {
 
 
     public void deleteElement(int position) {
+        presenter.deleteDatabase(databasesAdapter.getItem(position - databasesAdapter.getHeadersCount()));
         databasesAdapter.deleteChild(position);
     }
 
     public void moveToTop(int position) {
+        presenter.moveToTop(databasesAdapter.getItem(position - databasesAdapter.getHeadersCount()));
         databasesAdapter.moveChildToTop(position);
     }
 }

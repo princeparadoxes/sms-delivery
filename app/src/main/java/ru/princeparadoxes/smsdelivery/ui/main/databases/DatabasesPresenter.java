@@ -89,6 +89,38 @@ public final class DatabasesPresenter extends BasePresenter<DatabasesView> {
                 });
     }
 
+    public void moveToTop(DatabaseOfPhoneNumbers databaseOfPhoneNumbers) {
+        dataService.moveToTopDatabaseOfPhoneNumbers(databaseOfPhoneNumbers)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Action1<Boolean>() {
+                    @Override
+                    public void call(Boolean aBoolean) {
+                    }
+                }, new Action1<Throwable>() {
+                    @Override
+                    public void call(Throwable throwable) {
+
+                    }
+                });
+    }
+
+    public void deleteDatabase(DatabaseOfPhoneNumbers databaseOfPhoneNumbers) {
+        dataService.deleteDatabaseOfPhoneNumbers(databaseOfPhoneNumbers)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Action1<Boolean>() {
+                    @Override
+                    public void call(Boolean aBoolean) {
+                    }
+                }, new Action1<Throwable>() {
+                    @Override
+                    public void call(Throwable throwable) {
+
+                    }
+                });
+    }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();

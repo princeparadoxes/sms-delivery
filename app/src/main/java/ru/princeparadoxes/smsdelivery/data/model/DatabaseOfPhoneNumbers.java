@@ -10,11 +10,13 @@ import java.util.List;
 public class DatabaseOfPhoneNumbers implements Parcelable {
     private int id;
     private String name;
+    private int position;
     private List<String> numbers;
 
-    public DatabaseOfPhoneNumbers(int id, String name, List<String> numbers) {
+    public DatabaseOfPhoneNumbers(int id, String name, int position, List<String> numbers) {
         this.id = id;
         this.name = name;
+        this.position = position;
         this.numbers = numbers;
     }
 
@@ -34,6 +36,14 @@ public class DatabaseOfPhoneNumbers implements Parcelable {
         this.name = name;
     }
 
+    public int getPosition() {
+        return position;
+    }
+
+    public void setPosition(int position) {
+        this.position = position;
+    }
+
     public List<String> getNumbers() {
         return numbers;
     }
@@ -42,12 +52,12 @@ public class DatabaseOfPhoneNumbers implements Parcelable {
         this.numbers = numbers;
     }
 
-    public static DatabaseOfPhoneNumbers fromRealmObject(@NonNull NumbersBaseDB type) {
+    public static DatabaseOfPhoneNumbers fromRealmObject(@NonNull DatabaseOfPhoneNumbersDB type) {
         ArrayList<String> list = new ArrayList<>();
         for (NumberDB numberDB : type.getNumbers()) {
             list.add(numberDB.getNumber());
         }
-        return new DatabaseOfPhoneNumbers(type.getId(), type.getName(), list);
+        return new DatabaseOfPhoneNumbers(type.getId(), type.getName(), type.getPosition(), list);
     }
 
 
@@ -60,12 +70,14 @@ public class DatabaseOfPhoneNumbers implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(this.id);
         dest.writeString(this.name);
+        dest.writeInt(this.position);
         dest.writeStringList(this.numbers);
     }
 
     protected DatabaseOfPhoneNumbers(Parcel in) {
         this.id = in.readInt();
         this.name = in.readString();
+        this.position = in.readInt();
         this.numbers = in.createStringArrayList();
     }
 
