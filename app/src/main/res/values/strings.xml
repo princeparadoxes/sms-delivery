@@ -8,7 +8,7 @@
     <string name="roboto_medium" translatable="false">fonts/roboto_medium.ttf</string>
 
     <!--Main screen-->
-    <string name="main_screen_title">Main</string>
+    <string name="main_screen_title">@string/application_name</string>
 
     <!--Drawable Layout-->
     <string name="drawer_open">open</string>
