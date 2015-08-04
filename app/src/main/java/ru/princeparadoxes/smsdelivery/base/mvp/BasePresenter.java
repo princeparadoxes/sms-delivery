@@ -57,4 +57,6 @@ public abstract class BasePresenter<V extends BaseView> {
 
     protected void onSave(@NonNull Bundle outState) {
     }
+
+
 }

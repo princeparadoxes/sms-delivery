@@ -1,23 +1,11 @@
 package ru.princeparadoxes.smsdelivery.ui.create.database;
 
 import android.app.Activity;
-import android.app.ActivityOptions;
-import android.app.Application;
-import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
-import android.os.Build;
-import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.util.AttributeSet;
-import android.view.View;
-import android.widget.Toast;
-
-import java.util.ArrayList;
 
 import javax.inject.Inject;
-import javax.inject.Named;
 
 import ru.princeparadoxes.smsdelivery.R;
 import ru.princeparadoxes.smsdelivery.SmsComponent;
@@ -28,13 +16,8 @@ import ru.princeparadoxes.smsdelivery.base.mvp.BaseView;
 import ru.princeparadoxes.smsdelivery.base.navigation.activity.ActivityScreen;
 import ru.princeparadoxes.smsdelivery.base.navigation.activity.ActivityScreenSwitcher;
 import ru.princeparadoxes.smsdelivery.data.DataService;
-import rx.Observable;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action1;
-import rx.functions.Func1;
-import rx.schedulers.Schedulers;
+import ru.princeparadoxes.smsdelivery.util.Strings;
 import rx.subscriptions.CompositeSubscription;
-import timber.log.Timber;
 
 public class CreateDatabaseActivity extends BaseActivity implements HasComponent<CreateDatabaseComponent> {
     @Inject
@@ -79,16 +62,18 @@ public class CreateDatabaseActivity extends BaseActivity implements HasComponent
     public static final class Presenter extends BasePresenter<CreateDatabaseView> {
 
         private final DataService dataService;
-        private final ActivityScreenSwitcher screenSwitcher;
+        private final ActivityScreenSwitcher activityScreenSwitcher;
+        private String name;
 
         @Nullable
         private CompositeSubscription subscriptions;
 
         @Inject
-        public Presenter(DataService dataService, ActivityScreenSwitcher screenSwitcher) {
+        public Presenter(DataService dataService, ActivityScreenSwitcher activityScreenSwitcher) {
             this.dataService = dataService;
-            this.screenSwitcher = screenSwitcher;
+            this.activityScreenSwitcher = activityScreenSwitcher;
         }
+
 
         @Override
         protected void onLoad() {
@@ -105,6 +90,30 @@ public class CreateDatabaseActivity extends BaseActivity implements HasComponent
             }
         }
 
+        public void toFirstScene() {
+            if (checkView()) {
+                getView().toFirstScene();
+            }
+        }
+
+        public void toSecondScene(String name) {
+            if (checkView()) {
+                this.name = name;
+                getView().toSecondScene();
+            }
+        }
+
+        public String getName() {
+            if (Strings.isBlank(name)) {
+                return Strings.EMPTY;
+            } else {
+                return name;
+            }
+        }
+
+        public void finish() {
+            activityScreenSwitcher.goBack();
+        }
     }
 
     public static final class Screen extends ActivityScreen {

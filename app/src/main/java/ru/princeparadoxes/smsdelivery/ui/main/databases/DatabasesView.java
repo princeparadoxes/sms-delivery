@@ -60,24 +60,25 @@ public class DatabasesView extends FrameLayout implements BaseView {
         header.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                presenter.addDatabaseNumbers();
+//                presenter.addDatabaseNumbers();
+                presenter.openCreateDatabaseScreen();
             }
         });
         databasesAdapter.addHeader(header);
         databasesAdapter.notifyDataSetChanged();
         recyclerView.setAdapter(databasesAdapter);
-        recyclerView.addOnItemTouchListener(new OnRecyclerItemClickListener(getContext(),
-                new OnRecyclerItemClickListener.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(View childView, int position) {
-                            presenter.openDialog(position);
-                    }
-
-                    @Override
-                    public void onItemLongPress(View childView, int position) {
-
-                    }
-                }));
+//        recyclerView.addOnItemTouchListener(new OnRecyclerItemClickListener(getContext(),
+//                new OnRecyclerItemClickListener.OnItemClickListener() {
+//                    @Override
+//                    public void onItemClick(View childView, int position) {
+//                            presenter.openDialog(position);
+//                    }
+//
+//                    @Override
+//                    public void onItemLongPress(View childView, int position) {
+//
+//                    }
+//                }));
     }
 
     public void setData(List<DatabaseOfPhoneNumbers> databaseOfPhoneNumberses) {

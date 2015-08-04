@@ -5,9 +5,11 @@ import java.util.List;
 import javax.inject.Inject;
 
 import ru.princeparadoxes.smsdelivery.base.mvp.BasePresenter;
+import ru.princeparadoxes.smsdelivery.base.navigation.activity.ActivityScreenSwitcher;
 import ru.princeparadoxes.smsdelivery.data.DataService;
 import ru.princeparadoxes.smsdelivery.data.TokenStorage;
 import ru.princeparadoxes.smsdelivery.data.model.DatabaseOfPhoneNumbers;
+import ru.princeparadoxes.smsdelivery.ui.create.database.CreateDatabaseActivity;
 import ru.princeparadoxes.smsdelivery.ui.main.MainScope;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
@@ -20,16 +22,19 @@ public final class DatabasesPresenter extends BasePresenter<DatabasesView> {
     private final DataService dataService;
     private final TokenStorage tokenStorage;
     private final DatabasesActionsDialogBuilder dialog;
+    private final ActivityScreenSwitcher activityScreenSwitcher;
 
     private CompositeSubscription subscriptions;
 
     @Inject
     public DatabasesPresenter(DataService dataService,
                               TokenStorage tokenStorage,
-                              DatabasesActionsDialogBuilder dialog) {
+                              DatabasesActionsDialogBuilder dialog,
+                              ActivityScreenSwitcher activityScreenSwitcher) {
         this.dataService = dataService;
         this.tokenStorage = tokenStorage;
         this.dialog = dialog;
+        this.activityScreenSwitcher = activityScreenSwitcher;
     }
 
     @Override
@@ -119,6 +124,11 @@ public final class DatabasesPresenter extends BasePresenter<DatabasesView> {
 
                     }
                 });
+    }
+
+
+    public void openCreateDatabaseScreen() {
+        activityScreenSwitcher.open(new CreateDatabaseActivity.Screen());
     }
 
     @Override

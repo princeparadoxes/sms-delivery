@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ru.princeparadoxes.smsdelivery.ui.create.database.first.step.FirstStepView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/create_database_first_step_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/create_database_first_scene_tittle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal|top"
+        android:gravity="center"
+        android:text="Type name for new database"
+        android:textColor="@color/accent"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/create_database_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:gravity="center"
+        android:hint="Type name"
+        android:inputType="text"
+        android:textColor="@color/secondary_accent"
+        android:textSize="18sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/create_database_first_scene_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        android:text="NEXT" />
+
+
+</ru.princeparadoxes.smsdelivery.ui.create.database.first.step.FirstStepView>

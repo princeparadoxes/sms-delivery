@@ -91,6 +91,7 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
+    // Support
     compile 'com.android.support:support-v4:22.2.0'
     compile 'com.android.support:support-annotations:22.2.0'
     compile 'com.android.support:appcompat-v7:22.2.0'
@@ -106,6 +107,7 @@ dependencies {
     compile 'com.jakewharton:butterknife:6.1.0'
     compile 'com.etsy.android.grid:library:1.0.5'
     compile 'cat.ppicas.customtypeface:library:2.0.0'
+    compile "com.github.andkulikov:transitions-everywhere:1.4.0"
     // Debug
     compile 'com.jakewharton.timber:timber:3.1.0'
     // Data
