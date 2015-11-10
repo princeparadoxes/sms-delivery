@@ -1,0 +1,31 @@
+<ru.princeparadoxes.smsdelivery.ui.main.MainView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    >
+
+    <android.support.v4.widget.DrawerLayout
+        android:id="@+id/main_drawer_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <!-- The main content view -->
+        <include layout="@layout/coordinator_layout"/>
+
+        <!-- The navigation drawer -->
+        <FrameLayout
+            android:layout_width="320dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            >
+
+            <include layout="@layout/settings_view"/>
+
+        </FrameLayout>
+
+    </android.support.v4.widget.DrawerLayout>
+
+</ru.princeparadoxes.smsdelivery.ui.main.MainView>

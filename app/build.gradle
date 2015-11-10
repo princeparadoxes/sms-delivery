@@ -1,27 +1,136 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.4'
+    }
+}
+
+// Manifest version information!
+def versionMajor = rootProject.versionMajor
+def versionMinor = rootProject.versionMinor
+def versionBuild = rootProject.versionBuild
+
 apply plugin: 'com.android.application'
+apply plugin: 'com.neenbedankt.android-apt'
+
+apply from: "$rootDir/gradle/checkstyle.gradle"
+apply from: "$rootDir/gradle/findbugs.gradle"
+apply from: "$rootDir/gradle/pmd.gradle"
+check.dependsOn('checkstyle')
+check.dependsOn('findbugs')
+check.dependsOn('pmd')
+
+repositories {
+    mavenCentral()
+}
+
+def gitSha = 'git rev-parse --short HEAD'.execute([], project.rootDir).text.trim()
+def date = new Date()
+def buildTime = date.format("dd.MM.yy", TimeZone.getTimeZone("UTC"))
+def buildTimeInternal = date.format("yyyy-MM-dd'T'HH:mm'Z'", TimeZone.getTimeZone("UTC"))
+def packagename = "ru.princeparadoxes.smsdelivery"
 
 android {
-    compileSdkVersion 19
-    buildToolsVersion "20.0.0"
+    compileSdkVersion rootProject.compileSdkVersion
+    buildToolsVersion rootProject.buildToolsVersion
+
+    packagingOptions {
+        exclude 'META-INF/services/javax.annotation.processing.Processor'
+    }
 
     defaultConfig {
-        applicationId "ru.stefa.tizarhunter.stefasms"
-        minSdkVersion 14
-        targetSdkVersion 19
-        versionCode 1
-        versionName "1.0"
+        applicationId "${packagename}"
+
+        minSdkVersion rootProject.minSdkVersion
+        targetSdkVersion rootProject.targetSdkVersion
+
+        versionCode versionMajor * 1000 + versionMinor * 100 + versionBuild
+        versionName "${versionMajor}.${versionMinor}"
+
+        buildConfigField "String", "GIT_SHA", "\"${gitSha}\""
+        buildConfigField "String", "BUILD_TIME", "\"${buildTimeInternal}\""
+        buildConfigField "String", "PROJECT_NUMBER", "\"${manifestPlaceholders.projectNumber}\""
+
+        testApplicationId "${packagename}.tests"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+
     buildTypes {
+        debug {
+            applicationIdSuffix '.dev'
+            versionNameSuffix '-dev'
+            debuggable true
+        }
         release {
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            shrinkResources false
+            debuggable false
+            proguardFiles getDefaultProguardFile('proguard-android.txt')
+            proguardFiles file('proguard-rules.pro')
+        }
+    }
+
+    lintOptions {
+        abortOnError false
+
+        textReport true
+        textOutput 'stdout'
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_7
+    }
+
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    // Support
+    compile 'com.android.support:support-v4:22.2.0'
+    compile 'com.android.support:support-annotations:22.2.0'
+    compile 'com.android.support:appcompat-v7:22.2.0'
+    compile 'com.android.support:recyclerview-v7:22.2.0'
+    compile 'com.android.support:cardview-v7:22.2.0'
+    compile 'com.android.support:gridlayout-v7:22.2.0'
+    compile 'com.android.support:design:22.2.0'
+    // Dependency Injection
+    compile 'com.google.dagger:dagger:2.0.1'
+    apt 'com.google.dagger:dagger-compiler:2.0.1'
+    provided 'org.glassfish:javax.annotation:10.0-b28'
+    // UI
+    compile 'com.jakewharton:butterknife:6.1.0'
+    compile 'com.etsy.android.grid:library:1.0.5'
+    compile 'cat.ppicas.customtypeface:library:2.0.0'
+    compile "com.github.andkulikov:transitions-everywhere:1.4.0"
+    // Debug
+    compile 'com.jakewharton.timber:timber:3.1.0'
+    // Data
+    compile 'io.realm:realm-android:0.80.3'
+    // rxJava
+    compile 'io.reactivex:rxjava:1.0.12'
+    compile 'io.reactivex:rxandroid:0.24.0'
+}
+
+// change apk name
+android.applicationVariants.all { variant ->
+    for (output in variant.outputs) {
+        def outputFile = output.outputFile
+        if (outputFile != null && outputFile.name.endsWith('.apk')) {
+            def fileName = "ozome-android-${output.name}.apk"
+            output.outputFile = new File(outputFile.parent, fileName)
         }
     }
 }
-repositories {
-    jcenter()
-}
-dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:support-v13:21.0.0'
+
+// print build finish time
+gradle.buildFinished { buildResult ->
+    def buildFinishDate = new Date()
+    def formattedDate = buildFinishDate.format('yyyy-MM-dd HH:mm:ss')
+    println "Build finished: ${formattedDate}"
 }

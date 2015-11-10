@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ru.princeparadoxes.smsdelivery.ui.settings.SettingItemView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/setting_item_view"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/settings_item_height"
+    android:paddingLeft="@dimen/settings_item_horizontal_padding"
+    android:paddingRight="@dimen/settings_item_horizontal_padding"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    android:clickable="true"
+    android:background="@drawable/settings_selector"
+    >
+
+    <ImageView
+        android:id="@+id/setting_item_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingRight="24dp"
+        android:src="@drawable/ic_widget"
+        />
+
+    <TextView
+        android:id="@+id/setting_item_title"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:paddingRight="8dp"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/settings_item_text_size"
+        android:ellipsize="end"
+        app:customTypeface="regular"
+        tools:ignore="MissingPrefix"
+        />
+
+    <CheckBox
+        android:id="@+id/setting_item_checkbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="false"
+        android:focusable="false"
+        />
+
+</ru.princeparadoxes.smsdelivery.ui.settings.SettingItemView>

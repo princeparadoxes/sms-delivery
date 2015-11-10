@@ -1,7 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="application_background_color">#eeeeee</color>
-    <color name="background_element">#00bfff</color>
-    <color name="background_button">#ffb500</color>
-    <color name="number_listview_element_text">#808083</color>
+    <color name="primary">#0066FF</color>
+    <color name="primary_dark">#000000</color>
+    <color name="primary_light">#4a4a4a</color>
+    <color name="accent">#009789</color>
+    <color name="accent_light">#ffffff</color>
+    <color name="primary_text">#ffffff</color>
+    <color name="secondary_text">#ffffff</color>
+    <color name="secondary_accent">#8b8b8b</color>
+    <color name="icons">#fff</color>
+    <color name="content_background">#ffffff</color>
+
+    <!--Toolbar-->
+    <color name="toolbar_drawer_color">#ffffff</color>
+
+    <!--TabHost-->
+    <color name="tabhost_title_active_color">#ffffff</color>
+    <color name="tabhost_title_disable_color">#80ffffff</color>
+
 </resources>

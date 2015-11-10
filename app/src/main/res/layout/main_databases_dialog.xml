@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main_numbers_dialog"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:divider="@android:color/black"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:showDividers="middle">
+
+    <TextView
+        android:id="@+id/main_databases_dialog_delete"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/app_item_height"
+        android:gravity="center_vertical"
+        android:text="@string/databases_actions_dialog_delete"
+        android:textColor="@color/secondary_accent"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/main_databases_dialog_rename"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/app_item_height"
+        android:gravity="center_vertical"
+        android:text="@string/databases_actions_dialog_rename"
+        android:textColor="@color/secondary_accent"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/main_databases_dialog_move_to_top"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/app_item_height"
+        android:gravity="center_vertical"
+        android:text="@string/databases_actions_dialog_move_to_top"
+        android:textColor="@color/secondary_accent"
+        android:textSize="20sp" />
+
+</LinearLayout>

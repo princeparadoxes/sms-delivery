@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<ruleset name="Custom ruleset" xmlns="http://pmd.sourceforge.net/ruleset/2.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://pmd.sourceforge.net/ruleset/2.0.0 http://pmd.sourceforge.net/ruleset_2_0_0.xsd">
+    <description>
+
+        <rule ref="rulesets/java/android.xml" />
+        <rule ref="rulesets/java/basic.xml" />
+        <rule ref="rulesets/java/imports.xml" />
+        <rule ref="rulesets/java/unusedcode.xml" />
+        <rule ref="rulesets/java/strings.xml" />
+        <rule ref="rulesets/java/emptycode.xml" />
+        <rule ref="rulesets/java/finalizer.xml" />
+        <rule ref="rulesets/java/migration.xml" />
+        <rule ref="rulesets/java/optimization.xml" />
+        <rule ref="rulesets/java/controvertial.xml">
+            <exclude name="OnlyOneReturn" />
+            <exclude name="AvoidFinalLocalVariable" />
+            <exclude name="AvoidUsingVolatile" />
+            <exclude name="AvoidUsingNativeCode" />
+        </rule>
+
+        <rule ref="rulesets/java/design.xml">
+            <exclude name="UseSingleton" />
+        </rule>
+
+    </description>
+</ruleset>
