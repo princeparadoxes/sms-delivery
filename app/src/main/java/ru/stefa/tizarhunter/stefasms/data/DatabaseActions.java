@@ -1,4 +1,4 @@
-package ru.stefa.tizarhunter.stefasms.database;
+package ru.stefa.tizarhunter.stefasms.data;
 
 import android.content.ContentValues;
 import android.content.Context;

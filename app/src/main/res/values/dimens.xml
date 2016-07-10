@@ -1,4 +1,14 @@
 <resources>
+    <dimen name="activity_horizontal_small_margin">12dp</dimen>
     <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_horizontal_big_margin">28dp</dimen>
+    <dimen name="activity_horizontal_x_big_margin">40dp</dimen>
+    <dimen name="activity_vertical_small_margin">12dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="activity_vertical_big_margin">20dp</dimen>
+    <dimen name="activity_vertical_x_big_margin">28dp</dimen>
+    <dimen name="activity_vertical_xx_big_margin">40dp</dimen>
+
+
+    <dimen name="settings_item_height">48dp</dimen>
 </resources>

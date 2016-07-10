@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin">
+
+    <TextView
+        android:id="@+id/settings_message_delay"
+        style="@style/SettingsTextView"
+        android:text="@string/settings_message_delay"/>
+
+    <com.rengwuxian.materialedittext.MaterialEditText
+        android:id="@+id/settings_message_delay_edit"
+        style="@style/SettingsEditText"
+        android:layout_alignBaseline="@+id/settings_message_delay"
+        android:layout_alignParentRight="true"
+        android:layout_toRightOf="@+id/settings_message_delay"/>
+
+    <TextView
+        android:id="@+id/settings_window_size"
+        style="@style/SettingsTextView"
+        android:layout_below="@+id/settings_message_delay"
+        android:text="@string/settings_window_size"/>
+
+    <com.rengwuxian.materialedittext.MaterialEditText
+        android:id="@+id/settings_window_size_edit"
+        style="@style/SettingsEditText"
+        android:layout_alignBaseline="@+id/settings_window_size"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/settings_message_delay"
+        android:layout_toRightOf="@+id/settings_message_delay"/>
+
+    <TextView
+        android:id="@+id/settings_window_delay"
+        style="@style/SettingsTextView"
+        android:layout_below="@+id/settings_window_size"
+        android:text="@string/settings_window_delay"/>
+
+    <com.rengwuxian.materialedittext.MaterialEditText
+        android:id="@+id/settings_window_delay_edit"
+        style="@style/SettingsEditText"
+        android:layout_alignBaseline="@+id/settings_window_delay"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/settings_window_size"
+        android:layout_toRightOf="@+id/settings_message_delay"
+        />
+
+    <Button
+        android:id="@+id/settings_apply"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/settings_window_delay"
+        android:layout_marginTop="@dimen/activity_horizontal_x_big_margin"
+        android:text="@string/settings_apply"/>
+
+</RelativeLayout>

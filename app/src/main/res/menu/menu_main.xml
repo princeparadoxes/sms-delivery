@@ -1,0 +1,9 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:tools="http://schemas.android.com/tools"
+      tools:context="ru.stefa.tizarhunter.stefasms.MainActivity">
+    <item
+        android:id="@+id/action_settings"
+        android:showAsAction="always"
+        android:icon="@drawable/ic_settings_black_24dp"
+        android:title="@string/action_settings"/>
+</menu>

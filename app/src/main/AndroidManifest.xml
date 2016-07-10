@@ -1,22 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="ru.stefa.tizarhunter.stefasms" >
+          package="ru.stefa.tizarhunter.stefasms">
+
     <uses-permission android:name="android.permission.SEND_SMS"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+
     <application
+        android:name=".SmsApplication"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/CustomActionBarTheme"  >
-       <activity
+        android:theme="@style/AppTheme">
+        <activity
             android:name=".MyActivity"
+            android:configChanges="orientation"
             android:label="@string/app_name"
-            android:windowSoftInputMode="stateHidden">
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustResize">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".screens.settings.SettingsActivity"
+            android:label="@string/tittle_settings"
+            android:screenOrientation="portrait">
         </activity>
     </application>
 

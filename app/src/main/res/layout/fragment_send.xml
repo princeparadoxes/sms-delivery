@@ -1,66 +1,135 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:weightSum="1"
-              android:padding="8dp"
-              android:background="@color/application_background_color">
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="8dp"
+        android:animateLayoutChanges="true"
+        android:weightSum="1">
 
 
-<EditText
-            android:layout_width="match_parent"
-            android:layout_height="120dp"
-            android:inputType="textMultiLine"
-            android:ems="10"
-            android:padding="10dp"
-            android:hint="Введите сообщение"
-            android:textColor="@android:color/black"
-            android:textSize="25sp"
-            android:id="@+id/send_edit_message"
-            android:background="@drawable/archive_listview_element_background"
-            android:layout_weight="0.50"/>
-
-    <TextView
-            android:layout_width="match_parent"
-            android:layout_height="20dp"
-            android:layout_marginTop="8dp"
-            android:paddingLeft="8dp"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:background="@drawable/archive_listview_element_background"
-            android:id="@+id/send_number_symbols"/>
-
-    <FrameLayout
+        <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="0.50"
-            android:paddingTop="25dp">
+            app:cardUseCompatPadding="true">
 
-        <LinearLayout
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/send_edit_message"
+                android:layout_width="match_parent"
+                android:layout_height="144dp"
+                android:layout_margin="8dp"
+                android:ems="10"
+                android:hint="Введите сообщение"
+                android:inputType="textMultiLine"
+                android:maxLength="70"
+                android:textSize="20sp"
+                app:met_floatingLabel="highlight"
+                app:met_maxCharacters="70"/>
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardUseCompatPadding="true">
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:animateLayoutChanges="true"
                 android:orientation="vertical"
-                android:layout_gravity="bottom">
+                android:padding="8dp">
 
-            <Button
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:textColor="@android:color/black"
-                    android:background="@drawable/archive_listview_element_background"
-                    android:text="Выбрать базу номеров"
+                <Button
                     android:id="@+id/send_button_base"
-                    />
-
-            <Button
+                    style="@style/Widget.AppCompat.Button.Borderless.Colored"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:textColor="@android:color/black"
-                    android:background="@drawable/archive_listview_element_background"
-                    android:text="Послать!"
-                    android:layout_marginTop="8dp"
-                    android:id="@+id/send_button_send"
+                    android:text="Выбрать базу номеров"
                     />
-        </LinearLayout>
-    </FrameLayout>
-</LinearLayout>
+
+                <TextView
+                    android:id="@+id/send_count_numbers_in_base"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:freezesText="true"
+                    android:visibility="gone"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="4"
+                    android:orientation="horizontal"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:text="Посылать: "/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="С "/>
+
+                    <com.rengwuxian.materialedittext.MaterialEditText
+                        android:id="@+id/send_from"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="8dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:inputType="number"
+                        android:maxLength="5"
+                        android:textSize="14sp"
+                        app:met_autoValidate="true"
+                        app:met_floatingLabel="none"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="По "/>
+
+                    <com.rengwuxian.materialedittext.MaterialEditText
+                        android:id="@+id/send_to"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:inputType="number"
+                        android:maxLength="5"
+                        android:textSize="14sp"
+                        app:met_autoValidate="true"
+                        app:met_floatingLabel="none"/>
+                </LinearLayout>
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+
+        <ProgressBar
+            android:id="@+id/send_progress"
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
+            android:visibility="gone"
+            android:layout_marginTop="@dimen/activity_vertical_margin"/>
+
+        <Button
+            android:id="@+id/send_button_send"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="8dp"
+            android:text="Послать!"
+            />
+    </LinearLayout>
+</ScrollView>

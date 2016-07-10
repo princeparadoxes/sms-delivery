@@ -14,7 +14,7 @@ import android.widget.Toast;
 
 import java.util.List;
 
-import ru.stefa.tizarhunter.stefasms.database.DatabaseActions;
+import ru.stefa.tizarhunter.stefasms.data.DatabaseActions;
 import ru.stefa.tizarhunter.stefasms.screens.numbers.NumbersModel;
 
 public class SelectBaseDialog extends AlertDialog.Builder
