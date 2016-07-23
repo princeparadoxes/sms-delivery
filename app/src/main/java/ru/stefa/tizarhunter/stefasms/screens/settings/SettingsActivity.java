@@ -16,6 +16,15 @@ public class SettingsActivity extends AppCompatActivity {
     private MaterialEditText mMessagePortion;
     private MaterialEditText mMessagePortionDelay;
     private Button mApplyButton;
+    private View.OnClickListener mApplyListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Storage.mMessageDelay.set(mMessageDelay.getText().toString());
+            Storage.mMessagePortion.set(mMessagePortion.getText().toString());
+            Storage.mMessagePortionDelay.set(mMessagePortionDelay.getText().toString());
+            onBackPressed();
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,14 +47,4 @@ public class SettingsActivity extends AppCompatActivity {
         mMessagePortionDelay.setText(Storage.mMessagePortionDelay.getString());
         mApplyButton.setOnClickListener(mApplyListener);
     }
-
-    private View.OnClickListener mApplyListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            Storage.mMessageDelay.set(mMessageDelay.getText().toString());
-            Storage.mMessagePortion.set(mMessagePortion.getText().toString());
-            Storage.mMessagePortionDelay.set(mMessagePortionDelay.getText().toString());
-            onBackPressed();
-        }
-    };
 }

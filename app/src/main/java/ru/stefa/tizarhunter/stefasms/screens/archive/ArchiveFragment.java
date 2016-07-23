@@ -1,8 +1,8 @@
 package ru.stefa.tizarhunter.stefasms.screens.archive;
 
-import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,8 +18,8 @@ import ru.stefa.tizarhunter.stefasms.data.DatabaseActions;
  * Created by tizarhunter on 17.08.14.
  */
 public class ArchiveFragment extends Fragment {
-    private List<ArchiveModel> mArchiveModelList;
     private static final String ARG_SECTION_NUMBER = "section_archive";
+    private List<ArchiveModel> mArchiveModelList;
     private DatabaseActions mDatabaseActions;
 
     public static ArchiveFragment newInstance(int sectionNumber, Context context) {

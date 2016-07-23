@@ -2,22 +2,23 @@
 
 <FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingTop="8dp"
-    android:background="@color/application_background_color">
+    android:background="@color/application_background_color"
+    android:orientation="vertical"
+    android:paddingTop="8dp">
 
     <ListView
+        android:id="@+id/archive_listView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:divider="@android:color/transparent"
-        android:id="@+id/archive_listView"/>
+        android:divider="@android:color/transparent"/>
+
     <TextView
         android:id="@+id/archive_empty_text"
-        android:layout_gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:text="В архиве еще нет ни одного сообщения"
         android:visibility="gone"/>
 </FrameLayout>

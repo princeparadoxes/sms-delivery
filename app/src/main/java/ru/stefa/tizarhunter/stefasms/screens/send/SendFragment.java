@@ -1,7 +1,7 @@
 package ru.stefa.tizarhunter.stefasms.screens.send;
 
-import android.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.telephony.SmsManager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -39,9 +39,33 @@ public class SendFragment extends Fragment {
     private ArrayList<String> mNumbers;
     private DatabaseActions mDatabaseActions;
     private ArrayList<Runnable> runnables = new ArrayList<>();
+    View.OnClickListener mStopClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            for (Runnable runnable : runnables) {
+                mSendButton.removeCallbacks(runnable);
+            }
+            runnables.clear();
+            mSendButton.setOnClickListener(mSendClickListener);
+            mSendButton.setText(R.string.send_send);
+        }
+    };
+    View.OnClickListener mSendClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            sendSms();
+            mSendButton.setOnClickListener(mStopClickListener);
+            mSendButton.setText(R.string.send_stop_send);
+        }
+    };
     private String mDBName;
 
     public SendFragment() {
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        final View rootView = inflater.inflate(R.layout.fragment_send, container, false);
         mDatabaseActions = new DatabaseActions();
         mDatabaseActions.connectionDatabase(getActivity());
         selectBaseDialog = new SelectBaseDialog(getActivity(), new SelectBaseDialog.Callback() {
@@ -55,12 +79,6 @@ public class SendFragment extends Fragment {
                 }
             }
         });
-
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        final View rootView = inflater.inflate(R.layout.fragment_send, container, false);
         findViews(rootView);
         initViews();
         return rootView;
@@ -98,27 +116,6 @@ public class SendFragment extends Fragment {
         mEditFrom.setText(String.valueOf(1));
         mEditTo.setText(String.valueOf(mNumbers.size()));
     }
-
-    View.OnClickListener mSendClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            sendSms();
-            mSendButton.setOnClickListener(mStopClickListener);
-            mSendButton.setText(R.string.send_stop_send);
-        }
-    };
-
-    View.OnClickListener mStopClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            for (Runnable runnable : runnables) {
-                mSendButton.removeCallbacks(runnable);
-            }
-            runnables.clear();
-            mSendButton.setOnClickListener(mSendClickListener);
-            mSendButton.setText(R.string.send_send);
-        }
-    };
 
     private void sendSms() {
         final String sms = mMessageEditText.getText().toString();

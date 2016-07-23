@@ -49,12 +49,10 @@ public class MultiChoiceImpl implements AbsListView.MultiChoiceModeListener {
     @Override
     //Вызывается при клике на любой Item из СAB
     public boolean onActionItemClicked(ActionMode actionMode, MenuItem menuItem) {
-        if (menuItem.getTitle().equals("delete"))
-        {
+        if (menuItem.getTitle().equals("delete")) {
 //            String text = "Action - " + menuItem.getTitle() + " ; Selected items: " + getSelectedElements();
 //            Toast.makeText(listView.getContext(), text , Toast.LENGTH_LONG).show();
-            if (mOnClickMenuListener != null)
-            {
+            if (mOnClickMenuListener != null) {
                 mOnClickMenuListener.OnDeleteClick(getSelectedElements());
             }
             actionMode.finish();
@@ -93,8 +91,7 @@ public class MultiChoiceImpl implements AbsListView.MultiChoiceModeListener {
         return selectedElements;
     }
 
-    public static interface OnClickMenuListener
-    {
+    public static interface OnClickMenuListener {
         public void OnDeleteClick(List<String> selectedElements);
     }
 }

@@ -13,7 +13,7 @@ public class NumberValidator extends METValidator {
     private boolean isMore;
 
     public NumberValidator(Context context, int number, boolean isMore) {
-        super("Число должно быть " + (isMore ? "больше" :"меньше") + " чем " + number);
+        super("Число должно быть " + (isMore ? "больше" : "меньше") + " чем " + number);
         this.number = number;
         this.isMore = isMore;
     }

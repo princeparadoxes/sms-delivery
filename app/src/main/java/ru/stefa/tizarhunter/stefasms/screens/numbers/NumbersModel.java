@@ -1,27 +1,22 @@
 package ru.stefa.tizarhunter.stefasms.screens.numbers;
 
-public class NumbersModel
-{
+public class NumbersModel {
     private String mName;
     private int mSize;
 
-    public String getName()
-    {
+    public String getName() {
         return mName;
     }
 
-    public void setName(String name)
-    {
+    public void setName(String name) {
         mName = name;
     }
 
-    public int getSize()
-    {
+    public int getSize() {
         return mSize;
     }
 
-    public void setSize(int size)
-    {
+    public void setSize(int size) {
         mSize = size;
     }
 }

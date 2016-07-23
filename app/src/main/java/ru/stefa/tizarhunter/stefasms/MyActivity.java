@@ -24,7 +24,7 @@ public class MyActivity extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        mSectionsPagerAdapter = new SectionsPagerAdapter(getFragmentManager(), this);
+        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager(), this);
 
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);

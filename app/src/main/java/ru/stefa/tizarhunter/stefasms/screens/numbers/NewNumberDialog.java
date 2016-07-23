@@ -10,13 +10,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class NewNumberDialog extends AlertDialog.Builder
-{
+public class NewNumberDialog extends AlertDialog.Builder {
     private TextView mTitle;
     private EditText mEditText;
 
-    public NewNumberDialog(final Context context, final Callback callback)
-    {
+    public NewNumberDialog(final Context context, final Callback callback) {
         super(context);
         mTitle = createTitle(context);
         mTitle.setText("Новый номер");
@@ -27,39 +25,31 @@ public class NewNumberDialog extends AlertDialog.Builder
         mEditText = new EditText(context);
         linearLayout.addView(mEditText);
         setCustomTitle(mTitle).setView(linearLayout).setPositiveButton(android.R.string.ok, new DialogInterface
-                .OnClickListener()
-                {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i)
-                    {
-                        if (!mEditText.getText().toString().isEmpty())
-                        {
-                            callback.ok(mEditText.getText().toString());
-                        }
-                        else
-                        {
-                            Toast.makeText(context,"Введите новый номер!", Toast.LENGTH_LONG).show();
-                        }
-                    }
-                }).setNegativeButton(android.R.string.cancel, null);
+                .OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                if (!mEditText.getText().toString().isEmpty()) {
+                    callback.ok(mEditText.getText().toString());
+                } else {
+                    Toast.makeText(context, "Введите новый номер!", Toast.LENGTH_LONG).show();
+                }
+            }
+        }).setNegativeButton(android.R.string.cancel, null);
 
     }
 
-    private TextView createTitle(Context context)
-    {
+    private TextView createTitle(Context context) {
         TextView textView = createTextView(context, android.R.style.TextAppearance_DeviceDefault_DialogWindowTitle);
         return textView;
     }
 
-    private LinearLayout createMainLayout(Context context)
-    {
+    private LinearLayout createMainLayout(Context context) {
         LinearLayout linearLayout = new LinearLayout(context);
         linearLayout.setOrientation(LinearLayout.VERTICAL);
         return linearLayout;
     }
 
-    private TextView createTextView(Context context, int style)
-    {
+    private TextView createTextView(Context context, int style) {
         TextView textView = new TextView(context);
         textView.setTextAppearance(context, style);
         textView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
@@ -69,8 +59,7 @@ public class NewNumberDialog extends AlertDialog.Builder
         return textView;
     }
 
-    public static interface Callback
-    {
+    public static interface Callback {
         void ok(String newNumber);
     }
 }

@@ -16,14 +16,12 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NewBaseDialog extends AlertDialog.Builder
-{
+public class NewBaseDialog extends AlertDialog.Builder {
     private int mChoise = -1;
     private TextView mTitle;
     private EditText mEditText;
 
-    public NewBaseDialog(final Context context, final Callback callback)
-    {
+    public NewBaseDialog(final Context context, final Callback callback) {
         super(context);
         mTitle = createTitle(context);
         mTitle.setText("Новая база номеров");
@@ -38,59 +36,45 @@ public class NewBaseDialog extends AlertDialog.Builder
         stringList.add("Импортировать из файла");
         linearLayout.addView(createRadioButtons(context, stringList));
         setCustomTitle(mTitle).setView(linearLayout).setPositiveButton(android.R.string.ok, new DialogInterface
-                .OnClickListener()
-                {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i)
-                    {
-                        if (!mEditText.getText().toString().isEmpty())
-                        {
+                .OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                if (!mEditText.getText().toString().isEmpty()) {
 
-                            if (mChoise == 0)
-                            {
-                                callback.ok(mEditText.getText().toString());
-                            }
-                            else
-                            {
-                                callback.okImport(mEditText.getText().toString());
-                            }
-                        }
-                        else
-                        {
-                            Toast.makeText(context,"Введите имя базы данных", Toast.LENGTH_LONG).show();
-                        }
+                    if (mChoise == 0) {
+                        callback.ok(mEditText.getText().toString());
+                    } else {
+                        callback.okImport(mEditText.getText().toString());
                     }
-                }).setNegativeButton(android.R.string.cancel, null);
+                } else {
+                    Toast.makeText(context, "Введите имя базы данных", Toast.LENGTH_LONG).show();
+                }
+            }
+        }).setNegativeButton(android.R.string.cancel, null);
 
     }
 
-    private TextView createTitle(Context context)
-    {
+    private TextView createTitle(Context context) {
         TextView textView = createTextView(context, android.R.style.TextAppearance_DeviceDefault_DialogWindowTitle);
         return textView;
     }
 
-    private LinearLayout createMainLayout(Context context)
-    {
+    private LinearLayout createMainLayout(Context context) {
         LinearLayout linearLayout = new LinearLayout(context);
         linearLayout.setOrientation(LinearLayout.VERTICAL);
         return linearLayout;
     }
 
 
-    private RadioGroup createRadioButtons(Context context, List<String> stringList)
-    {
+    private RadioGroup createRadioButtons(Context context, List<String> stringList) {
         RadioGroup radioGroup = new RadioGroup(context);
-        for (int i = 0; i < stringList.size(); i++)
-        {
+        for (int i = 0; i < stringList.size(); i++) {
             RadioButton radioButton = new RadioButton(context);
             radioButton.setText(stringList.get(i));
             final int finalI = i;
-            radioButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
-            {
+            radioButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
-                public void onCheckedChanged(CompoundButton compoundButton, boolean b)
-                {
+                public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                     mChoise = finalI;
                 }
             });
@@ -99,8 +83,7 @@ public class NewBaseDialog extends AlertDialog.Builder
         return radioGroup;
     }
 
-    private TextView createTextView(Context context, int style)
-    {
+    private TextView createTextView(Context context, int style) {
         TextView textView = new TextView(context);
         textView.setTextAppearance(context, style);
         textView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
@@ -110,8 +93,7 @@ public class NewBaseDialog extends AlertDialog.Builder
         return textView;
     }
 
-    public static interface Callback
-    {
+    public static interface Callback {
         void ok(String nameBase);
 
         void okImport(String nameBase);

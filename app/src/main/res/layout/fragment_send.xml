@@ -9,9 +9,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:animateLayoutChanges="true"
         android:orientation="vertical"
         android:padding="8dp"
-        android:animateLayoutChanges="true"
         android:weightSum="1">
 
 
@@ -120,8 +120,8 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="4dp"
             android:layout_marginRight="4dp"
-            android:visibility="gone"
-            android:layout_marginTop="@dimen/activity_vertical_margin"/>
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:visibility="gone"/>
 
         <Button
             android:id="@+id/send_button_send"

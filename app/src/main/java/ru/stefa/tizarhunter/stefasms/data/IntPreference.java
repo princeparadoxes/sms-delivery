@@ -20,6 +20,7 @@ public class IntPreference {
     public int get() {
         return preferences.getInt(key, defaultValue);
     }
+
     public String getString() {
         return String.valueOf(preferences.getInt(key, defaultValue));
     }

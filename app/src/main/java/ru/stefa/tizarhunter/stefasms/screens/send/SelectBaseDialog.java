@@ -17,13 +17,11 @@ import java.util.List;
 import ru.stefa.tizarhunter.stefasms.data.DatabaseActions;
 import ru.stefa.tizarhunter.stefasms.screens.numbers.NumbersModel;
 
-public class SelectBaseDialog extends AlertDialog.Builder
-{
+public class SelectBaseDialog extends AlertDialog.Builder {
     private int mSelect = -1;
     private TextView mTitle;
 
-    public SelectBaseDialog(final Context context, final Callback callback)
-    {
+    public SelectBaseDialog(final Context context, final Callback callback) {
         super(context);
         mTitle = createTitle(context);
         mTitle.setText("Выберите базу номеров");
@@ -33,17 +31,12 @@ public class SelectBaseDialog extends AlertDialog.Builder
         final List<NumbersModel> stringList = databaseActions.listTables();
         linearLayout.addView(createRadioButtons(context, stringList));
         setCustomTitle(mTitle).setView(linearLayout).setPositiveButton(android.R.string.ok, new DialogInterface
-                .OnClickListener()
-        {
+                .OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialogInterface, int i)
-            {
-                if (mSelect != -1)
-                {
+            public void onClick(DialogInterface dialogInterface, int i) {
+                if (mSelect != -1) {
                     callback.ok(stringList.get(mSelect).getName().replaceAll("\\s+", "_"));
-                }
-                else
-                {
+                } else {
                     Toast.makeText(context, "Вы не выбрали ни одной базы", Toast.LENGTH_LONG).show();
                 }
             }
@@ -51,33 +44,27 @@ public class SelectBaseDialog extends AlertDialog.Builder
 
     }
 
-    private TextView createTitle(Context context)
-    {
+    private TextView createTitle(Context context) {
         TextView textView = createTextView(context, android.R.style.TextAppearance_DeviceDefault_DialogWindowTitle);
         return textView;
     }
 
-    private LinearLayout createMainLayout(Context context)
-    {
+    private LinearLayout createMainLayout(Context context) {
         LinearLayout linearLayout = new LinearLayout(context);
         linearLayout.setOrientation(LinearLayout.VERTICAL);
         return linearLayout;
     }
 
 
-    private RadioGroup createRadioButtons(Context context, List<NumbersModel> stringList)
-    {
+    private RadioGroup createRadioButtons(Context context, List<NumbersModel> stringList) {
         RadioGroup radioGroup = new RadioGroup(context);
-        for (int i = 0; i < stringList.size(); i++)
-        {
+        for (int i = 0; i < stringList.size(); i++) {
             RadioButton radioButton = new RadioButton(context);
             radioButton.setText(stringList.get(i).getName().replaceAll("_", " "));
             final int finalI = i;
-            radioButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
-            {
+            radioButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
-                public void onCheckedChanged(CompoundButton compoundButton, boolean b)
-                {
+                public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                     mSelect = finalI;
                 }
             });
@@ -86,8 +73,7 @@ public class SelectBaseDialog extends AlertDialog.Builder
         return radioGroup;
     }
 
-    private TextView createTextView(Context context, int style)
-    {
+    private TextView createTextView(Context context, int style) {
         TextView textView = new TextView(context);
         textView.setTextAppearance(context, style);
         textView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
@@ -97,8 +83,7 @@ public class SelectBaseDialog extends AlertDialog.Builder
         return textView;
     }
 
-    public static interface Callback
-    {
+    public static interface Callback {
         void ok(String nameBase);
     }
 }

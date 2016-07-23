@@ -12,44 +12,37 @@ import java.util.List;
 import ru.stefa.tizarhunter.stefasms.R;
 import ru.stefa.tizarhunter.stefasms.misc.BindableAdapter;
 
-public class ArchiveAdapter extends BindableAdapter<ArchiveModel>
-{
+public class ArchiveAdapter extends BindableAdapter<ArchiveModel> {
 
     private List<ArchiveModel> mList;
 
-    public ArchiveAdapter(Context context, List<ArchiveModel> list)
-    {
+    public ArchiveAdapter(Context context, List<ArchiveModel> list) {
         super(context);
         mList = list;
     }
 
     @Override
-    public int getCount()
-    {
+    public int getCount() {
         return mList.size();
     }
 
     @Override
-    public ArchiveModel getItem(int position)
-    {
+    public ArchiveModel getItem(int position) {
         return mList.get(position);
     }
 
     @Override
-    public long getItemId(int position)
-    {
+    public long getItemId(int position) {
         return position;
     }
 
     @Override
-    public View newView(LayoutInflater inflater, int position, ViewGroup container)
-    {
+    public View newView(LayoutInflater inflater, int position, ViewGroup container) {
         return inflater.inflate(R.layout.archive_listview_element, container, false);
     }
 
     @Override
-    public void bindView(ArchiveModel item, int position, View view)
-    {
+    public void bindView(ArchiveModel item, int position, View view) {
         ((TextView) view.findViewById(R.id.archive_listview_element_text)).setText(item.getText());
         ((TextView) view.findViewById(R.id.archive_listview_element_number)).setText("Кол-во сообщений " +
                 item.getNumberSends() + "");

@@ -7,9 +7,9 @@
         android:showAsAction="ifRoom"
         android:title="delete"/>
     <!--<item-->
-        <!--android:id="@+id/cab_share"-->
-        <!--android:icon="@android:drawable/ic_menu_share"-->
-        <!--android:orderInCategory="1"-->
-        <!--android:showAsAction="ifRoom"-->
-        <!--android:title="share"/>-->
+    <!--android:id="@+id/cab_share"-->
+    <!--android:icon="@android:drawable/ic_menu_share"-->
+    <!--android:orderInCategory="1"-->
+    <!--android:showAsAction="ifRoom"-->
+    <!--android:title="share"/>-->
 </menu>

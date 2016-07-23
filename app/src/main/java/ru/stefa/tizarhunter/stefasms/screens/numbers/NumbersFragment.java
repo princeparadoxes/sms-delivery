@@ -1,10 +1,10 @@
 package ru.stefa.tizarhunter.stefasms.screens.numbers;
 
-import android.app.Fragment;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,16 +26,15 @@ import ru.stefa.tizarhunter.stefasms.files.OpenFileDialog;
 import ru.stefa.tizarhunter.stefasms.misc.MultiChoiceImpl;
 
 public class NumbersFragment extends Fragment {
-    private SQLiteDatabase mSQLiteDatabase;
     private static final String ARG_SECTION_NUMBER = "section_number";
+    ListView mListView;
+    private SQLiteDatabase mSQLiteDatabase;
     private
     @NonNull
     HeaderHolder mHeaderHolder;
     private NumbersAdapter mNumbersAdapter;
     private ArrayList<NumbersModel> mAdapterData;
     private DatabaseActions mDatabaseActions;
-    ListView mListView;
-
 
     public static NumbersFragment newInstance(int sectionNumber, Context context) {
         NumbersFragment fragment = new NumbersFragment();

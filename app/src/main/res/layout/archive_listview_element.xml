@@ -5,34 +5,37 @@
     android:layout_height="match_parent"
     android:clickable="false"
     android:focusable="false">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="12dp"
-        android:layout_marginRight="8dp"
-        android:orientation="vertical"
-        android:background="@drawable/archive_listview_element_background"
+        android:layout_marginBottom="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginBottom="8dp">
+        android:layout_marginRight="8dp"
+        android:background="@drawable/archive_listview_element_background"
+        android:orientation="vertical"
+        android:padding="12dp">
 
         <TextView
+            android:id="@+id/archive_listview_element_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="18sp"
-            android:textStyle="bold"
             android:textColor="@android:color/black"
-            android:id="@+id/archive_listview_element_text"/>
+            android:textSize="18sp"
+            android:textStyle="bold"/>
+
         <TextView
+            android:id="@+id/archive_listview_element_number"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="12sp"
             android:textColor="@color/number_listview_element_text"
-            android:id="@+id/archive_listview_element_number"/>
+            android:textSize="12sp"/>
+
         <TextView
+            android:id="@+id/archive_listview_element_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="12sp"
             android:textColor="@color/number_listview_element_text"
-            android:id="@+id/archive_listview_element_date"/>
+            android:textSize="12sp"/>
     </LinearLayout>
 </FrameLayout>

@@ -3,7 +3,7 @@
       tools:context="ru.stefa.tizarhunter.stefasms.MainActivity">
     <item
         android:id="@+id/action_settings"
-        android:showAsAction="always"
         android:icon="@drawable/ic_settings_black_24dp"
+        android:showAsAction="always"
         android:title="@string/action_settings"/>
 </menu>

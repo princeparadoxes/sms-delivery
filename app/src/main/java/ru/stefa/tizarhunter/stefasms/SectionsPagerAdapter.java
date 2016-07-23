@@ -1,9 +1,9 @@
 package ru.stefa.tizarhunter.stefasms;
 
-import android.app.Fragment;
-import android.app.FragmentManager;
 import android.content.Context;
-import android.support.v13.app.FragmentPagerAdapter;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
 
 import java.util.Locale;
 
@@ -11,12 +11,12 @@ import ru.stefa.tizarhunter.stefasms.screens.archive.ArchiveFragment;
 import ru.stefa.tizarhunter.stefasms.screens.numbers.NumbersFragment;
 import ru.stefa.tizarhunter.stefasms.screens.send.SendFragment;
 
-public class SectionsPagerAdapter extends FragmentPagerAdapter
-{
-private Context mContext;
+public class SectionsPagerAdapter extends FragmentPagerAdapter {
+    private Context mContext;
+
     public SectionsPagerAdapter(FragmentManager fm, Context context) {
         super(fm);
-        mContext= context;
+        mContext = context;
     }
 
     @Override
