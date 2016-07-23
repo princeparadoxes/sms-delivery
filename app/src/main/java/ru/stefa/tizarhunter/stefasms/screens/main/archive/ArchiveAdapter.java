@@ -1,4 +1,4 @@
-package ru.stefa.tizarhunter.stefasms.screens.archive;
+package ru.stefa.tizarhunter.stefasms.screens.main.archive;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -44,8 +44,8 @@ public class ArchiveAdapter extends BindableAdapter<ArchiveModel> {
     @Override
     public void bindView(ArchiveModel item, int position, View view) {
         ((TextView) view.findViewById(R.id.archive_listview_element_text)).setText(item.getText());
-        ((TextView) view.findViewById(R.id.archive_listview_element_number)).setText("Кол-во сообщений " +
-                item.getNumberSends() + "");
+        ((TextView) view.findViewById(R.id.archive_listview_element_number)).setText(
+                view.getResources().getString(R.string.archive_count_messages, item.getNumberSends()));
         Date date = new Date(item.getDateTime());
         ((TextView) view.findViewById(R.id.archive_listview_element_date)).setText(date.toString());
     }

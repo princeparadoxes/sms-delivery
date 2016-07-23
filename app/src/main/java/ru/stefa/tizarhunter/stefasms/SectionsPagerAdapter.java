@@ -7,9 +7,9 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 import java.util.Locale;
 
-import ru.stefa.tizarhunter.stefasms.screens.archive.ArchiveFragment;
-import ru.stefa.tizarhunter.stefasms.screens.numbers.NumbersFragment;
-import ru.stefa.tizarhunter.stefasms.screens.send.SendFragment;
+import ru.stefa.tizarhunter.stefasms.screens.main.archive.ArchiveFragment;
+import ru.stefa.tizarhunter.stefasms.screens.main.numbers.NumbersFragment;
+import ru.stefa.tizarhunter.stefasms.screens.main.send.SendFragment;
 
 public class SectionsPagerAdapter extends FragmentPagerAdapter {
     private Context mContext;
@@ -42,11 +42,11 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
         Locale l = Locale.getDefault();
         switch (position) {
             case 0:
-                return mContext.getString(R.string.title_section1).toUpperCase(l);
+                return mContext.getString(R.string.title_send).toUpperCase(l);
             case 1:
-                return mContext.getString(R.string.title_section2).toUpperCase(l);
+                return mContext.getString(R.string.title_number).toUpperCase(l);
             case 2:
-                return mContext.getString(R.string.title_section3).toUpperCase(l);
+                return mContext.getString(R.string.title_archive).toUpperCase(l);
         }
         return null;
     }

@@ -1,4 +1,4 @@
-package ru.stefa.tizarhunter.stefasms.screens.send;
+package ru.stefa.tizarhunter.stefasms.screens.main.numbers;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -6,38 +6,50 @@ import android.content.DialogInterface;
 import android.view.Gravity;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import ru.stefa.tizarhunter.stefasms.data.DatabaseActions;
-import ru.stefa.tizarhunter.stefasms.screens.numbers.NumbersModel;
+import ru.stefa.tizarhunter.stefasms.R;
 
-public class SelectBaseDialog extends AlertDialog.Builder {
-    private int mSelect = -1;
+public class NewBaseDialog extends AlertDialog.Builder {
+    private int mChoise = -1;
     private TextView mTitle;
+    private EditText mEditText;
 
-    public SelectBaseDialog(final Context context, final Callback callback) {
+    public NewBaseDialog(final Context context, final Callback callback) {
         super(context);
         mTitle = createTitle(context);
-        mTitle.setText("Выберите базу номеров");
+        mTitle.setText(R.string.numbers_new_base);
         LinearLayout linearLayout = createMainLayout(context);
-        DatabaseActions databaseActions = new DatabaseActions();
-        databaseActions.connectionDatabase(context);
-        final List<NumbersModel> stringList = databaseActions.listTables();
+        TextView textView = createTextView(context, android.R.style.TextAppearance_DeviceDefault_Small);
+        textView.setText(R.string.numbers_type_base_name);
+        linearLayout.addView(textView);
+        mEditText = new EditText(context);
+        linearLayout.addView(mEditText);
+        List<String> stringList = new ArrayList<String>();
+        stringList.add(context.getString(R.string.numbers_type_type));
+        stringList.add(context.getString(R.string.numbers_type_import));
         linearLayout.addView(createRadioButtons(context, stringList));
         setCustomTitle(mTitle).setView(linearLayout).setPositiveButton(android.R.string.ok, new DialogInterface
                 .OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                if (mSelect != -1) {
-                    callback.ok(stringList.get(mSelect).getName().replaceAll("\\s+", "_"));
+                if (!mEditText.getText().toString().isEmpty()) {
+
+                    if (mChoise == 0) {
+                        callback.ok(mEditText.getText().toString());
+                    } else {
+                        callback.okImport(mEditText.getText().toString());
+                    }
                 } else {
-                    Toast.makeText(context, "Вы не выбрали ни одной базы", Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, R.string.numbers_type_base_name, Toast.LENGTH_LONG).show();
                 }
             }
         }).setNegativeButton(android.R.string.cancel, null);
@@ -45,8 +57,7 @@ public class SelectBaseDialog extends AlertDialog.Builder {
     }
 
     private TextView createTitle(Context context) {
-        TextView textView = createTextView(context, android.R.style.TextAppearance_DeviceDefault_DialogWindowTitle);
-        return textView;
+        return createTextView(context, android.R.style.TextAppearance_DeviceDefault_DialogWindowTitle);
     }
 
     private LinearLayout createMainLayout(Context context) {
@@ -56,16 +67,16 @@ public class SelectBaseDialog extends AlertDialog.Builder {
     }
 
 
-    private RadioGroup createRadioButtons(Context context, List<NumbersModel> stringList) {
+    private RadioGroup createRadioButtons(Context context, List<String> stringList) {
         RadioGroup radioGroup = new RadioGroup(context);
         for (int i = 0; i < stringList.size(); i++) {
             RadioButton radioButton = new RadioButton(context);
-            radioButton.setText(stringList.get(i).getName().replaceAll("_", " "));
+            radioButton.setText(stringList.get(i));
             final int finalI = i;
             radioButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                    mSelect = finalI;
+                    mChoise = finalI;
                 }
             });
             radioGroup.addView(radioButton);
@@ -85,5 +96,7 @@ public class SelectBaseDialog extends AlertDialog.Builder {
 
     public static interface Callback {
         void ok(String nameBase);
+
+        void okImport(String nameBase);
     }
 }

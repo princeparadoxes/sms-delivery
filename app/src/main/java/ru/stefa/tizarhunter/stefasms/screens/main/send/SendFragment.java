@@ -1,4 +1,4 @@
-package ru.stefa.tizarhunter.stefasms.screens.send;
+package ru.stefa.tizarhunter.stefasms.screens.main.send;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -134,8 +134,8 @@ public class SendFragment extends Fragment {
                 public void run() {
                     try {
                         smsManager.sendTextMessage(mNumbers.get(finalI), null, sms, null, null);
-                        Toast.makeText(getActivity(), "Сообщение " + (finalI + 1) + " из " + numbers.size() + " " +
-                                "послано", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), getActivity().getString(R.string
+                                .send_sms_sended, finalI + 1, numbers.size()), Toast.LENGTH_SHORT).show();
                         mProgressBar.setProgress(finalI + 1);
                         if (finalI + 1 == numbers.size()) {
                             runnables.clear();

@@ -11,6 +11,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import ru.stefa.tizarhunter.stefasms.R;
+
 public class FilesActions {
     private Context mContext;
 
@@ -22,7 +24,7 @@ public class FilesActions {
         ArrayList<String> numbers = new ArrayList<String>();
 
         if (!Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
-            Toast.makeText(mContext, "SD-карта не доступна: " + Environment.getExternalStorageState(),
+            Toast.makeText(mContext, mContext.getString(R.string.files_sd_not_access) + Environment.getExternalStorageState(),
                     Toast.LENGTH_LONG).show();
             return numbers;
         }
@@ -36,10 +38,10 @@ public class FilesActions {
             }
 
         } catch (FileNotFoundException e) {
-            Toast.makeText(mContext, "Ошибка. Файл не найден", Toast.LENGTH_LONG).show();
+            Toast.makeText(mContext, R.string.files_file_not_fount, Toast.LENGTH_LONG).show();
             e.printStackTrace();
         } catch (IOException e) {
-            Toast.makeText(mContext, "Ошибка", Toast.LENGTH_LONG).show();
+            Toast.makeText(mContext, R.string.files_error, Toast.LENGTH_LONG).show();
             e.printStackTrace();
         }
         return numbers;

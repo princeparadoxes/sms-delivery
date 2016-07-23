@@ -1,4 +1,4 @@
-package ru.stefa.tizarhunter.stefasms.screens.numbers;
+package ru.stefa.tizarhunter.stefasms.screens.main.numbers;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -43,7 +43,8 @@ public class NumbersAdapter extends BindableAdapter<NumbersModel> {
     public void bindView(NumbersModel item, int position, View view) {
         ((TextView) view.findViewById(R.id.number_listview_element_text)).setText(item.getName().replaceAll("_", " "));
         if (item.getSize() != 0) {
-            ((TextView) view.findViewById(R.id.number_listview_element_size)).setText(item.getSize() + "");
+            ((TextView) view.findViewById(R.id.number_listview_element_size)).setText(String.valueOf(item
+                    .getSize()));
         } else {
             ((TextView) view.findViewById(R.id.number_listview_element_size)).setText("");
         }

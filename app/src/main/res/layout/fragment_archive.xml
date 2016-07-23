@@ -19,6 +19,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="В архиве еще нет ни одного сообщения"
+        android:text="@string/archive_empty"
         android:visibility="gone"/>
 </FrameLayout>

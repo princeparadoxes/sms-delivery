@@ -26,7 +26,7 @@
                 android:layout_height="144dp"
                 android:layout_margin="8dp"
                 android:ems="10"
-                android:hint="Введите сообщение"
+                android:hint="@string/send_message_hint"
                 android:inputType="textMultiLine"
                 android:maxLength="70"
                 android:textSize="20sp"
@@ -51,7 +51,7 @@
                     style="@style/Widget.AppCompat.Button.Borderless.Colored"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:text="Выбрать базу номеров"
+                    android:text="@string/send_select_base"
                     />
 
                 <TextView
@@ -72,12 +72,12 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="2"
-                        android:text="Посылать: "/>
+                        android:text="@string/send_send_from"/>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="С "/>
+                        android:text="@string/send_from"/>
 
                     <com.rengwuxian.materialedittext.MaterialEditText
                         android:id="@+id/send_from"
@@ -95,7 +95,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="По "/>
+                        android:text="@string/send_by"/>
 
                     <com.rengwuxian.materialedittext.MaterialEditText
                         android:id="@+id/send_to"
@@ -129,7 +129,7 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginTop="8dp"
-            android:text="Послать!"
+            android:text="@string/send_send"
             />
     </LinearLayout>
 </ScrollView>

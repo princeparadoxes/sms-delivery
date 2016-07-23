@@ -13,6 +13,5 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/archive_listview_element_background"
-
         android:divider="@drawable/listview_devider"/>
 </LinearLayout>

@@ -1,4 +1,4 @@
-package ru.stefa.tizarhunter.stefasms.screens.numbers;
+package ru.stefa.tizarhunter.stefasms.screens.main.numbers;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -10,6 +10,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import ru.stefa.tizarhunter.stefasms.R;
+
 public class NewNumberDialog extends AlertDialog.Builder {
     private TextView mTitle;
     private EditText mEditText;
@@ -17,10 +19,10 @@ public class NewNumberDialog extends AlertDialog.Builder {
     public NewNumberDialog(final Context context, final Callback callback) {
         super(context);
         mTitle = createTitle(context);
-        mTitle.setText("Новый номер");
+        mTitle.setText(R.string.numbers_new_number);
         LinearLayout linearLayout = createMainLayout(context);
         TextView textView = createTextView(context, android.R.style.TextAppearance_DeviceDefault_Small);
-        textView.setText("Введите новый номер");
+        textView.setText(R.string.numbers_input_new_number);
         linearLayout.addView(textView);
         mEditText = new EditText(context);
         linearLayout.addView(mEditText);
@@ -31,7 +33,7 @@ public class NewNumberDialog extends AlertDialog.Builder {
                 if (!mEditText.getText().toString().isEmpty()) {
                     callback.ok(mEditText.getText().toString());
                 } else {
-                    Toast.makeText(context, "Введите новый номер!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, R.string.numbers_input_new_number, Toast.LENGTH_LONG).show();
                 }
             }
         }).setNegativeButton(android.R.string.cancel, null);
@@ -39,8 +41,7 @@ public class NewNumberDialog extends AlertDialog.Builder {
     }
 
     private TextView createTitle(Context context) {
-        TextView textView = createTextView(context, android.R.style.TextAppearance_DeviceDefault_DialogWindowTitle);
-        return textView;
+        return createTextView(context, android.R.style.TextAppearance_DeviceDefault_DialogWindowTitle);
     }
 
     private LinearLayout createMainLayout(Context context) {

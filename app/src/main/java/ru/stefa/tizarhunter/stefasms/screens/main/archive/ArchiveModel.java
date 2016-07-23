@@ -1,4 +1,4 @@
-package ru.stefa.tizarhunter.stefasms.screens.archive;
+package ru.stefa.tizarhunter.stefasms.screens.main.archive;
 
 public class ArchiveModel {
     private String mText;

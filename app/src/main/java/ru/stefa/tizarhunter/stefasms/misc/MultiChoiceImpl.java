@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ru.stefa.tizarhunter.stefasms.R;
-import ru.stefa.tizarhunter.stefasms.screens.numbers.NumbersModel;
+import ru.stefa.tizarhunter.stefasms.screens.main.numbers.NumbersModel;
 
 public class MultiChoiceImpl implements AbsListView.MultiChoiceModeListener {
     private AbsListView listView;

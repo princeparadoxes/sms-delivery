@@ -155,7 +155,7 @@ public class OpenFileDialog extends AlertDialog.Builder {
         TextView textView = createTextView(context, android.R.style.TextAppearance_DeviceDefault_Small);
         Drawable drawable = getContext().getResources().getDrawable(R.drawable.ic_arrow_back_grey600_24dp);
         drawable.setBounds(0, 0, 60, 60);
-        textView.setText("Назад");
+        textView.setText(R.string.open_file_dialog_back);
         textView.setCompoundDrawables(drawable, null, null, null);
         textView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT));

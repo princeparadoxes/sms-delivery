@@ -8,8 +8,8 @@ import android.database.sqlite.SQLiteDatabase;
 import java.util.ArrayList;
 import java.util.List;
 
-import ru.stefa.tizarhunter.stefasms.screens.archive.ArchiveModel;
-import ru.stefa.tizarhunter.stefasms.screens.numbers.NumbersModel;
+import ru.stefa.tizarhunter.stefasms.screens.main.archive.ArchiveModel;
+import ru.stefa.tizarhunter.stefasms.screens.main.numbers.NumbersModel;
 
 public class DatabaseActions {
     public static final String UID = "_id";

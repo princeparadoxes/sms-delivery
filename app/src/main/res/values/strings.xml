@@ -2,30 +2,58 @@
 <resources>
 
     <!--Tittles-->
+    <string name="app_name">SMS Рассылка</string>
     <string name="tittle_settings">Настройки</string>
-
-    <string name="app_name">СМС Рассылка</string>
-    <string name="title_section1">Новое SMS для рассылки</string>
-    <string name="title_section2">База номеров для рассылки</string>
-    <string name="title_section3">Отправленные ранее SMS</string>
-    <string name="action_settings">Настройки</string>
-    <string name="title_activity_main">MainActivity</string>
-    <string name="section_format">Hello World from section: %1$d</string>
-    <string name="validate_empty_field">Поле должно быть заполнено</string>
+    <string name="title_send">Новое SMS для рассылки</string>
+    <string name="title_number">База номеров для рассылки</string>
+    <string name="title_archive">Отправленные ранее SMS</string>
 
     <!--SEND-->
     <string name="send_selected_base" formatted="false">"Выбрана база: %s"</string>
     <string name="send_numbers_in_base" formatted="false">"Всего номеров в базе: %s"</string>
+    <string name="send_sms_sended" formatted="false">"Сообщение %d из %d послано"</string>
+    <string name="send_stop_send">Остановить отправку</string>
+    <string name="send_send">Послать!</string>
+    <string name="send_messages_not_sended">Сообщения не отправленны</string>
+    <string name="send_message_hint">Введите сообщение</string>
+    <string name="send_select_base">Выбрать базу номеров</string>
+    <string name="send_send_from">Посылать:</string>
+    <string name="send_from">С</string>
+    <string name="send_by">По</string>
 
+    <!--SELECT BASE DIALOG-->
+    <string name="select_base_dialog_select_base">Выберите базу номеров</string>
+    <string name="select_base_dialog_not_choosed">Вы не выбрали ни одной базы</string>
+
+    <!--NUMBERS-->
+    <string name="numbers_new_base">Новая база номеров</string>
+    <string name="numbers_type_base_name">Введите имя базы номеров</string>
+    <string name="numbers_type_type">Ввести номера вручную</string>
+    <string name="numbers_type_import">Импортировать из файла</string>
+    <string name="numbers_new_number">Новый номер</string>
+    <string name="numbers_input_new_number">Введите новый номер</string>
+    <string name="numbers_base_name_incorrect">Неправильное имя базы данных</string>
+    <string name="numbers_add_new_number">Добавить новый номер</string>
+
+    <!--ARCHIVE-->
+    <string name="archive_count_messages" formatted="false">"Кол-во сообщений %d"</string>
+    <string name="archive_empty">В архиве еще нет ни одного сообщения</string>
 
     <!--SETTINGS-->
     <string name="settings_message_delay">Время между сообщениями (мс)</string>
     <string name="settings_window_size">Размер порции (шт)</string>
     <string name="settings_window_delay">Время между порциями (мс)</string>
     <string name="settings_apply">Применить</string>
-    <string name="send_stop_send">Остановить отправку</string>
-    <string name="send_send">Послать!</string>
-    <string name="send_messages_not_sended">Сообщения не отправленны</string>
+
+    <!--FILES-->
+    <string name="files_sd_not_access">"SD-карта не доступна: "</string>
+    <string name="files_file_not_fount">Ошибка. Файл не найден</string>
+    <string name="files_error">Ошибка</string>
+
+    <!--OPEN FILE DIALOG-->
+    <string name="open_file_dialog_back">Назад</string>
+
+    <string name="validate_empty_field">Поле должно быть заполнено</string>
 
 
 </resources>

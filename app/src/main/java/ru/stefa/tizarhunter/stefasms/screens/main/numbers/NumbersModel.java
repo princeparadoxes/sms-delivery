@@ -1,4 +1,4 @@
-package ru.stefa.tizarhunter.stefasms.screens.numbers;
+package ru.stefa.tizarhunter.stefasms.screens.main.numbers;
 
 public class NumbersModel {
     private String mName;

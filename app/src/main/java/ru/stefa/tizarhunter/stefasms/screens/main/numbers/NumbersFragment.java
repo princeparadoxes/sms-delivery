@@ -1,4 +1,4 @@
-package ru.stefa.tizarhunter.stefasms.screens.numbers;
+package ru.stefa.tizarhunter.stefasms.screens.main.numbers;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
@@ -84,7 +84,7 @@ public class NumbersFragment extends Fragment {
                             changeHeaderToNumbers(numbersModel);
                             updateListView(stringsToNumberModel(numbers));
                         } else {
-                            Toast.makeText(getActivity(), "Неправильное имя базы данных", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getActivity(), R.string.numbers_base_name_incorrect, Toast.LENGTH_LONG).show();
                         }
                     }
 
@@ -111,7 +111,7 @@ public class NumbersFragment extends Fragment {
                             });
                             fileDialog.show();
                         } else {
-                            Toast.makeText(getActivity(), "Неправильное имя базы данных", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getActivity(), R.string.numbers_base_name_incorrect, Toast.LENGTH_LONG).show();
                         }
                     }
                 });
@@ -151,7 +151,7 @@ public class NumbersFragment extends Fragment {
     }
 
     private void changeHeaderToNumbers(final NumbersModel numbersModel) {
-        mHeaderHolder.mAddTextView.setText("Добавить новый номер");
+        mHeaderHolder.mAddTextView.setText(R.string.numbers_add_new_number);
         mHeaderHolder.mAddContainer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
