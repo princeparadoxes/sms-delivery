@@ -159,7 +159,7 @@ public class SendFragment extends Fragment {
                 offset += Storage.mMessagePortionDelay.get();
             }
         }
-        mDatabaseActions.addToArchive(mMessageEditText.getText().toString(), mNumbers.size(),
+        mDatabaseActions.addToArchive(mMessageEditText.getText().toString(), numbers.size(),
                 System.currentTimeMillis());
     }
 
