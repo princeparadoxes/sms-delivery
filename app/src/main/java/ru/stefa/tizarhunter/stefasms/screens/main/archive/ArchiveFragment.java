@@ -12,7 +12,7 @@ import java.util.Collections;
 import java.util.List;
 
 import ru.stefa.tizarhunter.stefasms.R;
-import ru.stefa.tizarhunter.stefasms.data.DatabaseActions;
+import ru.stefa.tizarhunter.stefasms.data.database.DatabaseService;
 
 /**
  * Created by tizarhunter on 17.08.14.
@@ -20,7 +20,7 @@ import ru.stefa.tizarhunter.stefasms.data.DatabaseActions;
 public class ArchiveFragment extends Fragment {
     private static final String ARG_SECTION_NUMBER = "section_archive";
     private List<ArchiveModel> mArchiveModelList;
-    private DatabaseActions mDatabaseActions;
+    private DatabaseService mDatabaseService;
 
     public static ArchiveFragment newInstance(int sectionNumber, Context context) {
         ArchiveFragment fragment = new ArchiveFragment();
@@ -34,10 +34,10 @@ public class ArchiveFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_archive, container, false);
-        mDatabaseActions = new DatabaseActions();
-        mDatabaseActions.connectionDatabase(getActivity());
+        mDatabaseService = new DatabaseService();
+        mDatabaseService.connectionDatabase(getActivity());
         ListView listView = (ListView) rootView.findViewById(R.id.archive_listView);
-        mArchiveModelList = mDatabaseActions.getAllArchive();
+        mArchiveModelList = mDatabaseService.getAllArchive();
         Collections.reverse(mArchiveModelList);
         ArchiveAdapter archiveAdapter = new ArchiveAdapter(getActivity(), mArchiveModelList);
         listView.setAdapter(archiveAdapter);

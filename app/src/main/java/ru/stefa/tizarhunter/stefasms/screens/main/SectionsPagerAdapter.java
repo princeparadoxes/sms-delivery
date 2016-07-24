@@ -1,4 +1,4 @@
-package ru.stefa.tizarhunter.stefasms;
+package ru.stefa.tizarhunter.stefasms.screens.main;
 
 import android.content.Context;
 import android.support.v4.app.Fragment;
@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 import java.util.Locale;
 
+import ru.stefa.tizarhunter.stefasms.R;
 import ru.stefa.tizarhunter.stefasms.screens.main.archive.ArchiveFragment;
 import ru.stefa.tizarhunter.stefasms.screens.main.numbers.NumbersFragment;
 import ru.stefa.tizarhunter.stefasms.screens.main.send.SendFragment;

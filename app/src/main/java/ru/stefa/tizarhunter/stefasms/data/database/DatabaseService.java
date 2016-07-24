@@ -1,4 +1,4 @@
-package ru.stefa.tizarhunter.stefasms.data;
+package ru.stefa.tizarhunter.stefasms.data.database;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -8,10 +8,11 @@ import android.database.sqlite.SQLiteDatabase;
 import java.util.ArrayList;
 import java.util.List;
 
+import ru.stefa.tizarhunter.stefasms.data.models.NumberBaseModel;
 import ru.stefa.tizarhunter.stefasms.screens.main.archive.ArchiveModel;
 import ru.stefa.tizarhunter.stefasms.screens.main.numbers.NumbersModel;
 
-public class DatabaseActions {
+public class DatabaseService {
     public static final String UID = "_id";
     public static final String NUMBER = "number";
     private Database mDatabase;
@@ -59,13 +60,26 @@ public class DatabaseActions {
         db.execSQL(SQL_DELETE_ENTRIES);
     }
 
-    public ArrayList<NumbersModel> listTables() {
+    @Deprecated
+    public ArrayList<NumbersModel> listTablesOld() {
         ArrayList<String> tableNames = readTableColumn(Database.NUMBERS_TABLE, Database.NAME_COLUMN);
         ArrayList<NumbersModel> numbersModels = new ArrayList<NumbersModel>();
         for (int i = 0; i < tableNames.size(); i++) {
             NumbersModel numbersModel = new NumbersModel();
             numbersModel.setName(tableNames.get(i));
             numbersModel.setSize(getCountTableRow(tableNames.get(i)));
+            numbersModels.add(numbersModel);
+        }
+        return numbersModels;
+    }
+
+    public List<NumberBaseModel> getNumberBaseList() {
+        ArrayList<String> basesNames = readTableColumn(Database.NUMBERS_TABLE, Database.NAME_COLUMN);
+        ArrayList<NumberBaseModel> numbersModels = new ArrayList<>();
+        for (String baseName : basesNames) {
+            NumberBaseModel numbersModel = new NumberBaseModel()
+                    .setName(baseName)
+                    .setCountNumbers(getCountTableRow(baseName));
             numbersModels.add(numbersModel);
         }
         return numbersModels;

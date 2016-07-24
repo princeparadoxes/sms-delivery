@@ -8,7 +8,7 @@ import android.widget.Button;
 import com.rengwuxian.materialedittext.MaterialEditText;
 
 import ru.stefa.tizarhunter.stefasms.R;
-import ru.stefa.tizarhunter.stefasms.data.Storage;
+import ru.stefa.tizarhunter.stefasms.data.preferences.Storage;
 
 public class SettingsActivity extends AppCompatActivity {
 

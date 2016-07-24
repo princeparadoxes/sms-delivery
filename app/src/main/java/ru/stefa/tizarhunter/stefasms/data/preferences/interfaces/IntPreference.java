@@ -1,4 +1,4 @@
-package ru.stefa.tizarhunter.stefasms.data;
+package ru.stefa.tizarhunter.stefasms.data.preferences.interfaces;
 
 import android.content.SharedPreferences;
 

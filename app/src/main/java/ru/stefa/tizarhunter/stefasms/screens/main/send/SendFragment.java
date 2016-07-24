@@ -17,13 +17,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ru.stefa.tizarhunter.stefasms.R;
-import ru.stefa.tizarhunter.stefasms.data.DatabaseActions;
-import ru.stefa.tizarhunter.stefasms.data.Storage;
+import ru.stefa.tizarhunter.stefasms.SmsApplication;
+import ru.stefa.tizarhunter.stefasms.data.DataService;
+import ru.stefa.tizarhunter.stefasms.data.database.DatabaseService;
+import ru.stefa.tizarhunter.stefasms.data.models.NumberBaseModel;
+import ru.stefa.tizarhunter.stefasms.data.preferences.Storage;
+import ru.stefa.tizarhunter.stefasms.screens.main.send.select.base.dialog.SelectBaseDialog;
 
 /**
  * Created by tizarhunter on 17.08.14.
  */
-public class SendFragment extends Fragment {
+public class SendFragment extends Fragment implements SelectBaseDialog.SelectBaseDialogListener{
     private static final String KEY_DB_MANE = "key.db.name";
 
     private Button mSendButton;
@@ -37,7 +41,8 @@ public class SendFragment extends Fragment {
     private SelectBaseDialog selectBaseDialog;
 
     private ArrayList<String> mNumbers;
-    private DatabaseActions mDatabaseActions;
+    private DatabaseService mDatabaseService;
+    private DataService dataService;
     private ArrayList<Runnable> runnables = new ArrayList<>();
     View.OnClickListener mStopClickListener = new View.OnClickListener() {
         @Override
@@ -58,7 +63,7 @@ public class SendFragment extends Fragment {
             mSendButton.setText(R.string.send_stop_send);
         }
     };
-    private String mDBName;
+    private String selectedBaseName;
 
     public SendFragment() {
     }
@@ -66,19 +71,9 @@ public class SendFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View rootView = inflater.inflate(R.layout.fragment_send, container, false);
-        mDatabaseActions = new DatabaseActions();
-        mDatabaseActions.connectionDatabase(getActivity());
-        selectBaseDialog = new SelectBaseDialog(getActivity(), new SelectBaseDialog.Callback() {
-            @Override
-            public void ok(String nameBase) {
-                if (nameBase != null) {
-                    mDBName = nameBase;
-                    chooseDB();
-                } else {
-                    mSendButton.setOnClickListener(null);
-                }
-            }
-        });
+        mDatabaseService = new DatabaseService();
+        mDatabaseService.connectionDatabase(getActivity());
+        dataService = ((SmsApplication) getActivity().getApplication()).getDataService();
         findViews(rootView);
         initViews();
         return rootView;
@@ -95,20 +90,20 @@ public class SendFragment extends Fragment {
     }
 
     private void initViews() {
-        if (mDBName != null) {
+        if (selectedBaseName != null) {
             chooseDB();
         }
-        mChooseBaseButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                selectBaseDialog.show();
-            }
-        });
+        mChooseBaseButton.setOnClickListener(view -> selectBaseDialog.show());
+        selectBaseDialog = new SelectBaseDialog(getContext());
+        selectBaseDialog.setListener(this);
+        dataService.getNumberBaseList()
+                .compose(DataService.applySchedulers())
+                .subscribe(selectBaseDialog::bindData, throwable -> {});
     }
 
     private void chooseDB() {
-        mChooseBaseButton.setText(getString(R.string.send_selected_base, mDBName));
-        mNumbers = mDatabaseActions.readTableColumn(mDBName, DatabaseActions.NUMBER);
+        mChooseBaseButton.setText(getString(R.string.send_selected_base, selectedBaseName));
+        mNumbers = mDatabaseService.readTableColumn(selectedBaseName, DatabaseService.NUMBER);
         mSendButton.setOnClickListener(mSendClickListener);
         mCountNumbersInBase.setVisibility(View.VISIBLE);
         mCountNumbersInBase.setText(getString(R.string.send_numbers_in_base, mNumbers.size()));
@@ -159,13 +154,13 @@ public class SendFragment extends Fragment {
                 offset += Storage.mMessagePortionDelay.get();
             }
         }
-        mDatabaseActions.addToArchive(mMessageEditText.getText().toString(), numbers.size(),
+        mDatabaseService.addToArchive(mMessageEditText.getText().toString(), numbers.size(),
                 System.currentTimeMillis());
     }
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
-        outState.putString(KEY_DB_MANE, mDBName);
+        outState.putString(KEY_DB_MANE, selectedBaseName);
         super.onSaveInstanceState(outState);
     }
 
@@ -173,10 +168,16 @@ public class SendFragment extends Fragment {
     public void onViewStateRestored(Bundle savedInstanceState) {
         super.onViewStateRestored(savedInstanceState);
         if (savedInstanceState == null) return;
-        mDBName = savedInstanceState.getString(KEY_DB_MANE);
-        if (mDBName != null) {
+        selectedBaseName = savedInstanceState.getString(KEY_DB_MANE);
+        if (selectedBaseName != null) {
             chooseDB();
         }
+    }
+
+    @Override
+    public void onSelectBaseDialogItemClick(NumberBaseModel numberBaseModel) {
+        selectedBaseName = numberBaseModel.getName();
+        chooseDB();
     }
 }
 

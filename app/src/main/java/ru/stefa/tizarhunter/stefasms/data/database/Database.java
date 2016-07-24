@@ -1,4 +1,4 @@
-package ru.stefa.tizarhunter.stefasms.data;
+package ru.stefa.tizarhunter.stefasms.data.database;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;

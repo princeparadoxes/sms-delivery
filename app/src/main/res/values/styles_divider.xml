@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="HorizontalDivider">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/divider_size</item>
+    </style>
+
+    <style name="VerticalDivider">
+        <item name="android:layout_width">@dimen/divider_size</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+
+    <style name="HorizontalDivider.Accent">
+        <item name="android:background">@color/accent</item>
+    </style>
+
+    <style name="VerticalDivider.Accent">
+        <item name="android:background">@color/accent</item>
+    </style>
+
+    <style name="HorizontalDivider.Primary">
+        <item name="android:background">@color/primary</item>
+    </style>
+
+    <style name="VerticalDivider.Primary">
+        <item name="android:background">@color/primary</item>
+    </style>
+
+    <style name="HorizontalDivider.Accent.LeftPadding">
+        <item name="android:layout_marginLeft">@dimen/activity_horizontal_margin</item>
+    </style>
+
+    <style name="HorizontalDivider.Primary.LeftPadding">
+        <item name="android:layout_marginLeft">@dimen/activity_horizontal_margin</item>
+    </style>
+
+</resources>

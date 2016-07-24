@@ -20,9 +20,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ru.stefa.tizarhunter.stefasms.R;
-import ru.stefa.tizarhunter.stefasms.data.DatabaseActions;
-import ru.stefa.tizarhunter.stefasms.files.FilesActions;
-import ru.stefa.tizarhunter.stefasms.files.OpenFileDialog;
+import ru.stefa.tizarhunter.stefasms.data.database.DatabaseService;
+import ru.stefa.tizarhunter.stefasms.data.files.FilesActions;
+import ru.stefa.tizarhunter.stefasms.data.files.OpenFileDialog;
 import ru.stefa.tizarhunter.stefasms.misc.MultiChoiceImpl;
 
 public class NumbersFragment extends Fragment {
@@ -34,7 +34,7 @@ public class NumbersFragment extends Fragment {
     HeaderHolder mHeaderHolder;
     private NumbersAdapter mNumbersAdapter;
     private ArrayList<NumbersModel> mAdapterData;
-    private DatabaseActions mDatabaseActions;
+    private DatabaseService mDatabaseService;
 
     public static NumbersFragment newInstance(int sectionNumber, Context context) {
         NumbersFragment fragment = new NumbersFragment();
@@ -48,9 +48,9 @@ public class NumbersFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_number, container, false);
 
-        mDatabaseActions = new DatabaseActions();
-        mDatabaseActions.connectionDatabase(getActivity());
-        mAdapterData = mDatabaseActions.listTables();
+        mDatabaseService = new DatabaseService();
+        mDatabaseService.connectionDatabase(getActivity());
+        mAdapterData = mDatabaseService.listTablesOld();
         mNumbersAdapter = new NumbersAdapter(getActivity(), mAdapterData);
         mListView = (ListView) rootView.findViewById(R.id.number_listView);
         LinearLayout linearLayout = new LinearLayout(getActivity());
@@ -75,9 +75,9 @@ public class NumbersFragment extends Fragment {
                     @Override
                     public void ok(final String nameBase) {
                         if (dataBaseNameValidation(nameBase) != null) {
-                            mDatabaseActions.createTableNumbers(dataBaseNameValidation(nameBase));
-                            ArrayList<String> numbers = mDatabaseActions.readTableColumn(dataBaseNameValidation
-                                    (nameBase), DatabaseActions.NUMBER);
+                            mDatabaseService.createTableNumbers(dataBaseNameValidation(nameBase));
+                            ArrayList<String> numbers = mDatabaseService.readTableColumn(dataBaseNameValidation
+                                    (nameBase), DatabaseService.NUMBER);
                             NumbersModel numbersModel = new NumbersModel();
                             numbersModel.setName(nameBase);
                             numbersModel.setSize(numbers.size());
@@ -91,16 +91,16 @@ public class NumbersFragment extends Fragment {
                     @Override
                     public void okImport(final String nameBase) {
                         if (dataBaseNameValidation(nameBase) != null) {
-                            mDatabaseActions.createTableNumbers(dataBaseNameValidation(nameBase));
+                            mDatabaseService.createTableNumbers(dataBaseNameValidation(nameBase));
                             OpenFileDialog fileDialog = new OpenFileDialog(getActivity()).setOpenDialogListener(new OpenFileDialog.OpenDialogListener() {
                                 @Override
                                 public void OnSelectedFile(String fileName) {
                                     FilesActions filesActions = new FilesActions(getActivity());
                                     ArrayList<String> numbersFromFile = filesActions.readFileSD(fileName);
-                                    mDatabaseActions.insertNumbersInTable(dataBaseNameValidation(nameBase),
+                                    mDatabaseService.insertNumbersInTable(dataBaseNameValidation(nameBase),
                                             numbersFromFile);
-                                    ArrayList<String> strings = mDatabaseActions.readTableColumn(dataBaseNameValidation
-                                            (nameBase), DatabaseActions.NUMBER);
+                                    ArrayList<String> strings = mDatabaseService.readTableColumn(dataBaseNameValidation
+                                            (nameBase), DatabaseService.NUMBER);
                                     NumbersModel numbersModel = new NumbersModel();
                                     numbersModel.setName(nameBase);
                                     numbersModel.setSize(strings.size());
@@ -123,8 +123,8 @@ public class NumbersFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 changeHeaderToNumbers(mAdapterData.get((int) id));
-                ArrayList<String> strings = mDatabaseActions.readTableColumn(mAdapterData.get((int) id).getName(),
-                        DatabaseActions.NUMBER);
+                ArrayList<String> strings = mDatabaseService.readTableColumn(mAdapterData.get((int) id).getName(),
+                        DatabaseService.NUMBER);
                 updateListView(stringsToNumberModel(strings));
             }
         });
@@ -132,9 +132,9 @@ public class NumbersFragment extends Fragment {
             @Override
             public void OnDeleteClick(List<String> selectedElements) {
                 for (int i = 0; i < selectedElements.size(); i++) {
-                    mDatabaseActions.dropTable(selectedElements.get(i));
+                    mDatabaseService.dropTable(selectedElements.get(i));
                 }
-                updateListView(mDatabaseActions.listTables());
+                updateListView(mDatabaseService.listTablesOld());
             }
         }));
     }
@@ -160,9 +160,9 @@ public class NumbersFragment extends Fragment {
                     public void ok(String newNumber) {
                         ArrayList<String> number = new ArrayList<String>();
                         number.add(newNumber);
-                        mDatabaseActions.insertNumbersInTable(numbersModel.getName(), number);
-                        ArrayList<String> strings = mDatabaseActions.readTableColumn(numbersModel.getName(),
-                                DatabaseActions.NUMBER);
+                        mDatabaseService.insertNumbersInTable(numbersModel.getName(), number);
+                        ArrayList<String> strings = mDatabaseService.readTableColumn(numbersModel.getName(),
+                                DatabaseService.NUMBER);
                         updateListView(stringsToNumberModel(strings));
                     }
                 });
@@ -176,7 +176,7 @@ public class NumbersFragment extends Fragment {
         mHeaderHolder.mBackImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                updateListView(mDatabaseActions.listTables());
+                updateListView(mDatabaseService.listTablesOld());
                 changeHeaderToTables();
             }
         });
@@ -184,9 +184,9 @@ public class NumbersFragment extends Fragment {
         mListView.setMultiChoiceModeListener(new MultiChoiceImpl(mListView, new MultiChoiceImpl.OnClickMenuListener() {
             @Override
             public void OnDeleteClick(List<String> selectedElements) {
-                mDatabaseActions.deleteNumbersFromTable(numbersModel.getName(), (ArrayList<String>) selectedElements);
-                ArrayList<String> strings = mDatabaseActions.readTableColumn(numbersModel.getName(),
-                        DatabaseActions.NUMBER);
+                mDatabaseService.deleteNumbersFromTable(numbersModel.getName(), (ArrayList<String>) selectedElements);
+                ArrayList<String> strings = mDatabaseService.readTableColumn(numbersModel.getName(),
+                        DatabaseService.NUMBER);
                 updateListView(stringsToNumberModel(strings));
             }
         }));

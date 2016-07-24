@@ -1,4 +1,4 @@
-package ru.stefa.tizarhunter.stefasms.files;
+package ru.stefa.tizarhunter.stefasms.data.files;
 
 import android.app.AlertDialog;
 import android.content.Context;

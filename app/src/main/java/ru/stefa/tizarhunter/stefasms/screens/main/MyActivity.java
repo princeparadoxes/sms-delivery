@@ -1,4 +1,4 @@
-package ru.stefa.tizarhunter.stefasms;
+package ru.stefa.tizarhunter.stefasms.screens.main;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +9,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import ru.stefa.tizarhunter.stefasms.R;
 import ru.stefa.tizarhunter.stefasms.screens.settings.SettingsActivity;
 
 

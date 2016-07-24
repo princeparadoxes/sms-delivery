@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.AppCompatTextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/default_item_height"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:text="@string/select_base_dialog_select_base"
+        android:textColor="@color/accent"
+        android:textSize="@dimen/text_size_x_big"/>
+
+    <View style="@style/HorizontalDivider.Primary.LeftPadding"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/select_base_dialog_recycler"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+</LinearLayout>

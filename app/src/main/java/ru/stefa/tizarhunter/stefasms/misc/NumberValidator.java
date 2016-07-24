@@ -1,4 +1,4 @@
-package ru.stefa.tizarhunter.stefasms;
+package ru.stefa.tizarhunter.stefasms.misc;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
