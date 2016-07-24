@@ -133,7 +133,7 @@ public class SendFragment extends Fragment {
                 @Override
                 public void run() {
                     try {
-                        smsManager.sendTextMessage(mNumbers.get(finalI), null, sms, null, null);
+                        smsManager.sendTextMessage(numbers.get(finalI), null, sms, null, null);
                         Toast.makeText(getActivity(), getActivity().getString(R.string
                                 .send_sms_sended, finalI + 1, numbers.size()), Toast.LENGTH_SHORT).show();
                         mProgressBar.setProgress(finalI + 1);
