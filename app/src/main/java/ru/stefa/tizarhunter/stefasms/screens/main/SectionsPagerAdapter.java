@@ -9,15 +9,15 @@ import java.util.Locale;
 
 import ru.stefa.tizarhunter.stefasms.R;
 import ru.stefa.tizarhunter.stefasms.screens.main.archive.ArchiveFragment;
-import ru.stefa.tizarhunter.stefasms.screens.main.numbers.NumbersFragment;
+import ru.stefa.tizarhunter.stefasms.screens.main.numbers.NumberBaseListFragment;
 import ru.stefa.tizarhunter.stefasms.screens.main.send.SendFragment;
 
 public class SectionsPagerAdapter extends FragmentPagerAdapter {
-    private Context mContext;
+    private Context context;
 
     public SectionsPagerAdapter(FragmentManager fm, Context context) {
         super(fm);
-        mContext = context;
+        this.context = context;
     }
 
     @Override
@@ -26,9 +26,9 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
             case 0:
                 return new SendFragment();
             case 1:
-                return NumbersFragment.newInstance(position + 1, mContext);
+                return new NumberBaseListFragment();
             case 2:
-                return ArchiveFragment.newInstance(position + 1, mContext);
+                return ArchiveFragment.newInstance(position + 1, context);
         }
         return null;
     }
@@ -43,11 +43,11 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
         Locale l = Locale.getDefault();
         switch (position) {
             case 0:
-                return mContext.getString(R.string.title_send).toUpperCase(l);
+                return context.getString(R.string.title_send).toUpperCase(l);
             case 1:
-                return mContext.getString(R.string.title_number).toUpperCase(l);
+                return context.getString(R.string.title_number).toUpperCase(l);
             case 2:
-                return mContext.getString(R.string.title_archive).toUpperCase(l);
+                return context.getString(R.string.title_archive).toUpperCase(l);
         }
         return null;
     }
