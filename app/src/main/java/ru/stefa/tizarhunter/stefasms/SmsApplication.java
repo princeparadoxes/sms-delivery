@@ -3,6 +3,7 @@ package ru.stefa.tizarhunter.stefasms;
 import android.app.Application;
 
 import ru.stefa.tizarhunter.stefasms.data.DataService;
+import ru.stefa.tizarhunter.stefasms.data.models.Font;
 import ru.stefa.tizarhunter.stefasms.data.preferences.Storage;
 
 /**
@@ -17,6 +18,7 @@ public class SmsApplication extends Application {
         super.onCreate();
         new Storage(getSharedPreferences(Storage.KEY_SHARED_PREFERENCES, MODE_PRIVATE));
         dataService = new DataService(this);
+        Font.registerFonts(this);
     }
 
     public DataService getDataService() {

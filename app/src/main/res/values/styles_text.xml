@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--see this document https://material.google.com/style/typography.html#-->
+    <!--STRINGS-->
+    <!--___FONTS___-->
+    <!--______NAMES______-->
+    <string name="roboto_regular_name">robotoRegular</string>
+    <string name="roboto_medium_name">robotoMedium</string>
+    <string name="roboto_light_name">robotoLight</string>
+    <!--______PATHS______-->
+    <string name="roboto_regular_path">fonts/Roboto-Regular.ttf</string>
+    <string name="roboto_medium_path">fonts/Roboto-Medium.ttf</string>
+    <string name="roboto_light_path">fonts/Roboto-Light.ttf</string>
+
+    <!--SIZES-->
+    <dimen name="text_size_small">12sp</dimen>
+    <dimen name="text_size_normal">14sp</dimen>
+    <dimen name="text_size_big">16sp</dimen>
+    <dimen name="text_size_x_big">20sp</dimen>
+    <dimen name="text_size_xx_big">24sp</dimen>
+
+    <!--STYLES-->
+    <!--___TYPEFACES___-->
+    <style name="RobotoRegular">
+        <item name="customTypeface">@string/roboto_regular_name</item>
+    </style>
+
+    <style name="RobotoMedium">
+        <item name="customTypeface">@string/roboto_medium_name</item>
+    </style>
+
+    <style name="RobotoLight">
+        <item name="customTypeface">@string/roboto_light_name</item>
+    </style>
+    <!--___SIZES__-->
+    <!--______SMALL______-->
+    <style name="RobotoRegular.Small">
+        <item name="android:textSize">@dimen/text_size_small</item>
+    </style>
+    <!--______NORMAL______-->
+    <style name="RobotoRegular.Normal">
+        <item name="android:textSize">@dimen/text_size_normal</item>
+    </style>
+
+    <style name="RobotoMedium.Normal">
+        <item name="android:textSize">@dimen/text_size_normal</item>
+    </style>
+    <!--______BIG______-->
+    <style name="RobotoRegular.Big">
+        <item name="android:textSize">@dimen/text_size_big</item>
+    </style>
+    <!--______X_BIG______-->
+    <style name="RobotoMedium.XBig">
+        <item name="android:textSize">@dimen/text_size_x_big</item>
+    </style>
+    <!--______XX_BIG______-->
+    <style name="RobotoRegular.XXBig">
+        <item name="android:textSize">@dimen/text_size_xx_big</item>
+    </style>
+    <!--___ALL_CAPS___-->
+    <style name="RobotoMedium.Normal.AllCaps">
+        <item name="android:textAllCaps">true</item>
+    </style>
+</resources>

@@ -6,20 +6,20 @@
     android:orientation="vertical">
 
     <android.support.v7.widget.AppCompatTextView
+        style="@style/RobotoMedium.Normal"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/default_item_height"
+        android:layout_height="@dimen/single_line_item_height"
         android:gravity="center_vertical"
+        android:textColor="@color/primary"
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
-        android:text="@string/select_base_dialog_select_base"
-        android:textColor="@color/accent"
-        android:textSize="@dimen/text_size_x_big"/>
-
-    <View style="@style/HorizontalDivider.Primary.LeftPadding"/>
+        android:text="@string/select_base_dialog_select_base"/>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/select_base_dialog_recycler"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:paddingTop="@dimen/activity_vertical_x_small_margin"
+        android:paddingBottom="@dimen/activity_vertical_x_small_margin"/>
 
 </LinearLayout>

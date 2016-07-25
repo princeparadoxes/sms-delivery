@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <!--Tittles-->
     <string name="app_name">SMS Рассылка</string>
     <string name="tittle_settings">Настройки</string>
@@ -23,7 +22,8 @@
 
     <!--SELECT BASE DIALOG-->
     <string name="select_base_dialog_select_base">Выберите базу номеров</string>
-    <string name="select_base_dialog_not_choosed">Вы не выбрали ни одной базы</string>
+    <string name="select_base_dialog_count_numbers" formatted="false">Количество номеров в
+        базе: %d</string>
 
     <!--NUMBERS-->
     <string name="numbers_new_base">Новая база номеров</string>

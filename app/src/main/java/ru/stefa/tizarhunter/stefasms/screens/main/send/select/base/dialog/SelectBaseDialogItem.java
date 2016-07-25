@@ -30,7 +30,8 @@ public class SelectBaseDialogItem extends BindableViewHolder<NumberBaseModel,
     public void bindView(int position, NumberBaseModel item, SelectBaseDialogItemListener actionListener) {
         super.bindView(position, item, actionListener);
         name.setText(item.getName());
-        count.setText(String.valueOf(item.getCountNumbers()));
+        count.setText(itemView.getResources().getString(
+                R.string.select_base_dialog_count_numbers, item.getCountNumbers()));
     }
 
     interface SelectBaseDialogItemListener extends BindableViewHolder
