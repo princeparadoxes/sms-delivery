@@ -124,24 +124,21 @@ public class SendFragment extends Fragment implements SelectBaseDialog.SelectBas
         mProgressBar.setMax(numbers.size());
         for (int i = 0; i < numbers.size(); i++) {
             final int finalI = i;
-            Runnable runnable = new Runnable() {
-                @Override
-                public void run() {
-                    try {
-                        smsManager.sendTextMessage(numbers.get(finalI), null, sms, null, null);
-                        Toast.makeText(getActivity(), getActivity().getString(R.string
-                                .send_sms_sended, finalI + 1, numbers.size()), Toast.LENGTH_SHORT).show();
-                        mProgressBar.setProgress(finalI + 1);
-                        if (finalI + 1 == numbers.size()) {
-                            runnables.clear();
-                            mSendButton.setOnClickListener(mSendClickListener);
-                            mSendButton.setText(R.string.send_send);
-                            mProgressBar.setVisibility(View.GONE);
-                        }
-                    } catch (Exception e) {
-                        Toast.makeText(getActivity(), R.string.send_messages_not_sended, Toast.LENGTH_SHORT).show();
-                        e.printStackTrace();
+            Runnable runnable = () -> {
+                try {
+                    smsManager.sendTextMessage(numbers.get(finalI), null, sms, null, null);
+                    Toast.makeText(getActivity(), getActivity().getString(R.string
+                            .send_sms_sended, finalI + 1, numbers.size()), Toast.LENGTH_SHORT).show();
+                    mProgressBar.setProgress(finalI + 1);
+                    if (finalI + 1 == numbers.size()) {
+                        runnables.clear();
+                        mSendButton.setOnClickListener(mSendClickListener);
+                        mSendButton.setText(R.string.send_send);
+                        mProgressBar.setVisibility(View.GONE);
                     }
+                } catch (Exception e) {
+                    Toast.makeText(getActivity(), R.string.send_messages_not_sended, Toast.LENGTH_SHORT).show();
+                    e.printStackTrace();
                 }
             };
             runnables.add(runnable);
