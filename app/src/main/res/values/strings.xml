@@ -59,7 +59,9 @@
     <!--OPEN FILE DIALOG-->
     <string name="open_file_dialog_back">Назад</string>
 
+    <!--VALIDATORS-->
     <string name="validate_empty_field">Поле должно быть заполнено</string>
+    <string name="validate_number_base_exist">Такое имя базы уже существует</string>
 
 
 </resources>

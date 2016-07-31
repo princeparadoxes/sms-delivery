@@ -6,12 +6,12 @@ import android.widget.TextView;
 import com.danil.recyclerbindableadapter.library.view.BindableViewHolder;
 
 import ru.stefa.tizarhunter.stefasms.R;
-import ru.stefa.tizarhunter.stefasms.data.models.NumberBaseModel;
+import ru.stefa.tizarhunter.stefasms.data.models.NumbersBaseModel;
 
 /**
  * Created by Danil on 25.07.2016.
  */
-public class NumberBaseListItem extends BindableViewHolder<NumberBaseModel,
+public class NumberBaseListItem extends BindableViewHolder<NumbersBaseModel,
         NumberBaseListItem.NumberBaseListItemListener> {
     private TextView name;
     private TextView count;
@@ -27,7 +27,7 @@ public class NumberBaseListItem extends BindableViewHolder<NumberBaseModel,
     }
 
     @Override
-    public void bindView(int position, NumberBaseModel item, NumberBaseListItemListener actionListener) {
+    public void bindView(int position, NumbersBaseModel item, NumberBaseListItemListener actionListener) {
         super.bindView(position, item, actionListener);
         name.setText(item.getName());
         count.setText(itemView.getResources().getString(
@@ -35,6 +35,6 @@ public class NumberBaseListItem extends BindableViewHolder<NumberBaseModel,
     }
 
     interface NumberBaseListItemListener extends BindableViewHolder
-            .ActionListener<NumberBaseModel> {
+            .ActionListener<NumbersBaseModel> {
     }
 }

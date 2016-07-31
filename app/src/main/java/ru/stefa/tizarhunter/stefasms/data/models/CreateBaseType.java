@@ -24,4 +24,13 @@ public enum CreateBaseType {
     public int getName() {
         return name;
     }
+
+    public static CreateBaseType getTypeForId(int id) {
+        for (CreateBaseType createBaseType : values()) {
+            if (createBaseType.getId() == id) {
+                return createBaseType;
+            }
+        }
+        return IMPORT_FROM_FILE;
+    }
 }

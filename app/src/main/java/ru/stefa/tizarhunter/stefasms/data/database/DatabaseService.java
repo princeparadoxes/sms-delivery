@@ -8,7 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import java.util.ArrayList;
 import java.util.List;
 
-import ru.stefa.tizarhunter.stefasms.data.models.NumberBaseModel;
+import ru.stefa.tizarhunter.stefasms.data.models.NumbersBaseModel;
 import ru.stefa.tizarhunter.stefasms.screens.main.archive.ArchiveModel;
 import ru.stefa.tizarhunter.stefasms.screens.main.numbers.NumbersModel;
 
@@ -23,22 +23,30 @@ public class DatabaseService {
         db = mDatabase.getWritableDatabase();
     }
 
-    public void createTableNumbers(String tableName) {
+    public NumbersBaseModel createTableNumbers(String tableName) {
         ContentValues newValues = new ContentValues();
         newValues.put(Database.NAME_COLUMN, tableName);
         db.insert(Database.NUMBERS_TABLE, null, newValues);
         final String SQL_CREATE_ENTRIES = "CREATE TABLE `" + tableName + "` (" + UID + " INTEGER PRIMARY KEY " +
                 "AUTOINCREMENT," + NUMBER + " TEXT);";
         db.execSQL(SQL_CREATE_ENTRIES);
+        return new NumbersBaseModel()
+                .setName(tableName)
+                .setCountNumbers(0)
+                .setLastUse(System.currentTimeMillis());
     }
 
-    public void insertNumbersInTable(String tableName, ArrayList<String> numbers) {
+    public NumbersBaseModel insertNumbersInTable(String tableName, ArrayList<String> numbers) {
         tableName = "`" + tableName + "`";
         ContentValues newValues = new ContentValues();
         for (int i = 0; i < numbers.size(); i++) {
             newValues.put(NUMBER, numbers.get(i));
             db.insert(tableName, null, newValues);
         }
+        return new NumbersBaseModel()
+                .setName(tableName)
+                .setCountNumbers(numbers.size())
+                .setLastUse(System.currentTimeMillis());
     }
 
     public void deleteNumbersFromTable(String tableName, ArrayList<String> numbers) {
@@ -73,11 +81,11 @@ public class DatabaseService {
         return numbersModels;
     }
 
-    public List<NumberBaseModel> getNumberBaseList() {
+    public List<NumbersBaseModel> getNumberBaseList() {
         ArrayList<String> basesNames = readTableColumn(Database.NUMBERS_TABLE, Database.NAME_COLUMN);
-        ArrayList<NumberBaseModel> numbersModels = new ArrayList<>();
+        ArrayList<NumbersBaseModel> numbersModels = new ArrayList<>();
         for (String baseName : basesNames) {
-            NumberBaseModel numbersModel = new NumberBaseModel()
+            NumbersBaseModel numbersModel = new NumbersBaseModel()
                     .setName(baseName)
                     .setCountNumbers(getCountTableRow(baseName));
             numbersModels.add(numbersModel);

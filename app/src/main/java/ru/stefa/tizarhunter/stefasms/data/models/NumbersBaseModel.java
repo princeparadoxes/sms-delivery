@@ -3,7 +3,7 @@ package ru.stefa.tizarhunter.stefasms.data.models;
 /**
  * Created by Danil on 25.07.2016.
  */
-public class NumberBaseModel {
+public class NumbersBaseModel {
     private String name;
     private int countNumbers;
     private long lastUse;
@@ -12,7 +12,7 @@ public class NumberBaseModel {
         return name;
     }
 
-    public NumberBaseModel setName(String name) {
+    public NumbersBaseModel setName(String name) {
         this.name = name;
         return this;
     }
@@ -21,7 +21,7 @@ public class NumberBaseModel {
         return countNumbers;
     }
 
-    public NumberBaseModel setCountNumbers(int countNumbers) {
+    public NumbersBaseModel setCountNumbers(int countNumbers) {
         this.countNumbers = countNumbers;
         return this;
     }
@@ -30,7 +30,7 @@ public class NumberBaseModel {
         return lastUse;
     }
 
-    public NumberBaseModel setLastUse(long lastUse) {
+    public NumbersBaseModel setLastUse(long lastUse) {
         this.lastUse = lastUse;
         return this;
     }

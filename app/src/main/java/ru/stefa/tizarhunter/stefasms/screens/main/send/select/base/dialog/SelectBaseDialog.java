@@ -10,12 +10,12 @@ import com.danil.recyclerbindableadapter.library.SimpleBindableAdapter;
 import java.util.List;
 
 import ru.stefa.tizarhunter.stefasms.R;
-import ru.stefa.tizarhunter.stefasms.data.models.NumberBaseModel;
+import ru.stefa.tizarhunter.stefasms.data.models.NumbersBaseModel;
 
 public class SelectBaseDialog extends BottomSheetDialog implements
         SelectBaseDialogItem.SelectBaseDialogItemListener{
     private RecyclerView recyclerView;
-    private SimpleBindableAdapter<NumberBaseModel> adapter;
+    private SimpleBindableAdapter<NumbersBaseModel> adapter;
     private SelectBaseDialogListener listener;
 
     public SelectBaseDialog(final Context context) {
@@ -37,7 +37,7 @@ public class SelectBaseDialog extends BottomSheetDialog implements
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
     }
 
-    public void bindData(List<NumberBaseModel> baseModels) {
+    public void bindData(List<NumbersBaseModel> baseModels) {
         adapter.addAll(baseModels);
     }
 
@@ -46,12 +46,12 @@ public class SelectBaseDialog extends BottomSheetDialog implements
     }
 
     @Override
-    public void OnItemClickListener(int position, NumberBaseModel item) {
+    public void OnItemClickListener(int position, NumbersBaseModel item) {
         dismiss();
         if (listener != null) listener.onSelectBaseDialogItemClick(item);
     }
 
     public interface SelectBaseDialogListener {
-        void onSelectBaseDialogItemClick(NumberBaseModel numberBaseModel);
+        void onSelectBaseDialogItemClick(NumbersBaseModel numbersBaseModel);
     }
 }

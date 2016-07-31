@@ -1,4 +1,4 @@
-package ru.stefa.tizarhunter.stefasms.misc;
+package ru.stefa.tizarhunter.stefasms.misc.met.validators;
 
 import android.content.Context;
 import android.support.annotation.NonNull;

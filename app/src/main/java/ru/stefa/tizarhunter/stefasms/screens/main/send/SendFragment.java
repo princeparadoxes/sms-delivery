@@ -20,7 +20,7 @@ import ru.stefa.tizarhunter.stefasms.R;
 import ru.stefa.tizarhunter.stefasms.SmsApplication;
 import ru.stefa.tizarhunter.stefasms.data.DataService;
 import ru.stefa.tizarhunter.stefasms.data.database.DatabaseService;
-import ru.stefa.tizarhunter.stefasms.data.models.NumberBaseModel;
+import ru.stefa.tizarhunter.stefasms.data.models.NumbersBaseModel;
 import ru.stefa.tizarhunter.stefasms.data.preferences.Storage;
 import ru.stefa.tizarhunter.stefasms.screens.main.send.select.base.dialog.SelectBaseDialog;
 
@@ -96,7 +96,7 @@ public class SendFragment extends Fragment implements SelectBaseDialog.SelectBas
         mChooseBaseButton.setOnClickListener(view -> selectBaseDialog.show());
         selectBaseDialog = new SelectBaseDialog(getContext());
         selectBaseDialog.setListener(this);
-        dataService.getNumberBaseList()
+        dataService.getNumbersBaseList()
                 .compose(DataService.applySchedulers())
                 .subscribe(selectBaseDialog::bindData, throwable -> {});
     }
@@ -172,8 +172,8 @@ public class SendFragment extends Fragment implements SelectBaseDialog.SelectBas
     }
 
     @Override
-    public void onSelectBaseDialogItemClick(NumberBaseModel numberBaseModel) {
-        selectedBaseName = numberBaseModel.getName();
+    public void onSelectBaseDialogItemClick(NumbersBaseModel numbersBaseModel) {
+        selectedBaseName = numbersBaseModel.getName();
         chooseDB();
     }
 }

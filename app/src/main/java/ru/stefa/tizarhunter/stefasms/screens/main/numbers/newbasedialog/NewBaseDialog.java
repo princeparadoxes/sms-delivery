@@ -9,12 +9,17 @@ import android.view.View;
 import com.danil.recyclerbindableadapter.library.SimpleBindableAdapter;
 import com.rengwuxian.materialedittext.MaterialEditText;
 
+import java.util.List;
+
 import ru.stefa.tizarhunter.stefasms.R;
 import ru.stefa.tizarhunter.stefasms.data.models.CreateBaseType;
 import ru.stefa.tizarhunter.stefasms.data.models.NewBaseDialogModel;
-import ru.stefa.tizarhunter.stefasms.misc.EmptyValidator;
+import ru.stefa.tizarhunter.stefasms.data.models.NumbersBaseModel;
+import ru.stefa.tizarhunter.stefasms.misc.met.validators.EmptyValidator;
+import ru.stefa.tizarhunter.stefasms.misc.met.validators.IfBaseNameExistValidator;
 
-public class NewBaseDialog extends AppCompatDialog implements NewBaseDialogItem.NewBaseDialogItemListener {
+public class NewBaseDialog extends AppCompatDialog implements NewBaseDialogItem
+        .NewBaseDialogItemListener {
     private MaterialEditText name;
     private RecyclerView recyclerView;
     private View okButton;
@@ -24,12 +29,12 @@ public class NewBaseDialog extends AppCompatDialog implements NewBaseDialogItem.
     private SimpleBindableAdapter<NewBaseDialogModel> adapter;
     private NewBaseDialogModel selectedItem;
 
-    public NewBaseDialog(final Context context) {
+    public NewBaseDialog(final Context context, List<NumbersBaseModel> basesList) {
         super(context, R.style.AlertDialogTheme);
         setTitle(R.string.new_base_dialog_title);
         setContentView(R.layout.new_base_dialog);
         findViews();
-        initViews();
+        initViews(basesList);
     }
 
     private void findViews() {
@@ -39,8 +44,9 @@ public class NewBaseDialog extends AppCompatDialog implements NewBaseDialogItem.
         cancelButton = findViewById(R.id.new_base_dialog_cancel);
     }
 
-    private void initViews() {
+    private void initViews(List<NumbersBaseModel> basesList) {
         name.addValidator(new EmptyValidator(getContext()));
+        name.addValidator(new IfBaseNameExistValidator(getContext(), basesList));
 
         adapter = new SimpleBindableAdapter<>(R.layout.new_base_dialog_item,
                 NewBaseDialogItem.class);
