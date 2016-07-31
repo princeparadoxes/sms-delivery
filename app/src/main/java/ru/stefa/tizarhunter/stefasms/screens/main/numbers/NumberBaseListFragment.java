@@ -14,9 +14,12 @@ import com.danil.recyclerbindableadapter.library.SimpleBindableAdapter;
 import ru.stefa.tizarhunter.stefasms.R;
 import ru.stefa.tizarhunter.stefasms.SmsApplication;
 import ru.stefa.tizarhunter.stefasms.data.DataService;
+import ru.stefa.tizarhunter.stefasms.data.models.NewBaseDialogModel;
 import ru.stefa.tizarhunter.stefasms.data.models.NumberBaseModel;
+import ru.stefa.tizarhunter.stefasms.screens.main.numbers.newbasedialog.NewBaseDialog;
 
-public class NumberBaseListFragment extends Fragment implements NumberBaseListItem.NumberBaseListItemListener {
+public class NumberBaseListFragment extends Fragment implements NumberBaseListItem
+        .NumberBaseListItemListener, NewBaseDialog.NewBaseDialogListener {
     private RecyclerView recyclerView;
     private FloatingActionButton fab;
 
@@ -46,15 +49,8 @@ public class NumberBaseListFragment extends Fragment implements NumberBaseListIt
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         fab.setOnClickListener(v -> {
-            NewBaseDialog newBaseDialog = new NewBaseDialog(getActivity(), new NewBaseDialog.Callback() {
-                @Override
-                public void ok(final String nameBase) {
-                }
-
-                @Override
-                public void okImport(final String nameBase) {
-                }
-            });
+            NewBaseDialog newBaseDialog = new NewBaseDialog(getActivity());
+            newBaseDialog.setNewBaseDialogListener(this);
             newBaseDialog.show();
         });
     }
@@ -69,5 +65,10 @@ public class NumberBaseListFragment extends Fragment implements NumberBaseListIt
     @Override
     public void OnItemClickListener(int position, NumberBaseModel item) {
 
+    }
+
+    @Override
+    public void onOkButtonClick(String name, NewBaseDialogModel newBaseDialogModel) {
+        
     }
 }

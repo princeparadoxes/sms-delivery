@@ -26,16 +26,20 @@
         базе: %d</string>
 
     <!--NUMBERS-->
-    <string name="numbers_new_base">Новая база номеров</string>
-    <string name="numbers_type_base_name">Введите имя базы номеров</string>
-    <string name="numbers_type_type">Ввести номера вручную</string>
-    <string name="numbers_type_import">Импортировать из файла</string>
+    <string name="create_base_type_input_from_keyboard">Ввести номера вручную</string>
+    <string name="create_base_type_import_from_file">Импортировать из файла</string>
     <string name="numbers_new_number">Новый номер</string>
     <string name="numbers_input_new_number">Введите новый номер</string>
     <string name="numbers_base_name_incorrect">Неправильное имя базы данных</string>
     <string name="numbers_add_new_number">Добавить новый номер</string>
     <string name="number_base_list_item_count_numbers" formatted="false">Количество номеров в
         базе: %d</string>
+
+    <!--NEW BASE DIALOG-->
+    <string name="new_base_dialog_title">Новая база номеров</string>
+    <string name="new_base_dialog_hint">Введите имя базы номеров</string>
+    <string name="new_base_dialog_ok">Ок</string>
+    <string name="new_base_dialog_cancel">Отмена</string>
 
     <!--ARCHIVE-->
     <string name="archive_count_messages" formatted="false">"Кол-во сообщений %d"</string>
