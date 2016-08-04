@@ -1,4 +1,4 @@
-package ru.stefa.tizarhunter.stefasms.screens.main.numbers.newbasedialog;
+package ru.stefa.tizarhunter.stefasms.screens.main.base.list.dialog;
 
 import android.support.v7.widget.AppCompatRadioButton;
 import android.view.View;

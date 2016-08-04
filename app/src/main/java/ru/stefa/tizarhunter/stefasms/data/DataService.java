@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ru.stefa.tizarhunter.stefasms.data.database.DatabaseService;
+import ru.stefa.tizarhunter.stefasms.data.models.NumberModel;
 import ru.stefa.tizarhunter.stefasms.data.models.NumbersBaseModel;
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
@@ -31,17 +32,16 @@ public class DataService {
         return (Observable.Transformer<T, T>) schedulersTransformer;
     }
 
-    //number base
     public Observable<NumbersBaseModel> createNumbersBase(String name) {
         return Observable.just(databaseService.createTableNumbers(name));
     }
 
     public Observable<NumbersBaseModel> createNumbersBase(String name, ArrayList<String> numbers) {
         return Observable.just(databaseService.insertNumbersInTable(name, numbers));
-
     }
 
     public Observable<List<NumbersBaseModel>> getNumbersBaseList() {
-        return Observable.just(databaseService.getNumberBaseList());
+        return Observable.just(databaseService.getNumbersBaseList());
     }
+
 }

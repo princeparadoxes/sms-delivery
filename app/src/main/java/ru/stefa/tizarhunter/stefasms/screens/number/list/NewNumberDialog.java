@@ -1,4 +1,4 @@
-package ru.stefa.tizarhunter.stefasms.screens.main.numbers;
+package ru.stefa.tizarhunter.stefasms.screens.number.list;
 
 import android.app.AlertDialog;
 import android.content.Context;

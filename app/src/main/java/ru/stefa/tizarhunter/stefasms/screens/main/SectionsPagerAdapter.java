@@ -9,7 +9,7 @@ import java.util.Locale;
 
 import ru.stefa.tizarhunter.stefasms.R;
 import ru.stefa.tizarhunter.stefasms.screens.main.archive.ArchiveFragment;
-import ru.stefa.tizarhunter.stefasms.screens.main.numbers.NumberBaseListFragment;
+import ru.stefa.tizarhunter.stefasms.screens.main.base.list.NumbersBaseListFragment;
 import ru.stefa.tizarhunter.stefasms.screens.main.send.SendFragment;
 
 public class SectionsPagerAdapter extends FragmentPagerAdapter {
@@ -26,7 +26,7 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
             case 0:
                 return new SendFragment();
             case 1:
-                return new NumberBaseListFragment();
+                return new NumbersBaseListFragment();
             case 2:
                 return ArchiveFragment.newInstance(position + 1, context);
         }

@@ -1,4 +1,4 @@
-package ru.stefa.tizarhunter.stefasms.screens.main.numbers.newbasedialog;
+package ru.stefa.tizarhunter.stefasms.screens.main.base.list.dialog;
 
 import android.content.Context;
 import android.support.v7.app.AppCompatDialog;

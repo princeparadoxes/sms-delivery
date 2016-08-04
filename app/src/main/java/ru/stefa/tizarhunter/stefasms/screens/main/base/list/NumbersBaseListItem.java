@@ -1,4 +1,4 @@
-package ru.stefa.tizarhunter.stefasms.screens.main.numbers;
+package ru.stefa.tizarhunter.stefasms.screens.main.base.list;
 
 import android.view.View;
 import android.widget.TextView;
@@ -11,12 +11,12 @@ import ru.stefa.tizarhunter.stefasms.data.models.NumbersBaseModel;
 /**
  * Created by Danil on 25.07.2016.
  */
-public class NumberBaseListItem extends BindableViewHolder<NumbersBaseModel,
-        NumberBaseListItem.NumberBaseListItemListener> {
+public class NumbersBaseListItem extends BindableViewHolder<NumbersBaseModel,
+        NumbersBaseListItem.NumberBaseListItemListener> {
     private TextView name;
     private TextView count;
 
-    public NumberBaseListItem(View itemView) {
+    public NumbersBaseListItem(View itemView) {
         super(itemView);
         initViews();
     }

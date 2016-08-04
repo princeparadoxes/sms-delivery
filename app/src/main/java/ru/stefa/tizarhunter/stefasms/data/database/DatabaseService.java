@@ -8,9 +8,9 @@ import android.database.sqlite.SQLiteDatabase;
 import java.util.ArrayList;
 import java.util.List;
 
+import ru.stefa.tizarhunter.stefasms.data.models.NumberModel;
 import ru.stefa.tizarhunter.stefasms.data.models.NumbersBaseModel;
 import ru.stefa.tizarhunter.stefasms.screens.main.archive.ArchiveModel;
-import ru.stefa.tizarhunter.stefasms.screens.main.numbers.NumbersModel;
 
 public class DatabaseService {
     public static final String UID = "_id";
@@ -46,7 +46,8 @@ public class DatabaseService {
         return new NumbersBaseModel()
                 .setName(tableName)
                 .setCountNumbers(numbers.size())
-                .setLastUse(System.currentTimeMillis());
+                .setLastUse(System.currentTimeMillis())
+                .setNumberList(getNumberList(tableName));
     }
 
     public void deleteNumbersFromTable(String tableName, ArrayList<String> numbers) {
@@ -68,29 +69,32 @@ public class DatabaseService {
         db.execSQL(SQL_DELETE_ENTRIES);
     }
 
-    @Deprecated
-    public ArrayList<NumbersModel> listTablesOld() {
-        ArrayList<String> tableNames = readTableColumn(Database.NUMBERS_TABLE, Database.NAME_COLUMN);
-        ArrayList<NumbersModel> numbersModels = new ArrayList<NumbersModel>();
-        for (int i = 0; i < tableNames.size(); i++) {
-            NumbersModel numbersModel = new NumbersModel();
-            numbersModel.setName(tableNames.get(i));
-            numbersModel.setSize(getCountTableRow(tableNames.get(i)));
-            numbersModels.add(numbersModel);
-        }
-        return numbersModels;
-    }
-
-    public List<NumbersBaseModel> getNumberBaseList() {
+    public List<NumbersBaseModel> getNumbersBaseList() {
         ArrayList<String> basesNames = readTableColumn(Database.NUMBERS_TABLE, Database.NAME_COLUMN);
         ArrayList<NumbersBaseModel> numbersModels = new ArrayList<>();
         for (String baseName : basesNames) {
             NumbersBaseModel numbersModel = new NumbersBaseModel()
                     .setName(baseName)
-                    .setCountNumbers(getCountTableRow(baseName));
+                    .setCountNumbers(getCountTableRow(baseName))
+                    .setNumberList(getNumberList(baseName));
             numbersModels.add(numbersModel);
         }
         return numbersModels;
+    }
+
+    public List<NumberModel> getNumberList(String tableName) {
+        List<NumberModel> arrayList = new ArrayList<>();
+        tableName = "`" + tableName + "`";
+        Cursor c = db.query(tableName, null, null, null, null, null, null);
+        if (c.moveToFirst()) {
+            do {
+                String s = c.getString(c.getColumnIndex(NUMBER));
+                arrayList.add(new NumberModel().setNumber(s));
+            }
+            while (c.moveToNext());
+        }
+        c.close();
+        return arrayList;
     }
 
     public void addToArchive(String text, int count, long time) {

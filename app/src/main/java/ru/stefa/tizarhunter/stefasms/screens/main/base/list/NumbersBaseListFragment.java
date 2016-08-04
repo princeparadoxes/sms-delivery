@@ -1,4 +1,4 @@
-package ru.stefa.tizarhunter.stefasms.screens.main.numbers;
+package ru.stefa.tizarhunter.stefasms.screens.main.base.list;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -21,9 +21,10 @@ import ru.stefa.tizarhunter.stefasms.data.files.OpenFileDialog;
 import ru.stefa.tizarhunter.stefasms.data.models.CreateBaseType;
 import ru.stefa.tizarhunter.stefasms.data.models.NewBaseDialogModel;
 import ru.stefa.tizarhunter.stefasms.data.models.NumbersBaseModel;
-import ru.stefa.tizarhunter.stefasms.screens.main.numbers.newbasedialog.NewBaseDialog;
+import ru.stefa.tizarhunter.stefasms.navigation.Router;
+import ru.stefa.tizarhunter.stefasms.screens.main.base.list.dialog.NewBaseDialog;
 
-public class NumberBaseListFragment extends Fragment implements NumberBaseListItem
+public class NumbersBaseListFragment extends Fragment implements NumbersBaseListItem
         .NumberBaseListItemListener, NewBaseDialog.NewBaseDialogListener {
     private RecyclerView recyclerView;
     private FloatingActionButton fab;
@@ -49,7 +50,7 @@ public class NumberBaseListFragment extends Fragment implements NumberBaseListIt
 
     private void initViews() {
         adapter = new SimpleBindableAdapter<>(R.layout.number_base_list_item,
-                NumberBaseListItem.class);
+                NumbersBaseListItem.class);
         adapter.setActionListener(this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -71,7 +72,7 @@ public class NumberBaseListFragment extends Fragment implements NumberBaseListIt
 
     @Override
     public void OnItemClickListener(int position, NumbersBaseModel item) {
-
+        Router.goToNumberList(getContext(), item);
     }
 
     @Override
@@ -90,14 +91,14 @@ public class NumberBaseListFragment extends Fragment implements NumberBaseListIt
                                 //TODO show error
                             });
                 });
-                dataService.createNumbersBase(name)
-                        .compose(DataService.applySchedulers())
-                        .subscribe(nameBase -> {
-                            fileDialog.show();
-                        }, throwable -> {
-                            //TODO show error
-                        });
-
+                fileDialog.show();
+//                dataService.createNumbersBase(name)
+//                        .compose(DataService.applySchedulers())
+//                        .subscribe(nameBase -> {
+//                            fileDialog.show();
+//                        }, throwable -> {
+//                            TODO show error
+//                        });
                 break;
             case INPUT_FROM_KEYBOARD:
                 dataService.createNumbersBase(name)
