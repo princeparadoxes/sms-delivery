@@ -2,20 +2,28 @@ package ru.stefa.tizarhunter.stefasms.screens.settings;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
 import com.rengwuxian.materialedittext.MaterialEditText;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import ru.stefa.tizarhunter.stefasms.R;
 import ru.stefa.tizarhunter.stefasms.data.preferences.Storage;
 
 public class SettingsActivity extends AppCompatActivity {
 
-    private MaterialEditText mMessageDelay;
-    private MaterialEditText mMessagePortion;
-    private MaterialEditText mMessagePortionDelay;
-    private Button mApplyButton;
+    @BindView(R.id.settings_message_delay_edit)
+    MaterialEditText mMessageDelay;
+    @BindView(R.id.settings_window_size_edit)
+    MaterialEditText mMessagePortion;
+    @BindView(R.id.settings_window_delay_edit)
+    MaterialEditText mMessagePortionDelay;
+    @BindView(R.id.settings_apply)
+    Button mApplyButton;
+
     private View.OnClickListener mApplyListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -30,15 +38,9 @@ public class SettingsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
-        findViews();
+        ButterKnife.bind(this);
         initViews();
-    }
-
-    private void findViews() {
-        mMessageDelay = (MaterialEditText) findViewById(R.id.settings_message_delay_edit);
-        mMessagePortion = (MaterialEditText) findViewById(R.id.settings_window_size_edit);
-        mMessagePortionDelay = (MaterialEditText) findViewById(R.id.settings_window_delay_edit);
-        mApplyButton = (Button) findViewById(R.id.settings_apply);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     private void initViews() {
@@ -46,5 +48,16 @@ public class SettingsActivity extends AppCompatActivity {
         mMessagePortion.setText(Storage.mMessagePortion.getString());
         mMessagePortionDelay.setText(Storage.mMessagePortionDelay.getString());
         mApplyButton.setOnClickListener(mApplyListener);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                this.finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }

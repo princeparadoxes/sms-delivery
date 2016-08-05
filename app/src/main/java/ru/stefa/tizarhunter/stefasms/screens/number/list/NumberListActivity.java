@@ -6,6 +6,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.MenuItem;
 
 import com.danil.recyclerbindableadapter.library.SimpleBindableAdapter;
 import com.danil.recyclerbindableadapter.library.view.BindableViewHolder;
@@ -35,6 +36,7 @@ public class NumberListActivity extends AppCompatActivity implements NumberListI
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.number_list_activity);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ButterKnife.bind(this);
         dataService = ((SmsApplication) getApplication()).getDataService();
         initViews();
@@ -64,5 +66,16 @@ public class NumberListActivity extends AppCompatActivity implements NumberListI
     @Override
     public void OnItemClickListener(int position, NumberModel item) {
 
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                this.finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }
