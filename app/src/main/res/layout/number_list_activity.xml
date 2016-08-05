@@ -8,7 +8,10 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/number_list_recycler"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:paddingBottom="@dimen/recyclerview_with_fab_bottom_padding"
+        android:paddingTop="@dimen/activity_vertical_x_small_margin"/>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/number_list_fab"
@@ -16,7 +19,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"
         android:layout_margin="@dimen/fab_margin"
-        android:tint="@android:color/white"
-        android:src="@drawable/ic_add_black_24dp"/>
+        android:src="@drawable/ic_add_black_24dp"
+        android:tint="@android:color/white"/>
 
 </FrameLayout>
