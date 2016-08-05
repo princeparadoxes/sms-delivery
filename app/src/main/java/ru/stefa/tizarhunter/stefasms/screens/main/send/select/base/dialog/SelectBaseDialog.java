@@ -1,9 +1,11 @@
 package ru.stefa.tizarhunter.stefasms.screens.main.send.select.base.dialog;
 
 import android.content.Context;
+import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.BottomSheetDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
 import com.danil.recyclerbindableadapter.library.SimpleBindableAdapter;
 
@@ -49,6 +51,13 @@ public class SelectBaseDialog extends BottomSheetDialog implements
     public void OnItemClickListener(int position, NumbersBaseModel item) {
         dismiss();
         if (listener != null) listener.onSelectBaseDialogItemClick(item);
+    }
+
+    @Override
+    public void show() {
+        super.show();
+        View view = findViewById(android.support.design.R.id.design_bottom_sheet);
+        BottomSheetBehavior.from(view).setState(BottomSheetBehavior.STATE_COLLAPSED);
     }
 
     public interface SelectBaseDialogListener {
