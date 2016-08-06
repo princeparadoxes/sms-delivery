@@ -14,7 +14,7 @@ public class NumbersBaseModel implements Parcelable {
     private String name;
     private int countNumbers;
     private long lastUse;
-    private List<NumberModel> numberList;
+    private List<ContactModel> numberList;
 
     public String getName() {
         return name;
@@ -44,12 +44,12 @@ public class NumbersBaseModel implements Parcelable {
     }
 
     @NonNull
-    public List<NumberModel> getNumberList() {
+    public List<ContactModel> getNumberList() {
         if (numberList == null) numberList = new ArrayList<>();
         return numberList;
     }
 
-    public NumbersBaseModel setNumberList(List<NumberModel> numberList) {
+    public NumbersBaseModel setNumberList(List<ContactModel> numberList) {
         this.numberList = numberList;
         return this;
     }
@@ -74,7 +74,7 @@ public class NumbersBaseModel implements Parcelable {
         this.name = in.readString();
         this.countNumbers = in.readInt();
         this.lastUse = in.readLong();
-        this.numberList = in.createTypedArrayList(NumberModel.CREATOR);
+        this.numberList = in.createTypedArrayList(ContactModel.CREATOR);
     }
 
     public static final Creator<NumbersBaseModel> CREATOR = new Creator<NumbersBaseModel>() {

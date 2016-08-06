@@ -8,7 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import java.util.ArrayList;
 import java.util.List;
 
-import ru.stefa.tizarhunter.stefasms.data.models.NumberModel;
+import ru.stefa.tizarhunter.stefasms.data.models.ContactModel;
 import ru.stefa.tizarhunter.stefasms.data.models.NumbersBaseModel;
 import ru.stefa.tizarhunter.stefasms.screens.main.archive.ArchiveModel;
 
@@ -82,14 +82,14 @@ public class DatabaseService {
         return numbersModels;
     }
 
-    public List<NumberModel> getNumberList(String tableName) {
-        List<NumberModel> arrayList = new ArrayList<>();
+    public List<ContactModel> getNumberList(String tableName) {
+        List<ContactModel> arrayList = new ArrayList<>();
         tableName = "`" + tableName + "`";
         Cursor c = db.query(tableName, null, null, null, null, null, null);
         if (c.moveToFirst()) {
             do {
                 String s = c.getString(c.getColumnIndex(NUMBER));
-                arrayList.add(new NumberModel().setNumber(s));
+                arrayList.add(new ContactModel().setNumber(s));
             }
             while (c.moveToNext());
         }

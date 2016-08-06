@@ -3,14 +3,14 @@ package ru.stefa.tizarhunter.stefasms.data.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class NumberModel implements Parcelable {
+public class ContactModel implements Parcelable {
     private String number;
 
     public String getNumber() {
         return number;
     }
 
-    public NumberModel setNumber(String number) {
+    public ContactModel setNumber(String number) {
         this.number = number;
         return this;
     }
@@ -25,22 +25,22 @@ public class NumberModel implements Parcelable {
         dest.writeString(this.number);
     }
 
-    public NumberModel() {
+    public ContactModel() {
     }
 
-    protected NumberModel(Parcel in) {
+    protected ContactModel(Parcel in) {
         this.number = in.readString();
     }
 
-    public static final Parcelable.Creator<NumberModel> CREATOR = new Parcelable.Creator<NumberModel>() {
+    public static final Parcelable.Creator<ContactModel> CREATOR = new Parcelable.Creator<ContactModel>() {
         @Override
-        public NumberModel createFromParcel(Parcel source) {
-            return new NumberModel(source);
+        public ContactModel createFromParcel(Parcel source) {
+            return new ContactModel(source);
         }
 
         @Override
-        public NumberModel[] newArray(int size) {
-            return new NumberModel[size];
+        public ContactModel[] newArray(int size) {
+            return new ContactModel[size];
         }
     };
 }

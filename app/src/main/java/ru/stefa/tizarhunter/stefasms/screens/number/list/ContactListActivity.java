@@ -9,33 +9,32 @@ import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
 
 import com.danil.recyclerbindableadapter.library.SimpleBindableAdapter;
-import com.danil.recyclerbindableadapter.library.view.BindableViewHolder;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import ru.stefa.tizarhunter.stefasms.R;
 import ru.stefa.tizarhunter.stefasms.SmsApplication;
 import ru.stefa.tizarhunter.stefasms.data.DataService;
-import ru.stefa.tizarhunter.stefasms.data.models.NumberModel;
+import ru.stefa.tizarhunter.stefasms.data.models.ContactModel;
 import ru.stefa.tizarhunter.stefasms.data.models.NumbersBaseModel;
 import ru.stefa.tizarhunter.stefasms.navigation.Router;
 
 /**
  * Created by Danil on 04.08.2016.
  */
-public class NumberListActivity extends AppCompatActivity implements NumberListItem.NumberListItemListener {
-    @BindView(R.id.number_list_recycler)
+public class ContactListActivity extends AppCompatActivity implements ContactListItem.NumberListItemListener {
+    @BindView(R.id.contact_list_recycler)
     RecyclerView recyclerView;
-    @BindView(R.id.number_list_fab)
+    @BindView(R.id.contact_list_fab)
     FloatingActionButton fab;
 
-    private SimpleBindableAdapter<NumberModel> adapter;
+    private SimpleBindableAdapter<ContactModel> adapter;
     private DataService dataService;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.number_list_activity);
+        setContentView(R.layout.contact_list_activity);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ButterKnife.bind(this);
         dataService = ((SmsApplication) getApplication()).getDataService();
@@ -52,11 +51,13 @@ public class NumberListActivity extends AppCompatActivity implements NumberListI
     }
 
     private void initViews() {
-        adapter = new SimpleBindableAdapter<>(R.layout.number_list_item, NumberListItem.class);
+        adapter = new SimpleBindableAdapter<>(R.layout.contact_list_item, ContactListItem.class);
         adapter.setActionListener(this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         fab.setOnClickListener(v -> {
+            NewContactDialog newContactDialog = new NewContactDialog(this);
+            newContactDialog.show();
 //            NewBaseDialog newBaseDialog = new NewBaseDialog(getActivity(), adapter.getItems());
 //            newBaseDialog.setNewBaseDialogListener(this);
 //            newBaseDialog.show();
@@ -64,7 +65,7 @@ public class NumberListActivity extends AppCompatActivity implements NumberListI
     }
 
     @Override
-    public void OnItemClickListener(int position, NumberModel item) {
+    public void OnItemClickListener(int position, ContactModel item) {
 
     }
 

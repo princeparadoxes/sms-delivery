@@ -11,6 +11,8 @@ import com.rengwuxian.materialedittext.MaterialEditText;
 
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import ru.stefa.tizarhunter.stefasms.R;
 import ru.stefa.tizarhunter.stefasms.data.models.CreateBaseType;
 import ru.stefa.tizarhunter.stefasms.data.models.NewBaseDialogModel;
@@ -20,10 +22,14 @@ import ru.stefa.tizarhunter.stefasms.misc.met.validators.IfBaseNameExistValidato
 
 public class NewBaseDialog extends AppCompatDialog implements NewBaseDialogItem
         .NewBaseDialogItemListener {
-    private MaterialEditText name;
-    private RecyclerView recyclerView;
-    private View okButton;
-    private View cancelButton;
+    @BindView(R.id.new_base_dialog_name)
+    MaterialEditText name;
+    @BindView(R.id.new_base_dialog_recycler)
+    RecyclerView recyclerView;
+    @BindView(R.id.new_base_dialog_ok)
+    View okButton;
+    @BindView(R.id.new_base_dialog_cancel)
+    View cancelButton;
 
     private NewBaseDialogListener newBaseDialogListener;
     private SimpleBindableAdapter<NewBaseDialogModel> adapter;
@@ -33,15 +39,8 @@ public class NewBaseDialog extends AppCompatDialog implements NewBaseDialogItem
         super(context, R.style.AlertDialogTheme);
         setTitle(R.string.new_base_dialog_title);
         setContentView(R.layout.new_base_dialog);
-        findViews();
+        ButterKnife.bind(this);
         initViews(basesList);
-    }
-
-    private void findViews() {
-        name = (MaterialEditText) findViewById(R.id.new_base_dialog_name);
-        recyclerView = (RecyclerView) findViewById(R.id.new_base_dialog_recycler);
-        okButton = findViewById(R.id.new_base_dialog_ok);
-        cancelButton = findViewById(R.id.new_base_dialog_cancel);
     }
 
     private void initViews(List<NumbersBaseModel> basesList) {

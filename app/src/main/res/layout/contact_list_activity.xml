@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/number_list_recycler"
+        android:id="@+id/contact_list_recycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clipToPadding="false"
@@ -14,7 +14,7 @@
         android:paddingTop="@dimen/activity_vertical_x_small_margin"/>
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/number_list_fab"
+        android:id="@+id/contact_list_fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"

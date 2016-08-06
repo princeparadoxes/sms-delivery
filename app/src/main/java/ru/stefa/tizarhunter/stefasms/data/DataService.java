@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ru.stefa.tizarhunter.stefasms.data.database.DatabaseService;
-import ru.stefa.tizarhunter.stefasms.data.models.NumberModel;
 import ru.stefa.tizarhunter.stefasms.data.models.NumbersBaseModel;
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;

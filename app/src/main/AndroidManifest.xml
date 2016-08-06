@@ -28,7 +28,7 @@
             android:label="@string/tittle_settings">
         </activity>
         <activity
-            android:name=".screens.number.list.NumberListActivity">
+            android:name=".screens.number.list.ContactListActivity">
         </activity>
     </application>
 

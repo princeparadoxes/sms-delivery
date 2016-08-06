@@ -25,13 +25,14 @@
     <string name="select_base_dialog_count_numbers" formatted="false">Количество номеров в
         базе: %d</string>
 
-    <!--NUMBERS-->
+    <!--CREATE BASE TYPE-->
     <string name="create_base_type_input_from_keyboard">Ввести номера вручную</string>
     <string name="create_base_type_import_from_file">Импортировать из файла</string>
-    <string name="numbers_new_number">Новый номер</string>
-    <string name="numbers_input_new_number">Введите новый номер</string>
-    <string name="numbers_base_name_incorrect">Неправильное имя базы данных</string>
-    <string name="numbers_add_new_number">Добавить новый номер</string>
+
+    <!--NEW CONTACT DIALOG-->
+    <string name="new_contact_dialog_title">Новый номер</string>
+    <string name="new_contact_dialog_number_hint">Введите номер телефона</string>
+
     <string name="number_base_list_item_count_numbers" formatted="false">Количество номеров в
         базе: %d</string>
 
